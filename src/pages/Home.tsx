@@ -1,4 +1,4 @@
-import { Box, Grid } from "@chakra-ui/react";
+import { Link, Grid } from "@chakra-ui/react";
 import Nav from "../components/Nav";
 import IceCreamTile from "../components/IceCream/IceCreamTile";
 import { useEffect, useState } from "react";
@@ -20,7 +20,7 @@ const Home = () => {
     };
 
     fetchData();
-  });
+  }, []);
 
   return (
     <>
@@ -39,13 +39,17 @@ const Home = () => {
       >
         {/* Grid items */}
         {iceCream.map((icecream, index) => (
-          <Box key={index} p={1}>
+          <Link
+            key={index}
+            p={1}
+            href={`/${icecream.name_pl}-${icecream.brand_pl}/${icecream._id}`}
+          >
             <IceCreamTile
               name={icecream.name_pl}
               imageURL={icecream.image}
               rating={icecream.rating}
             />
-          </Box>
+          </Link>
         ))}
       </Grid>
     </>

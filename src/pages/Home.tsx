@@ -1,12 +1,14 @@
 import { Link, Grid } from "@chakra-ui/react";
-import Nav from "../components/Nav";
+import { Nav, UserNav } from "../components/Nav";
 import IceCreamTile from "../components/IceCream/IceCreamTile";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IceCream } from "../models/IceCream";
+import { useAuthStore } from "../zustand";
 
 const Home = () => {
   const [iceCream, setIceCream] = useState<IceCream[]>([]);
+  const user = useAuthStore((state) => state.user);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +26,7 @@ const Home = () => {
 
   return (
     <>
-      <Nav />
+      {user ? <UserNav /> : <Nav />}
       <Grid
         maxW={"100%"}
         w={"100%"}

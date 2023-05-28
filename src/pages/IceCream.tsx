@@ -84,14 +84,7 @@ export default function IceCream() {
                 fontSize={"2xl"}
                 fontWeight={"300"}
               >
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore
-              </Text>
-              <Text fontSize={"lg"}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
-                aliquid amet at delectus doloribus dolorum expedita hic, ipsum
-                maxime modi nam officiis porro, quae, quisquam quos
-                reprehenderit velit? Natus, totam.
+                {iceCream?.description_pl}
               </Text>
             </VStack>
             <Box>

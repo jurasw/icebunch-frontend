@@ -16,9 +16,10 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { MdLocalShipping } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
+import Rating from "../components/IceCream/Rating";
+
 
 export default function IceCream() {
   const { id } = useParams();
@@ -60,13 +61,16 @@ export default function IceCream() {
             >
               {iceCream?.name_pl}
             </Heading>
-            <Text
+            <Rating rating={4.3}
+            numReviews={69}
+            />
+            {/* <Text
               color={useColorModeValue("gray.900", "gray.400")}
               fontWeight={300}
               fontSize={"2xl"}
             >
               $350.00 USD
-            </Text>
+            </Text> */}
           </Box>
 
           <Stack
@@ -79,13 +83,7 @@ export default function IceCream() {
             }
           >
             <VStack spacing={{ base: 4, sm: 6 }}>
-              <Text
-                color={useColorModeValue("gray.500", "gray.400")}
-                fontSize={"2xl"}
-                fontWeight={"300"}
-              >
-                {iceCream?.description_pl}
-              </Text>
+           
             </VStack>
             <Box>
               <Text
@@ -95,10 +93,16 @@ export default function IceCream() {
                 textTransform={"uppercase"}
                 mb={"4"}
               >
-                Features
+                Description
               </Text>
-
-              <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+              <Text
+                color={useColorModeValue("gray.500", "gray.400")}
+                fontSize={"2xl"}
+                fontWeight={"300"}
+              >
+                {iceCream?.description_pl}
+              </Text>
+              {/* <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
                 <List spacing={2}>
                   <ListItem>Chronograph</ListItem>
                   <ListItem>Master Chronometer Certified</ListItem>{" "}
@@ -109,7 +113,7 @@ export default function IceCream() {
                   <ListItem>Chronometer</ListItem>
                   <ListItem>Small seconds</ListItem>
                 </List>
-              </SimpleGrid>
+              </SimpleGrid> */}
             </Box>
             <Box>
               <Text
@@ -123,12 +127,6 @@ export default function IceCream() {
               </Text>
 
               <List spacing={2}>
-                <ListItem>
-                  <Text as={"span"} fontWeight={"bold"}>
-                    Between lugs:
-                  </Text>{" "}
-                  20 mm
-                </ListItem>
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
                     Bracelet:
@@ -184,13 +182,8 @@ export default function IceCream() {
               boxShadow: "lg",
             }}
           >
-            Add to cart
+            Add review
           </Button>
-
-          <Stack direction="row" alignItems="center" justifyContent={"center"}>
-            <MdLocalShipping />
-            <Text>2-3 business days delivery</Text>
-          </Stack>
         </Stack>
       </SimpleGrid>
     </Container>

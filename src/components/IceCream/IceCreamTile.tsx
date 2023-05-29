@@ -4,7 +4,7 @@ import {
   Image,
   useColorModeValue,
 } from "@chakra-ui/react";
-import Rating from "./Rating";
+import RatingWithCounter from "./RatingWithCounter";
 
 interface IceCreamProps {
   name: string;
@@ -46,7 +46,7 @@ function IceCreamTile(props: IceCreamProps) {
           </Flex>
 
           <Flex justifyContent="space-between" alignContent="center">
-            <Rating rating={props.rating}
+            <RatingWithCounter rating={props.rating}
             numReviews={props.number_of_ratings}
             />
           </Flex>

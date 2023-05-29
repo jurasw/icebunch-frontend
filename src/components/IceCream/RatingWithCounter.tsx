@@ -6,7 +6,7 @@ interface RatingProps {
     numReviews: number | undefined;
   }
   
-  function Rating({ rating, numReviews }: RatingProps) {
+  function RatingWithCounter({ rating, numReviews }: RatingProps) {
     return (
       <Box display="flex" alignItems="center">
         {Array(5)
@@ -37,4 +37,4 @@ interface RatingProps {
     );
   }
 
-export default Rating;
+export default RatingWithCounter;

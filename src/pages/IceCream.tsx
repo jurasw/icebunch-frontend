@@ -20,8 +20,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
 import { Review } from "../models/Review";
-import Rating from "../components/IceCream/Rating";
-
+// import RatingWithCounter from "../components/IceCream/RatingWithCounter";
+import ReviewParagraph from "../components/IceCream/ReviewParagraph";
 
 export default function IceCream() {
   const { id } = useParams();
@@ -44,13 +44,6 @@ export default function IceCream() {
       setReviews(result.data);
     };
     fetchReviews();
-    if (reviews) {
-      console.log('revievs' + reviews)
-      // console.log('content:'+ reviews[0]?.content)
-      // console.log('rating:'+ reviews[0]?.rating)
-
-    }
-
   }, []);
 
   return (
@@ -80,16 +73,9 @@ export default function IceCream() {
             >
               {iceCream?.name_pl}
             </Heading>
-            <Rating rating={iceCream?.rating}
+            {/* <RatingWithCounter rating={iceCream?.rating}
             numReviews={iceCream?.number_of_ratings}
-            />
-            {/* <Text
-              color={useColorModeValue("gray.900", "gray.400")}
-              fontWeight={300}
-              fontSize={"2xl"}
-            >
-              $350.00 USD
-            </Text> */}
+            /> */}
           </Box>
 
           <Stack
@@ -101,8 +87,7 @@ export default function IceCream() {
               />
             }
           >
-            <VStack spacing={{ base: 4, sm: 6 }}>
-           
+            <VStack spacing={{ base: 4, sm: 6 }}>       
             </VStack>
             <Box>
               <Text
@@ -149,8 +134,9 @@ export default function IceCream() {
      
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
-                  <Avatar name='testowy user' src='https://bit.ly/dan-abramov' />                  
 
+                  <ReviewParagraph revievs={reviews}/>
+                  {reviews && <Avatar name='testowy user' src='https://bit.ly/dan-abramov' />}                 
                   {reviews && reviews[0]?.rating}: 
                   {reviews && reviews[0]?.content}
                   </Text>{" "}

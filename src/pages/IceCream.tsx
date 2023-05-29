@@ -13,7 +13,6 @@ import {
   useColorModeValue,
   List,
   ListItem,
-  propNames,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";

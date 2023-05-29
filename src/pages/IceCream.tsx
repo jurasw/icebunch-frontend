@@ -13,25 +13,44 @@ import {
   useColorModeValue,
   List,
   ListItem,
+  Avatar,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
+import { Review } from "../models/Review";
 import Rating from "../components/IceCream/Rating";
 
 
 export default function IceCream() {
   const { id } = useParams();
+
   const [iceCream, setIceCream] = useState<IceCream>();
+  const [reviews, setReviews] = useState<Review[]>();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchIceCream = async () => {
       const result = await axios.get(`/ice-creams/${id}`);
       setIceCream(result.data);
     };
+    fetchIceCream();
+  }, []);
 
-    fetchData();
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const result = await axios.get(`reviews/ice-cream/${id}`);
+      console.log(result.data[0].content)
+      setReviews(result.data);
+    };
+    fetchReviews();
+    if (reviews) {
+      console.log('revievs' + reviews)
+      // console.log('content:'+ reviews[0]?.content)
+      // console.log('rating:'+ reviews[0]?.rating)
+
+    }
+
   }, []);
 
   return (
@@ -123,46 +142,18 @@ export default function IceCream() {
                 textTransform={"uppercase"}
                 mb={"4"}
               >
-                Product Details
+                REVIEWS
               </Text>
-
+            
               <List spacing={2}>
+     
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
-                    Bracelet:
+                  <Avatar name='testowy user' src='https://bit.ly/dan-abramov' />                  
+
+                  {reviews && reviews[0]?.rating}: 
+                  {reviews && reviews[0]?.content}
                   </Text>{" "}
-                  leather strap
-                </ListItem>
-                <ListItem>
-                  <Text as={"span"} fontWeight={"bold"}>
-                    Case:
-                  </Text>{" "}
-                  Steel
-                </ListItem>
-                <ListItem>
-                  <Text as={"span"} fontWeight={"bold"}>
-                    Case diameter:
-                  </Text>{" "}
-                  42 mm
-                </ListItem>
-                <ListItem>
-                  <Text as={"span"} fontWeight={"bold"}>
-                    Dial color:
-                  </Text>{" "}
-                  Black
-                </ListItem>
-                <ListItem>
-                  <Text as={"span"} fontWeight={"bold"}>
-                    Crystal:
-                  </Text>{" "}
-                  Domed, scratch‑resistant sapphire crystal with anti‑reflective
-                  treatment inside
-                </ListItem>
-                <ListItem>
-                  <Text as={"span"} fontWeight={"bold"}>
-                    Water resistance:
-                  </Text>{" "}
-                  5 bar (50 metres / 167 feet){" "}
                 </ListItem>
               </List>
             </Box>

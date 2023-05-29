@@ -13,6 +13,7 @@ import {
   useColorModeValue,
   List,
   ListItem,
+  propNames,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -61,8 +62,8 @@ export default function IceCream() {
             >
               {iceCream?.name_pl}
             </Heading>
-            <Rating rating={4.3}
-            numReviews={69}
+            <Rating rating={iceCream?.rating}
+            numReviews={iceCream?.number_of_ratings}
             />
             {/* <Text
               color={useColorModeValue("gray.900", "gray.400")}

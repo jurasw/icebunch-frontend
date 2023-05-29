@@ -45,6 +45,7 @@ interface Props {
   name: string;
   imageURL: string;
   rating: number;
+  number_of_ratings: number;
 }
 
 function IceCreamTile(props: Props) {
@@ -81,7 +82,7 @@ function IceCreamTile(props: Props) {
 
           <Flex justifyContent="space-between" alignContent="center">
             <Rating rating={props.rating}
-            numReviews={69}
+            numReviews={props.number_of_ratings}
             />
           </Flex>
         </Box>

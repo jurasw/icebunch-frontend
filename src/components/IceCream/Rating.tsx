@@ -2,8 +2,8 @@ import { Box } from "@chakra-ui/react";
   import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 
 interface RatingProps {
-    rating: number;
-    numReviews: number;
+    rating: number | undefined;
+    numReviews: number | undefined;
   }
   
   function Rating({ rating, numReviews }: RatingProps) {
@@ -12,6 +12,8 @@ interface RatingProps {
         {Array(5)
           .fill("")
           .map((_, i) => {
+            console.log(rating)
+            if (rating) {
             const roundedRating = Math.round(rating * 2) / 2;
             if (roundedRating - i >= 1) {
               return (
@@ -26,9 +28,10 @@ interface RatingProps {
               return <BsStarHalf key={i} style={{ marginLeft: "1" }} />;
             }
             return <BsStar key={i} style={{ marginLeft: "1" }} />;
+            }
           })}
         <Box as="span" ml="2" color="gray.600" fontSize="sm">
-          {numReviews} review{numReviews > 1 && "s"}
+          {numReviews} review
         </Box>
       </Box>
     );

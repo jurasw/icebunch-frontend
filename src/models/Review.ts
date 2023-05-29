@@ -4,6 +4,5 @@ export interface Review {
     iceCreamId: string;
     content: string;
     rating: number;
-
   }
   

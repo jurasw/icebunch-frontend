@@ -6,14 +6,14 @@ import {
 } from "@chakra-ui/react";
 import RatingWithCounter from "./RatingWithCounter";
 
-interface IceCreamProps {
+interface Props {
   name: string;
   imageURL: string;
   rating: number;
   number_of_ratings: number;
 }
 
-function IceCreamTile(props: IceCreamProps) {
+function IceCreamTile(props: Props) {
   return (
     <Flex p={50} w="full" alignItems="center" justifyContent="center">
       <Box

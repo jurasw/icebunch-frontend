@@ -1,22 +1,23 @@
+import { Avatar } from "@chakra-ui/react";
+import { Review } from "../../models/Review";
 import RatingWithCounter from "./RatingWithCounter";
-import { Box } from "@chakra-ui/react";
 
-// interface ReviewProps {
-//     rating: number | undefined;
-//     numReviews: number | undefined;
-//   }
-  
-  function ReviewParagraph({ reviews }: any) {
-    return reviews.map(({ content, rating }: any) => {
-         (
-          <Box display="flex" alignItems="center">
-            <RatingWithCounter rating={rating}
-                numReviews={1}
-                />
-            <p>{content}</p>
-          </Box>
-        );
-    })
-  }
+interface Props {
+  reviews: Review[] | undefined;
+}
+
+function ReviewParagraph(props: Props) {
+  return (
+    <>
+      {props.reviews?.map((review) => (
+        <>
+          <Avatar name="testowy user" src="https://bit.ly/dan-abramov" />
+          <RatingWithCounter rating={review.rating} numReviews={69} />
+          <p>{review.content}</p>
+        </>
+      ))}
+    </>
+  );
+}
 
 export default ReviewParagraph;

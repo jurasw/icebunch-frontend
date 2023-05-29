@@ -13,14 +13,12 @@ import {
   useColorModeValue,
   List,
   ListItem,
-  Avatar,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
 import { Review } from "../models/Review";
-// import RatingWithCounter from "../components/IceCream/RatingWithCounter";
 import ReviewParagraph from "../components/IceCream/ReviewParagraph";
 
 export default function IceCream() {
@@ -134,12 +132,8 @@ export default function IceCream() {
      
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
-
-                  <ReviewParagraph revievs={reviews}/>
-                  {reviews && <Avatar name='testowy user' src='https://bit.ly/dan-abramov' />}                 
-                  {reviews && reviews[0]?.rating}: 
-                  {reviews && reviews[0]?.content}
-                  </Text>{" "}
+                  <ReviewParagraph reviews={reviews} />
+                  </Text>
                 </ListItem>
               </List>
             </Box>

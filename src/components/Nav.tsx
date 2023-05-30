@@ -85,10 +85,10 @@ export function Nav() {
         >
           <Button
             as={"a"}
+            href={"/login"}
             fontSize={"sm"}
             fontWeight={400}
             variant={"link"}
-            href={"/login"}
           >
             Sign In
           </Button>
@@ -320,8 +320,8 @@ export function UserNav() {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem>Your Servers</MenuItem>
-                  <MenuItem>Account Settings</MenuItem>
+                  <MenuItem>Your Profile</MenuItem>
+                  <MenuItem>Ice Cream</MenuItem>
                   <MenuItem onClick={logout}>Logout</MenuItem>
                 </MenuList>
               </Menu>

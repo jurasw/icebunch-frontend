@@ -1,5 +1,6 @@
-import { Link, Grid } from "@chakra-ui/react";
+import { Link, Grid, Input, Center, FormControl, FormLabel, Switch, Select, HStack } from "@chakra-ui/react";
 import { Nav, UserNav } from "../components/Nav";
+// import { SearchIcon } from "@chakra-ui/icons";
 import IceCreamTile from "../components/IceCream/IceCreamTile";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -27,6 +28,25 @@ const Home = () => {
   return (
     <>
       {user ? <UserNav /> : <Nav />}
+      <Center>
+
+        <Input  marginTop={'1.5rem'} justifySelf={"center"} width={"30%"} placeholder='search...' size='lg' />
+      </Center>
+
+      <Center margin={'1rem'}>
+        <HStack>
+        <FormControl display='flex' alignItems='center'>
+        <FormLabel htmlFor='vegan-form' mb='0'>
+          only vegan
+        </FormLabel>
+        <Switch id='vegan' />
+        </FormControl>
+        <Select placeholder='Rating decreasing'>
+    <option value='option1'>Rating increasing</option>
+  </Select>
+        </HStack>
+        </Center>
+
       <Grid
         maxW={"100%"}
         w={"100%"}
@@ -39,6 +59,7 @@ const Home = () => {
         }}
         gap={2}
       >
+
         {/* Grid items */}
         {iceCream.map((icecream, index) => (
           <Link

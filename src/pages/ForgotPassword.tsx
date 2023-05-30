@@ -51,7 +51,7 @@ import {
               _hover={{
                 bg: 'blue.500',
               }}>
-              Request Reset
+              Request Password Reset
             </Button>
           </Stack>
         </Stack>

@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, VisuallyHidden } from '@chakra-ui/react'
+import { Button, ButtonGroup, VisuallyHidden, Text } from '@chakra-ui/react'
 import { GoogleIcon } from './ProviderIcons'
 
 const providers = [
@@ -10,7 +10,7 @@ export const OAuthButtonGroup = () => (
     {providers.map(({ name, icon }) => (
       <Button key={name} width="full">
         <VisuallyHidden>Sign in with {name}</VisuallyHidden>
-        {icon}
+        <Text>Continue with Google</Text> {icon}
       </Button>
     ))}
   </ButtonGroup>

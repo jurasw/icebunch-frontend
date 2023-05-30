@@ -58,7 +58,12 @@ export default function SimpleCard() {
           <Heading fontSize={"4xl"}>Sign in to your account</Heading>
           <HStack spacing="1" justify="center">
             <Text color="muted">Don't have an account?</Text>
-            <Button variant="link" colorScheme="blue">
+            <Button
+            as={"a"}
+            href={"/register"}
+            variant="link"
+            colorScheme="blue"
+            >
               Sign up
             </Button>
           </HStack>
@@ -78,13 +83,13 @@ export default function SimpleCard() {
               <FormLabel>Password</FormLabel>
               <Input type="password" onChange={handlePassword} />
             </FormControl>
-            <Stack spacing={10}>
+            <Stack spacing={8}>
               <Stack
                 direction={{ base: "column", sm: "row" }}
                 align={"start"}
-                justify={"space-between"}
+                justify={"center"}
               >
-                <Link color={"blue.400"}>Forgot password?</Link>
+                <Link href={"/forgot-password"} color={"blue.400"}>Forgot password?</Link>
               </Stack>
               <Button
                 bg={"blue.400"}
@@ -100,7 +105,7 @@ export default function SimpleCard() {
               <HStack>
               <Divider />
               <Text fontSize="sm" whiteSpace="nowrap" color="muted">
-                or continue with
+                or
               </Text>
               <Divider />
             </HStack>

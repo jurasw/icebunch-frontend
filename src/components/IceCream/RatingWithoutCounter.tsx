@@ -1,12 +1,11 @@
 import { Box } from "@chakra-ui/react";
-  import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
+import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 
 interface Props {
     rating: number | undefined;
-    numReviews: number | undefined;
   }
   
-  function RatingWithCounter({ rating, numReviews }: Props) {
+  function RatingWithCounter({ rating }: Props) {
     return (
       <Box display="flex" alignItems="center">
         {Array(5)
@@ -30,9 +29,6 @@ interface Props {
             return <BsStar key={i} style={{ marginLeft: "1" }} />;
             }
           })}
-        <Box as="span" ml="2" color="gray.600" fontSize="sm">
-          {numReviews} review
-        </Box>
       </Box>
     );
   }

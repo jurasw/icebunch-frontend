@@ -4,14 +4,16 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
   Stack,
   Link,
   Button,
   Heading,
-  Text,
   useColorModeValue,
+  HStack,
+  Text,
+  Divider
 } from "@chakra-ui/react";
+import { OAuthButtonGroup } from "../components/Login/OAuthButtonGroup";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -54,9 +56,12 @@ export default function SimpleCard() {
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Sign in to your account</Heading>
-          <Text fontSize={"lg"} color={"gray.600"}>
-            to enjoy all of our cool <Link color={"blue.400"}>features</Link> ✌️
-          </Text>
+          <HStack spacing="1" justify="center">
+            <Text color="muted">Don't have an account?</Text>
+            <Button variant="link" colorScheme="blue">
+              Sign up
+            </Button>
+          </HStack>
         </Stack>
         <Box
           rounded={"lg"}
@@ -79,7 +84,6 @@ export default function SimpleCard() {
                 align={"start"}
                 justify={"space-between"}
               >
-                <Checkbox>Remember me</Checkbox>
                 <Link color={"blue.400"}>Forgot password?</Link>
               </Stack>
               <Button
@@ -92,6 +96,16 @@ export default function SimpleCard() {
               >
                 Sign in
               </Button>
+
+              <HStack>
+              <Divider />
+              <Text fontSize="sm" whiteSpace="nowrap" color="muted">
+                or continue with
+              </Text>
+              <Divider />
+            </HStack>
+            <OAuthButtonGroup />
+
             </Stack>
           </Stack>
         </Box>

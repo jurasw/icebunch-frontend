@@ -1,18 +1,18 @@
 import { Avatar } from "@chakra-ui/react";
 import { Review } from "../../models/Review";
-import RatingWithCounter from "./RatingWithCounter";
+import RatingWithoutCounter from "./RatingWithoutCounter";
 
-interface Props {
+interface ReviewProps {
   reviews: Review[] | undefined;
 }
 
-function ReviewParagraph(props: Props) {
+function ReviewParagraph(props: ReviewProps) {
   return (
     <>
       {props.reviews?.map((review) => (
         <>
           <Avatar name="testowy user" src="https://bit.ly/dan-abramov" />
-          <RatingWithCounter rating={review.rating} numReviews={69} />
+          <RatingWithoutCounter rating={review.rating} />
           <p>{review.content}</p>
         </>
       ))}

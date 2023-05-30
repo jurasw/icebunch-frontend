@@ -41,7 +41,7 @@ const Home = () => {
     <>
       {user ? <UserNav /> : <Nav />}
       <Center>
-        <Input onChange={handleSearchChange} marginTop={'1.5rem'} justifySelf={"center"} width={{sm: "60%", base: "40%"}} placeholder='Search...' size='lg' />
+        <Input onChange={handleSearchChange} marginTop={'1.5rem'} justifySelf={"center"} width={{sm: "60%", xl: "40%"}} placeholder='Search...' size='lg' />
       </Center>
       <Center margin={'1rem'}>
         <HStack>

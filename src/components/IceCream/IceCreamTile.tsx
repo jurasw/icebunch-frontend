@@ -1,6 +1,5 @@
-import { Flex, Box, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Box, useColorModeValue, Image } from "@chakra-ui/react";
 import RatingWithCounter from "./RatingWithCounter";
-
 interface Props {
   name: string;
   imageURL: string;
@@ -10,6 +9,8 @@ interface Props {
 }
 
 function IceCreamTile(props: Props) {
+
+
   return (
     <Flex m={1} w="full" alignItems="center" justifyContent="center">
       <Box
@@ -23,16 +24,13 @@ function IceCreamTile(props: Props) {
         shadow="lg"
         position="relative"
       >
-        <Box
-          backgroundImage={`url(${props.imageURL})`}
+        <Image
+          src={props.imageURL}
           roundedTop="lg"
           objectFit="contain"
           height="300px"
           width="100%"
-          bgSize="contain"
-          bgPosition="center"
-          bgRepeat="no-repeat"
-        ></Box>
+        />
 
         <Box p="6">
           <Box display="flex" alignItems="baseline"></Box>

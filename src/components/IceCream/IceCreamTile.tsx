@@ -14,6 +14,7 @@ function IceCreamTile(props: Props) {
     <Flex m={1} w="full" alignItems="center" justifyContent="center">
       <Box
         as={"a"}
+        minW={"250px"}
         href={props.href}
         bg={useColorModeValue("white", "gray.800")}
         maxW="lg"

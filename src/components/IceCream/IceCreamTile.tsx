@@ -1,7 +1,8 @@
-import { Flex, Box, useColorModeValue, Image } from "@chakra-ui/react";
+import { Flex, Box, useColorModeValue, Image, Text } from "@chakra-ui/react";
 import RatingWithCounter from "./RatingWithCounter";
 interface Props {
   name: string;
+  brand: string;
   imageURL: string;
   rating: number;
   number_of_ratings: number;
@@ -42,10 +43,12 @@ function IceCreamTile(props: Props) {
               lineHeight="tight"
               isTruncated
             >
-              {props.name}
+              {props.brand}
+              <Text fontSize={'lg'}>
+            {props.name}
+              </Text>
             </Box>
           </Flex>
-
           <Flex justifyContent="space-between" alignContent="center">
             <RatingWithCounter
               rating={props.rating}

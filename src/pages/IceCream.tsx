@@ -13,17 +13,21 @@ import {
   useColorModeValue,
   List,
   ListItem,
+  Textarea
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
 import { Review } from "../models/Review";
 import ReviewParagraph from "../components/IceCream/ReviewParagraph";
+import { useAuthStore } from "../zustand";
+import RatingWithCounter from "../components/IceCream/RatingWithCounter";
 
 export default function IceCream() {
   const { id } = useParams();
-
+  const user = useAuthStore((state) => state.user);
+  const navigate = useNavigate();
   const [iceCream, setIceCream] = useState<IceCream>();
   const [reviews, setReviews] = useState<Review[]>();
 
@@ -68,11 +72,16 @@ export default function IceCream() {
               fontWeight={600}
               fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
             >
-              {iceCream?.name_pl}
+              {iceCream?.brand_pl}
             </Heading>
-            {/* <RatingWithCounter rating={iceCream?.rating}
+            <Text
+            fontSize={{ base: "l", sm: "xl", lg: "2xl" }}
+            >
+              {iceCream?.name_pl}
+            </Text>
+            <RatingWithCounter rating={iceCream?.rating}
             numReviews={iceCream?.number_of_ratings}
-            /> */}
+            />
           </Box>
 
           <Stack
@@ -103,18 +112,6 @@ export default function IceCream() {
               >
                 {iceCream?.description_pl}
               </Text>
-              {/* <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-                <List spacing={2}>
-                  <ListItem>Chronograph</ListItem>
-                  <ListItem>Master Chronometer Certified</ListItem>{" "}
-                  <ListItem>Tachymeter</ListItem>
-                </List>
-                <List spacing={2}>
-                  <ListItem>Anti‑magnetic</ListItem>
-                  <ListItem>Chronometer</ListItem>
-                  <ListItem>Small seconds</ListItem>
-                </List>
-              </SimpleGrid> */}
             </Box>
             <Box>
               <Text
@@ -137,21 +134,28 @@ export default function IceCream() {
               </List>
             </Box>
           </Stack>
-
+          <Textarea placeholder='Share your thoughts about this one' />
           <Button
             rounded={"none"}
             w={"full"}
             mt={8}
             size={"lg"}
             py={"7"}
+            as={"a"}
+            onClick={() => {
+              if (!user) {
+                navigate('/login')
+            }}}
             bg={useColorModeValue("gray.900", "gray.50")}
             color={useColorModeValue("white", "gray.900")}
             textTransform={"uppercase"}
             _hover={{
               transform: "translateY(2px)",
               boxShadow: "lg",
+              cursor: "pointer"
             }}
           >
+
             Add review
           </Button>
         </Stack>

@@ -5,7 +5,7 @@ interface Props {
     rating: number | undefined;
   }
   
-  function RatingWithCounter({ rating }: Props) {
+  function RatingWithoutCounter({ rating }: Props) {
     return (
       <Box display="flex" alignItems="center">
         {Array(5)
@@ -33,4 +33,4 @@ interface Props {
     );
   }
 
-export default RatingWithCounter;
+export default RatingWithoutCounter;

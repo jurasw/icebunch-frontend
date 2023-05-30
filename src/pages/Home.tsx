@@ -78,6 +78,7 @@ const Home = () => {
           <IceCreamTile
             key={index}
             name={icecream.name_pl}
+            brand={icecream.brand_pl}
             imageURL={icecream.image}
             rating={icecream.rating}
             number_of_ratings={icecream.number_of_ratings}

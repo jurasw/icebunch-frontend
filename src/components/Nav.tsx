@@ -69,7 +69,7 @@ export function Nav() {
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
           >
-            Logo
+            iceBunch
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>

@@ -2,7 +2,7 @@ import { Button, ButtonGroup, VisuallyHidden, Text } from '@chakra-ui/react'
 import { GoogleIcon } from './ProviderIcons'
 
 const providers = [
-  { name: 'Google', icon: <GoogleIcon boxSize="5" /> },
+  { name: 'Google', icon: <GoogleIcon boxSize="5" ml={4} /> },
 ]
 
 export const OAuthButtonGroup = () => (

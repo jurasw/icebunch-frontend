@@ -8,6 +8,11 @@ interface AuthState {
   login: (user: User | null) => void;
 }
 
+// enum Language{
+//   PL = "PL",
+//   EN = "EN"
+// }
+
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
@@ -17,5 +22,10 @@ export const useAuthStore = create<AuthState>()(
     { name: 'auth' }
   )
 );
+
+// export const useLanguageStore = create((set) => ({
+//   language: Language.PL,
+//   changeLanguage: () => set((state: Language) => (),)
+// }))
 
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + useAuthStore.getState().user?.token;

@@ -13,7 +13,7 @@ import {
   Text,
   Divider
 } from "@chakra-ui/react";
-import { OAuthButtonGroup } from "../components/Login/OAuthButtonGroup";
+import OAuthButtonGroup from "../components/Login/OAuthButtonGroup";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";

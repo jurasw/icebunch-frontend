@@ -12,11 +12,14 @@ import {
   Text,
   useColorModeValue,
   Link,
+  HStack,
+  Divider
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import OAuthButtonGroup from "../components/Login/OAuthButtonGroup";
 
 export default function SignupCard() {
   const [showPassword, setShowPassword] = useState(false);
@@ -126,6 +129,16 @@ export default function SignupCard() {
               >
                 Sign up
               </Button>
+
+              <HStack>
+              <Divider />
+              <Text fontSize="sm" whiteSpace="nowrap" color="muted">
+                or
+              </Text>
+              <Divider />
+            </HStack>
+            <OAuthButtonGroup />
+
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>

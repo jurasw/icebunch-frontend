@@ -4,16 +4,20 @@ import { Router } from "./Router";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 
 axios.defaults.baseURL = "https://icebackend.bieda.it/";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <BrowserRouter>
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
-        <Router />
-      </ChakraProvider>
-    </QueryClientProvider>
-  </BrowserRouter>
+  <GoogleOAuthProvider clientId="670451075307-2g5qk2533aance5c2pbfvtvei4n9cl1d.apps.googleusercontent.com">
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <ChakraProvider>
+          <Router />
+        </ChakraProvider>
+      </QueryClientProvider>
+    </BrowserRouter>
+  </GoogleOAuthProvider>
 );

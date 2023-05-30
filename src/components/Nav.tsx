@@ -32,6 +32,7 @@ import {
   SunIcon,
 } from "@chakra-ui/icons";
 import { useAuth } from "../hooks/useAuth";
+import { useAuthStore } from "../zustand";
 
 export function Nav() {
   const { isOpen, onToggle } = useDisclosure();
@@ -279,13 +280,14 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [];
 
 export function UserNav() {
+  const user = useAuthStore((state) => state.user);
   const { logout } = useAuth();
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Box>Logo</Box>
+          <Box>iceBunch</Box>
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
@@ -316,7 +318,7 @@ export function UserNav() {
                   </Center>
                   <br />
                   <Center>
-                    <p>Username</p>
+                    <p>{user?.email}</p>
                   </Center>
                   <br />
                   <MenuDivider />

@@ -61,7 +61,7 @@ export const useAuth = () => {
     loginToStore({ email: response.email, token: response.token });
     axios.defaults.headers.common["Authorization"] = "Bearer " + response.token;
     console.log(response);
-    navigate("/dashboard");
+    navigate("/");
   };
 
   const tokenExpired = (token: string | null): boolean => {

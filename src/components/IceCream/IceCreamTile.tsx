@@ -1,9 +1,4 @@
-import {
-  Flex,
-  Box,
-  Image,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Flex, Box, useColorModeValue } from "@chakra-ui/react";
 import RatingWithCounter from "./RatingWithCounter";
 
 interface Props {
@@ -11,28 +6,35 @@ interface Props {
   imageURL: string;
   rating: number;
   number_of_ratings: number;
+  href: string;
 }
 
 function IceCreamTile(props: Props) {
   return (
-    <Flex p={50} w="full" alignItems="center" justifyContent="center">
+    <Flex m={1} w="full" alignItems="center" justifyContent="center">
       <Box
+        as={"a"}
+        href={props.href}
         bg={useColorModeValue("white", "gray.800")}
-        maxW="sm"
+        maxW="lg"
         borderWidth="1px"
         rounded="lg"
         shadow="lg"
         position="relative"
       >
-        <Image
-          src={props.imageURL}
-          alt={`Picture of ${props.name}`}
+        <Box
+          backgroundImage={`url(${props.imageURL})`}
           roundedTop="lg"
-        />
+          objectFit="contain"
+          height="300px"
+          width="100%"
+          bgSize="contain"
+          bgPosition="center"
+          bgRepeat="no-repeat"
+        ></Box>
 
         <Box p="6">
-          <Box display="flex" alignItems="baseline">
-          </Box>
+          <Box display="flex" alignItems="baseline"></Box>
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
               fontSize="2xl"
@@ -46,8 +48,9 @@ function IceCreamTile(props: Props) {
           </Flex>
 
           <Flex justifyContent="space-between" alignContent="center">
-            <RatingWithCounter rating={props.rating}
-            numReviews={props.number_of_ratings}
+            <RatingWithCounter
+              rating={props.rating}
+              numReviews={props.number_of_ratings}
             />
           </Flex>
         </Box>

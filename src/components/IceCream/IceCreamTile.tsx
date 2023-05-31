@@ -1,9 +1,12 @@
 import { Flex, Box, useColorModeValue, Image, Text } from "@chakra-ui/react";
 import RatingWithCounter from "./RatingWithCounter";
+import { Language, useLanguageStore } from "../../zustand";
 
 interface Props {
-  name: string;
-  brand: string;
+  name_pl: string;
+  brand_pl: string;
+  name_en: string;
+  brand_en: string;
   imageURL: string;
   rating: number;
   number_of_ratings: number;
@@ -11,6 +14,8 @@ interface Props {
 }
 
 function IceCreamTile(props: Props) {
+  const language = useLanguageStore((state) => state.language);
+
   return (
     <Flex m={1} w="full" alignItems="center" justifyContent="center">
       <Box
@@ -42,8 +47,12 @@ function IceCreamTile(props: Props) {
               lineHeight="tight"
               isTruncated
             >
-              {props.brand}
-              <Text fontSize="lg">{props.name}</Text>
+              {language === Language.PL && props.brand_pl}
+              {language === Language.EN && props.brand_en}
+              <Text fontSize="lg">
+                {language === Language.PL && props.name_pl}
+                {language === Language.EN && props.name_en}
+              </Text>
             </Box>
           </Flex>
           <Flex justifyContent="space-between" alignContent="center">

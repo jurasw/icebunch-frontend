@@ -21,11 +21,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
 import { Review } from "../models/Review";
 import ReviewParagraph from "../components/IceCream/ReviewParagraph";
-import { useAuthStore } from "../zustand";
+import { Language, useAuthStore, useLanguageStore } from "../zustand";
 import RatingWithCounter from "../components/IceCream/RatingWithCounter";
 
 export default function IceCream() {
   const { id } = useParams();
+  const language = useLanguageStore((state) => state.language);
   const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
   const [iceCream, setIceCream] = useState<IceCream>();
@@ -72,10 +73,12 @@ export default function IceCream() {
               fontWeight={600}
               fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
             >
-              {iceCream?.brand_pl}
+              {language === Language.PL && iceCream?.brand_pl}
+              {language === Language.EN && iceCream?.brand_en}
             </Heading>
             <Text fontSize={{ base: "l", sm: "xl", lg: "2xl" }}>
-              {iceCream?.name_pl}
+              {language === Language.PL && iceCream?.name_pl}
+              {language === Language.EN && iceCream?.name_en}
             </Text>
             <RatingWithCounter
               rating={iceCream?.rating}
@@ -108,7 +111,8 @@ export default function IceCream() {
                 fontSize={"2xl"}
                 fontWeight={"300"}
               >
-                {iceCream?.description_pl}
+                {language === Language.PL && iceCream?.description_pl}
+                {language === Language.EN && iceCream?.description_en}
               </Text>
             </Box>
             <Box>

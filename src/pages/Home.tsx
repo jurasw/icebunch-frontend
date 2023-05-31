@@ -14,11 +14,9 @@ import IceCreamTile from "../components/IceCream/IceCreamTile";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IceCream } from "../models/IceCream";
-import { useLanguageStore } from "../zustand";
 
 const Home = () => {
   const [iceCream, setIceCream] = useState<IceCream[]>([]);
-  const language = useLanguageStore((state) => state.language);
   const [searchField, setSearchField] = useState("");
   const [isVegan, setIsVegan] = useState(false);
   const [sorting, setSorting] = useState<number>(-1);
@@ -49,7 +47,6 @@ const Home = () => {
   return (
     <>
       <Nav />
-      {language}
       <Center>
         <Input
           onChange={handleSearchChange}
@@ -97,8 +94,10 @@ const Home = () => {
           <GridItem>
             <IceCreamTile
               key={index}
-              name={icecream.name_pl}
-              brand={icecream.brand_pl}
+              name_pl={icecream.name_pl}
+              brand_pl={icecream.brand_pl}
+              name_en={icecream.name_en}
+              brand_en={icecream.brand_en}
               imageURL={icecream.image}
               rating={icecream.rating}
               number_of_ratings={icecream.number_of_ratings}

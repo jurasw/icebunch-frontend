@@ -13,7 +13,7 @@ import {
   useColorModeValue,
   List,
   ListItem,
-  Textarea
+  Textarea,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -42,7 +42,7 @@ export default function IceCream() {
   useEffect(() => {
     const fetchReviews = async () => {
       const result = await axios.get(`reviews/ice-cream/${id}`);
-      console.log(result.data[0].content)
+      console.log(result.data[0].content);
       setReviews(result.data);
     };
     fetchReviews();
@@ -55,14 +55,14 @@ export default function IceCream() {
         spacing={{ base: 7, md: 10 }}
         py={{ base: 18, md: 24 }}
       >
-        <Flex
-        justifyContent={"center"}
-        >
+        <Flex justifyContent={"center"}>
           <Image
+            objectFit="contain"
             alt={"product image"}
             src={iceCream?.image}
             align={"center"}
-            w={"auto"}
+            maxW={"100%"}
+            maxH="95vh"
           />
         </Flex>
         <Stack spacing={{ base: 6, md: 10 }}>
@@ -74,13 +74,12 @@ export default function IceCream() {
             >
               {iceCream?.brand_pl}
             </Heading>
-            <Text
-            fontSize={{ base: "l", sm: "xl", lg: "2xl" }}
-            >
+            <Text fontSize={{ base: "l", sm: "xl", lg: "2xl" }}>
               {iceCream?.name_pl}
             </Text>
-            <RatingWithCounter rating={iceCream?.rating}
-            numReviews={iceCream?.number_of_ratings}
+            <RatingWithCounter
+              rating={iceCream?.rating}
+              numReviews={iceCream?.number_of_ratings}
             />
           </Box>
 
@@ -93,8 +92,7 @@ export default function IceCream() {
               />
             }
           >
-            <VStack spacing={{ base: 4, sm: 6 }}>       
-            </VStack>
+            <VStack spacing={{ base: 4, sm: 6 }}></VStack>
             <Box>
               <Text
                 fontSize={{ base: "16px", lg: "18px" }}
@@ -123,18 +121,17 @@ export default function IceCream() {
               >
                 REVIEWS
               </Text>
-            
+
               <List spacing={2}>
-     
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
-                  <ReviewParagraph reviews={reviews} />
+                    <ReviewParagraph reviews={reviews} />
                   </Text>
                 </ListItem>
               </List>
             </Box>
           </Stack>
-          <Textarea placeholder='Share your thoughts about this one' />
+          <Textarea placeholder="Share your thoughts about this one" />
           <Button
             rounded={"none"}
             w={"full"}
@@ -144,18 +141,18 @@ export default function IceCream() {
             as={"a"}
             onClick={() => {
               if (!user) {
-                navigate('/login')
-            }}}
+                navigate("/login");
+              }
+            }}
             bg={useColorModeValue("gray.900", "gray.50")}
             color={useColorModeValue("white", "gray.900")}
             textTransform={"uppercase"}
             _hover={{
               transform: "translateY(2px)",
               boxShadow: "lg",
-              cursor: "pointer"
+              cursor: "pointer",
             }}
           >
-
             Add review
           </Button>
         </Stack>

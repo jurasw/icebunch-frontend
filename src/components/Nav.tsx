@@ -33,6 +33,8 @@ import {
 } from "@chakra-ui/icons";
 import { useAuth } from "../hooks/useAuth";
 import { useAuthStore } from "../zustand";
+import Flag from "./Nav/Flag";
+import { useNavigate } from "react-router-dom";
 
 export function Nav() {
   const { isOpen, onToggle } = useDisclosure();
@@ -84,6 +86,14 @@ export function Nav() {
           direction={"row"}
           spacing={6}
         >
+          <Flag
+          locale="pl"
+          src="../flag-pl.png"
+          />
+          <Flag
+          locale="en"
+          src="../flag-en.png"
+          />
           <Button
             as={"a"}
             href={"/login"}
@@ -283,6 +293,7 @@ export function UserNav() {
   const user = useAuthStore((state) => state.user);
   const { logout } = useAuth();
   const { colorMode, toggleColorMode } = useColorMode();
+  const navigate = useNavigate()
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
@@ -322,8 +333,16 @@ export function UserNav() {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem>Your Profile</MenuItem>
-                  <MenuItem>Ice Cream</MenuItem>
+                  <MenuItem
+                  onClick={()=>{
+                    (user && navigate('/my-profile'))
+                  }}
+                  >Your Profile</MenuItem>
+                  <MenuItem
+                   onClick={()=>{
+                    (user && navigate('/'))
+                  }}
+                  >Ice Cream</MenuItem>
                   <MenuItem onClick={logout}>Logout</MenuItem>
                 </MenuList>
               </Menu>

@@ -30,6 +30,7 @@ function IceCreamTile(props: Props) {
         position="relative"
       >
         <Image
+          mt={5}
           src={props.imageURL}
           roundedTop="lg"
           objectFit="contain"

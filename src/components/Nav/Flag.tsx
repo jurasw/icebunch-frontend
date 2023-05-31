@@ -1,6 +1,5 @@
 import { Image } from "@chakra-ui/react";
 import { Language, useLanguageStore } from "../../zustand";
-// import { useState } from "react";
 
 interface Props {
   src: string;

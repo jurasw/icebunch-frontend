@@ -1,5 +1,6 @@
 import { Flex, Box, useColorModeValue, Image, Text } from "@chakra-ui/react";
 import RatingWithCounter from "./RatingWithCounter";
+
 interface Props {
   name: string;
   brand: string;
@@ -10,13 +11,11 @@ interface Props {
 }
 
 function IceCreamTile(props: Props) {
-
-
   return (
     <Flex m={1} w="full" alignItems="center" justifyContent="center">
       <Box
-        as={"a"}
-        minW={"250px"}
+        as="a"
+        w="90%"
         href={props.href}
         bg={useColorModeValue("white", "gray.800")}
         maxW="lg"
@@ -44,9 +43,7 @@ function IceCreamTile(props: Props) {
               isTruncated
             >
               {props.brand}
-              <Text fontSize={'lg'}>
-            {props.name}
-              </Text>
+              <Text fontSize="lg">{props.name}</Text>
             </Box>
           </Flex>
           <Flex justifyContent="space-between" alignContent="center">

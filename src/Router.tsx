@@ -8,6 +8,7 @@ import ForgotPasswordForm from "./pages/ForgotPassword";
 import ResetPasswordForm from "./pages/ResetPassword";
 import IceCream from "./pages/IceCream";
 import MyProfile from "./pages/MyProfile";
+import Profile from "./pages/Profile";
 
 export const Router = () => {
   const location = useLocation();
@@ -17,6 +18,7 @@ export const Router = () => {
       <Routes location={location} key={location.pathname}>
         <Route path={Path.HOME} element={<Home />} />
         <Route path={Path.MY_PROFILE} element={<MyProfile />} />
+        <Route path={Path.PROFILE} element={<Profile />} />
         <Route path={Path.ICE_CREAM} element={<IceCream />} />
         <Route path={Path.LOGIN} element={<Login />} />
         <Route path={Path.REGISTER} element={<Register />} />

@@ -5,8 +5,8 @@ export enum Path {
     FORGOT = '/forgot-password',
     RESET = 'reset-password',
     SETTINGS = '/settings',
+    PROFILE = '/profile/:viewedUserId',
     MY_PROFILE = '/my-profile',
-    PROFILE = '/profile',
     ICE_CREAM= '/:name/:id'
   }
   

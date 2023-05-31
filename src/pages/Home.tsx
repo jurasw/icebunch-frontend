@@ -9,17 +9,15 @@ import {
   HStack,
   GridItem,
 } from "@chakra-ui/react";
-import { Nav, UserNav } from "../components/Nav";
-// import { SearchIcon } from "@chakra-ui/icons";
+import { Nav } from "../components/Nav";
 import IceCreamTile from "../components/IceCream/IceCreamTile";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IceCream } from "../models/IceCream";
-import { useAuthStore, useLanguageStore } from "../zustand";
+import { useLanguageStore } from "../zustand";
 
 const Home = () => {
   const [iceCream, setIceCream] = useState<IceCream[]>([]);
-  const user = useAuthStore((state) => state.user);
   const language = useLanguageStore((state) => state.language);
   const [searchField, setSearchField] = useState("");
   const [isVegan, setIsVegan] = useState(false);
@@ -50,7 +48,7 @@ const Home = () => {
 
   return (
     <>
-      {user ? <UserNav /> : <Nav />}
+      <Nav />
       {language}
       <Center>
         <Input

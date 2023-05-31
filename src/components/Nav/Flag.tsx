@@ -21,6 +21,7 @@ function Flag(props: Props) {
       objectFit="contain"
       height="30px"
       width="100%"
+      mx={5}
     />
   );
 }

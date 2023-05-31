@@ -38,7 +38,10 @@ import { useNavigate } from "react-router-dom";
 
 export function Nav() {
   const { isOpen, onToggle } = useDisclosure();
-
+  const user = useAuthStore((state) => state.user);
+  const { logout } = useAuth();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const navigate = useNavigate();
   return (
     <Box>
       <Flex
@@ -80,44 +83,94 @@ export function Nav() {
           </Flex>
         </Flex>
 
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={"flex-end"}
-          direction={"row"}
-          spacing={6}
-        >
-          <Flag
-          locale={Language.PL}
-          src="../flag-pl.png"
-          />
-          <Flag
-          locale={Language.EN}
-          src="../flag-en.png"
-          />
-          <Button
-            as={"a"}
-            href={"/login"}
-            fontSize={"sm"}
-            fontWeight={400}
-            variant={"link"}
+        {user ? (
+          <Flex alignItems={"center"}>
+            <Flag locale={Language.PL} src="../flag-pl.png" />
+            <Flag locale={Language.EN} src="../flag-en.png" />
+            <Stack direction={"row"} spacing={7}>
+              <Button onClick={toggleColorMode}>
+                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+              </Button>
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  rounded={"full"}
+                  variant={"link"}
+                  cursor={"pointer"}
+                  minW={0}
+                >
+                  <Avatar
+                    size={"sm"}
+                    src={"https://avatars.dicebear.com/api/male/username.svg"}
+                  />
+                </MenuButton>
+                <MenuList alignItems={"center"}>
+                  <br />
+                  <Center>
+                    <Avatar
+                      size={"2xl"}
+                      src={"https://avatars.dicebear.com/api/male/username.svg"}
+                    />
+                  </Center>
+                  <br />
+                  <Center>
+                    <p>{user?.email}</p>
+                  </Center>
+                  <br />
+                  <MenuDivider />
+                  <MenuItem
+                    onClick={() => {
+                      user && navigate("/my-profile");
+                    }}
+                  >
+                    Your Profile
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      user && navigate("/");
+                    }}
+                  >
+                    Ice Cream
+                  </MenuItem>
+                  <MenuItem onClick={logout}>Logout</MenuItem>
+                </MenuList>
+              </Menu>
+            </Stack>
+          </Flex>
+        ) : (
+          <Stack
+            flex={{ base: 1, md: 0 }}
+            justify={"flex-end"}
+            direction={"row"}
+            spacing={6}
           >
-            Sign In
-          </Button>
-          <Button
-            as={"a"}
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"pink.400"}
-            href={"/register"}
-            _hover={{
-              bg: "pink.300",
-            }}
-          >
-            Sign Up
-          </Button>
-        </Stack>
+            <Flag locale={Language.PL} src="../flag-pl.png" />
+            <Flag locale={Language.EN} src="../flag-en.png" />
+            <Button
+              as={"a"}
+              href={"/login"}
+              fontSize={"sm"}
+              fontWeight={400}
+              variant={"link"}
+            >
+              Sign In
+            </Button>
+            <Button
+              as={"a"}
+              display={{ base: "none", md: "inline-flex" }}
+              fontSize={"sm"}
+              fontWeight={600}
+              color={"white"}
+              bg={"pink.400"}
+              href={"/register"}
+              _hover={{
+                bg: "pink.300",
+              }}
+            >
+              Sign Up
+            </Button>
+          </Stack>
+        )}
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
@@ -288,68 +341,3 @@ interface NavItem {
 }
 
 const NAV_ITEMS: Array<NavItem> = [];
-
-export function UserNav() {
-  const user = useAuthStore((state) => state.user);
-  const { logout } = useAuth();
-  const { colorMode, toggleColorMode } = useColorMode();
-  const navigate = useNavigate()
-  return (
-    <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
-        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Box>iceBunch</Box>
-
-          <Flex alignItems={"center"}>
-            <Stack direction={"row"} spacing={7}>
-              <Button onClick={toggleColorMode}>
-                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-              </Button>
-
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={"full"}
-                  variant={"link"}
-                  cursor={"pointer"}
-                  minW={0}
-                >
-                  <Avatar
-                    size={"sm"}
-                    src={"https://avatars.dicebear.com/api/male/username.svg"}
-                  />
-                </MenuButton>
-                <MenuList alignItems={"center"}>
-                  <br />
-                  <Center>
-                    <Avatar
-                      size={"2xl"}
-                      src={"https://avatars.dicebear.com/api/male/username.svg"}
-                    />
-                  </Center>
-                  <br />
-                  <Center>
-                    <p>{user?.email}</p>
-                  </Center>
-                  <br />
-                  <MenuDivider />
-                  <MenuItem
-                  onClick={()=>{
-                    (user && navigate('/my-profile'))
-                  }}
-                  >Your Profile</MenuItem>
-                  <MenuItem
-                   onClick={()=>{
-                    (user && navigate('/'))
-                  }}
-                  >Ice Cream</MenuItem>
-                  <MenuItem onClick={logout}>Logout</MenuItem>
-                </MenuList>
-              </Menu>
-            </Stack>
-          </Flex>
-        </Flex>
-      </Box>
-    </>
-  );
-}

@@ -8,7 +8,7 @@ interface AuthState {
   login: (user: User | null) => void;
 }
 
-enum Language{
+export enum Language{
   PL = "PL",
   EN = "EN"
 }

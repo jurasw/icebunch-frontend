@@ -32,7 +32,7 @@ import {
   SunIcon,
 } from "@chakra-ui/icons";
 import { useAuth } from "../hooks/useAuth";
-import { useAuthStore } from "../zustand";
+import { Language, useAuthStore } from "../zustand";
 import Flag from "./Nav/Flag";
 import { useNavigate } from "react-router-dom";
 
@@ -87,11 +87,11 @@ export function Nav() {
           spacing={6}
         >
           <Flag
-          locale="pl"
+          locale={Language.PL}
           src="../flag-pl.png"
           />
           <Flag
-          locale="en"
+          locale={Language.EN}
           src="../flag-en.png"
           />
           <Button

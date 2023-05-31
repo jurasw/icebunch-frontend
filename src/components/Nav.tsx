@@ -21,8 +21,9 @@ import {
   HamburgerIcon,
 } from "@chakra-ui/icons";
 import { useAuthStore } from "../zustand";
-import AuthorizedNav from "./Nav/authorizedNav";
-import GuestNav from "./Nav/guestNav";
+import AuthorizedNav from "./Nav/AuthorizedNav";
+import GuestNav from "./Nav/GuestNav";
+
 
 export function Nav() {
   const { isOpen, onToggle } = useDisclosure();

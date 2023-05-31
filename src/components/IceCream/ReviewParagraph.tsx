@@ -11,8 +11,8 @@ interface ReviewProps {
 
 function ReviewParagraph(props: ReviewProps) {
 
-
   const navigate = useNavigate()
+
   return (
     <>
       {props.reviews?.map((review) => (
@@ -28,6 +28,7 @@ function ReviewParagraph(props: ReviewProps) {
         }}
         >
           <Avatar name="testowy user" src="https://bit.ly/dan-abramov" />
+          {review?.username}
           <RatingWithoutCounter rating={review.rating} />
           <p>{review.content}</p>
           </Box>

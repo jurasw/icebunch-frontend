@@ -15,6 +15,7 @@ import {
   ListItem,
   Textarea,
 } from "@chakra-ui/react";
+// import { SendReviewDTO } from "../models/Review";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -28,9 +29,31 @@ export default function IceCream() {
   const { id } = useParams();
   const language = useLanguageStore((state) => state.language);
   const user = useAuthStore((state) => state.user);
-  const navigate = useNavigate();
+  const [userEmail, setUserEmail] = useState<string>('');
+  const [userId, setUserId] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [iceCream, setIceCream] = useState<IceCream>();
   const [reviews, setReviews] = useState<Review[]>();
+  const [reviewContent, setReviewContent] = useState('')
+  const [reviewRating, setReviewRating] = useState<number>(1.5)
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getUserEmail = async () => {
+      const result = await axios.get(`/users/email/${user?.email}`);
+      setUserEmail(result.data.email);
+      setUserId(result.data._id)
+      const username = result.data.email.split("@")[0]
+      setUsername(username)
+    };
+    getUserEmail();
+
+    setReviewRating(2)
+  }, []);
+
+  const handleFieldContent = (event: any) => {
+    setReviewContent(event.target.value)
+  };
 
   useEffect(() => {
     const fetchIceCream = async () => {
@@ -43,11 +66,23 @@ export default function IceCream() {
   useEffect(() => {
     const fetchReviews = async () => {
       const result = await axios.get(`reviews/ice-cream/${id}`);
-      console.log(result.data[0].content);
-      setReviews(result.data);
+      if (result) {
+        setReviews(result?.data);
+      }
     };
     fetchReviews();
   }, []);
+
+
+  const sendReview = async (rating: number, content: string, iceCreamId: string, userId: string, username: string) => {
+    await axios.put(`/reviews`, {
+      rating,
+      content,
+      iceCreamId,
+      userId,
+      username
+    });
+  };
 
   return (
     <Container maxW={"7xl"}>
@@ -135,7 +170,12 @@ export default function IceCream() {
               </List>
             </Box>
           </Stack>
-          <Textarea placeholder="Share your thoughts about this one" />
+          <Textarea
+          // value={value}
+          onChange={handleFieldContent}
+          // onChange={handleFieldContent}
+          resize={"none"}
+          placeholder="Share your thoughts about this one" />
           <Button
             rounded={"none"}
             w={"full"}
@@ -146,6 +186,9 @@ export default function IceCream() {
             onClick={() => {
               if (!user) {
                 navigate("/login");
+              }
+              if (id && userEmail) {
+              sendReview(reviewRating, reviewContent, id, userId, username)
               }
             }}
             bg={useColorModeValue("gray.900", "gray.50")}

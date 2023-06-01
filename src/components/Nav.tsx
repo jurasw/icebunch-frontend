@@ -139,11 +139,11 @@ const AuthorizedMobileNav = () => {
   );
 };
 
-interface NavItem {
-  label: string;
-  subLabel?: string;
-  children?: Array<NavItem>;
-  href?: string;
-}
+// interface NavItem {
+//   label: string;
+//   subLabel?: string;
+//   children?: Array<NavItem>;
+//   href?: string;
+// }
 
-const NAV_ITEMS: Array<NavItem> = [];
+// const NAV_ITEMS: Array<NavItem> = [];

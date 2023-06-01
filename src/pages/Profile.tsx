@@ -1,5 +1,4 @@
 import { Center, Text } from "@chakra-ui/react";
-import { Nav } from "../components/Nav";
 // import { SearchIcon } from "@chakra-ui/icons";
 // import { useEffect, useState } from "react";
 // import axios from "axios";
@@ -8,6 +7,7 @@ import { Nav } from "../components/Nav";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Nav from "../components/Nav";
 
 
 

@@ -1,149 +1,135 @@
 import {
   Box,
   Flex,
+  Avatar,
+  HStack,
+  IconButton,
+  Button,
+  Menu,
+  MenuButton,
   useDisclosure,
   useColorModeValue,
   Stack,
-  Text,
-  Collapse,
-  useBreakpointValue,
-  IconButton,
+  Spacer,
+  useColorMode,
 } from "@chakra-ui/react";
-import {
-  CloseIcon,
-  HamburgerIcon,
-} from "@chakra-ui/icons";
-import AuthorizedNav from "./Nav/AuthorizedNav";
-import GuestNav from "./Nav/GuestNav";
-import { useNavigate } from "react-router-dom";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Flag from "./Nav/Flag";
 import { Language, useAuthStore } from "../zustand";
+import { useAuth } from "../hooks/useAuth";
+import { Path } from "../pages/Paths";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
-export function Nav() {
-  const { isOpen, onToggle } = useDisclosure();
-  const user = useAuthStore((state) => state.user);
-  return (
-    <Box>
-      <Flex
-        bg={useColorModeValue("white", "gray.800")}
-        color={useColorModeValue("gray.600", "white")}
-        minH={"60px"}
-        py={{ base: 2 }}
-        px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
-        align={"center"}
-      >
-        <Flex
-          flex={{ base: 1, md: "auto" }}
-          ml={{ base: -2 }}
-          display={{ base: "flex", md: "none" }}
-        >
-          <IconButton
-            onClick={onToggle}
-            icon={
-              isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
-            }
-            variant={"ghost"}
-            aria-label={"Toggle Navigation"}
-          />
-        </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            color={useColorModeValue("gray.800", "white")}
-          >
-            iceBunch
-          </Text>
-        </Flex>
-
-        {user ? <AuthorizedNav /> : <GuestNav />}
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity>
-      {user ? <AuthorizedMobileNav /> : <GuestMobileNav />}
-      </Collapse>
-    </Box>
-  );
-}
-
-const GuestMobileNav = () => {
-  const navigate = useNavigate();
+export const MenuItems = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Stack
-      bg={useColorModeValue("white", "gray.800")}
-      p={4}
-      display={{ md: "none" }}
-    >
-      <Text
-      _hover={{
-        cursor: "pointer"
-      }}
-      onClick={() => {    
-          navigate("/");
-        }}
-      >
-          Ice Cream
-      </Text>
-      <Text
-      _hover={{
-        cursor: "pointer"
-      }}
-      onClick={() => {    
-          navigate("/");
-        }}
-      >
-          About
-      </Text>
-    </Stack>
-  );
-};
-
-const AuthorizedMobileNav = () => {
-  const navigate = useNavigate();
-
-  return (
-    <Stack
-      bg={useColorModeValue("white", "gray.800")}
-      p={4}
-      display={{ md: "none" }}
-    >
-
-      <Text
-      _hover={{
-        cursor: "pointer"
-      }}
-      onClick={() => {    
-          navigate("/");
-        }}
-      >
-          Ice Cream
-      </Text>
-
-      <Text
-      _hover={{
-        cursor: "pointer"
-      }}
-      onClick={() => {    
-          navigate("/");
-        }}
-      >
-          About
-      </Text>
+    <>
       <Flag locale={Language.PL} src="../flag-pl.png" />
       <Flag locale={Language.EN} src="../flag-en.png" />
-    </Stack>
+      <Button onClick={toggleColorMode}>
+        {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+      </Button>
+    </>
   );
 };
 
-// interface NavItem {
-//   label: string;
-//   subLabel?: string;
-//   children?: Array<NavItem>;
-//   href?: string;
-// }
+export default function Nav() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const user = useAuthStore((state) => state.user);
+  const { logout } = useAuth();
 
-// const NAV_ITEMS: Array<NavItem> = [];
+  return (
+    <>
+      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+          <IconButton
+            size={"md"}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={"Open Menu"}
+            display={{ md: "none" }}
+            onClick={isOpen ? onClose : onOpen}
+          />
+          <HStack spacing={8} alignItems={"center"} w={"100%"}>
+            <Box as={"a"} href="/">
+              iceBunch
+            </Box>
+            <Spacer />
+            <HStack
+              as={"nav"}
+              spacing={4}
+              display={{ base: "none", md: "flex" }}
+            >
+              <MenuItems />
+            </HStack>
+          </HStack>
+          <Flex alignItems={"center"}>
+            {user ? (
+              <>
+                <Menu>
+                  <MenuButton
+                    ml={8}
+                    as={Button}
+                    rounded={"full"}
+                    variant={"link"}
+                    cursor={"pointer"}
+                    minW={0}
+                  >
+                    <Avatar
+                      as={"a"}
+                      href={Path.MY_PROFILE}
+                      size={"sm"}
+                      src={
+                        "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                      }
+                    />
+                  </MenuButton>
+                </Menu>
+                <Button
+                  variant={"solid"}
+                  colorScheme={"teal"}
+                  size={"sm"}
+                  ml={4}
+                  onClick={logout}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  variant={"solid"}
+                  colorScheme={"teal"}
+                  size={"sm"}
+                  mr={4}
+                  as={"a"}
+                  href={Path.LOGIN}
+                >
+                  Sign in
+                </Button>
+                <Button
+                  variant={"solid"}
+                  colorScheme={"teal"}
+                  size={"sm"}
+                  mr={4}
+                  as={"a"}
+                  href={Path.REGISTER}
+                >
+                  Sign up
+                </Button>
+              </>
+            )}
+          </Flex>
+        </Flex>
+
+        {isOpen ? (
+          <Box pb={4} display={{ md: "none" }}>
+            <Stack as={"nav"} spacing={4}>
+              <MenuItems />
+            </Stack>
+          </Box>
+        ) : null}
+      </Box>
+    </>
+  );
+}

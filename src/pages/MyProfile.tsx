@@ -1,10 +1,10 @@
 import { Center, Text } from "@chakra-ui/react";
-import { Nav } from "../components/Nav";
 // import { SearchIcon } from "@chakra-ui/icons";
 // import { useEffect, useState } from "react";
 // import axios from "axios";
 // import { IceCream } from "../models/IceCream";
 import { useAuthStore } from "../zustand";
+import Nav from "../components/Nav";
 
 const MyProfile = () => {
   //   const [iceCream, setIceCream] = useState<IceCream[]>([]);

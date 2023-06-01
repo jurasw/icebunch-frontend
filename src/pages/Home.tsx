@@ -9,11 +9,11 @@ import {
   HStack,
   GridItem,
 } from "@chakra-ui/react";
-import { Nav } from "../components/Nav";
 import IceCreamTile from "../components/IceCream/IceCreamTile";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IceCream } from "../models/IceCream";
+import Nav from "../components/Nav";
 
 const Home = () => {
   const [iceCream, setIceCream] = useState<IceCream[]>([]);

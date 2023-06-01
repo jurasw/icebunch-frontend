@@ -13,17 +13,16 @@ import {
   useColorModeValue,
   Link,
   HStack,
-  Divider
+  Divider,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import OAuthButtonGroup from "../components/Login/OAuthButtonGroup";
+import { Path } from "./Paths";
 
 export default function SignupCard() {
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
   const { formSignupMutation } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,18 +35,7 @@ export default function SignupCard() {
   };
 
   const register = () => {
-    formSignupMutation.mutate(
-      { email, password },
-      {
-        onSuccess: () => {
-          navigate(`/`);
-        },
-        onError: (err: unknown) => {
-          console.log(err);
-        },
-      }
-    );
-    setPassword("");
+    formSignupMutation.mutate({ email, password });
   };
 
   return (
@@ -131,20 +119,20 @@ export default function SignupCard() {
               </Button>
 
               <HStack>
-              <Divider />
-              <Text fontSize="sm" whiteSpace="nowrap" color="muted">
-                or
-              </Text>
-              <Divider />
-            </HStack>
-            <OAuthButtonGroup />
-
+                <Divider />
+                <Text fontSize="sm" whiteSpace="nowrap" color="muted">
+                  or
+                </Text>
+                <Divider />
+              </HStack>
+              <OAuthButtonGroup />
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>
-                Already a user? 
-                <Link href="/login" color={"blue.400"}>
-                  {" "}Login
+                Already a user?
+                <Link href={Path.LOGIN} color={"blue.400"}>
+                  {" "}
+                  Login
                 </Link>
               </Text>
             </Stack>

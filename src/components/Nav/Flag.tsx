@@ -19,7 +19,7 @@ function Flag(props: Props) {
       roundedTop="lg"
       objectFit="contain"
       height="30px"
-      width="100%"
+      width="auto"
       mx={5}
     />
   );

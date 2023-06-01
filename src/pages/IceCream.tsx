@@ -20,11 +20,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
-import { Review } from "../models/Review";
+import { Review, SendReviewDTO } from "../models/Review";
 import ReviewParagraph from "../components/IceCream/ReviewParagraph";
 import { Language, useAuthStore, useLanguageStore } from "../zustand";
 import RatingWithCounter from "../components/IceCream/RatingWithCounter";
 import Nav from "../components/Nav";
+import { Path } from "./Paths";
 
 export default function IceCream() {
   const { id } = useParams();
@@ -74,20 +75,8 @@ export default function IceCream() {
     fetchReviews();
   }, []);
 
-  const sendReview = async (
-    rating: number,
-    content: string,
-    iceCreamId: string,
-    userId: string,
-    username: string
-  ) => {
-    await axios.put(`/reviews`, {
-      rating,
-      content,
-      iceCreamId,
-      userId,
-      username,
-    });
+  const sendReview = async (payload: SendReviewDTO) => {
+    await axios.put(`/reviews`, payload);
   };
 
   return (
@@ -179,13 +168,16 @@ export default function IceCream() {
                 </List>
               </Box>
             </Stack>
-            <Textarea
-              // value={value}
-              onChange={handleFieldContent}
-              // onChange={handleFieldContent}
-              resize={"none"}
-              placeholder="Share your thoughts about this one"
-            />
+            {user && (
+              <Textarea
+                // value={value}
+                onChange={handleFieldContent}
+                // onChange={handleFieldContent}
+                resize={"none"}
+                placeholder="Share your thoughts about this one"
+              />
+            )}
+
             <Button
               rounded={"none"}
               w={"full"}
@@ -195,10 +187,16 @@ export default function IceCream() {
               as={"a"}
               onClick={() => {
                 if (!user) {
-                  navigate("/login");
+                  navigate(Path.LOGIN);
                 }
                 if (id && userEmail) {
-                  sendReview(reviewRating, reviewContent, id, userId, username);
+                  sendReview({
+                    rating: reviewRating,
+                    content: reviewContent,
+                    iceCreamId: id,
+                    userId: userId,
+                    username: username,
+                  });
                 }
               }}
               bg={useColorModeValue("gray.900", "gray.50")}

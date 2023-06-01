@@ -8,8 +8,12 @@ export interface Review {
   }
 
   export interface SendReviewDTO {
-    rating: number;
-    content: string;
+    rating: number,
+    content: string,
+    iceCreamId: string,
+    userId: string,
+    username: string
   }
+
 
   

@@ -24,6 +24,8 @@ import { Review } from "../models/Review";
 import ReviewParagraph from "../components/IceCream/ReviewParagraph";
 import { Language, useAuthStore, useLanguageStore } from "../zustand";
 import RatingWithCounter from "../components/IceCream/RatingWithCounter";
+import { Nav } from "../components/Nav";
+
 
 export default function IceCream() {
   const { id } = useParams();
@@ -85,6 +87,9 @@ export default function IceCream() {
   };
 
   return (
+    <>
+    <Nav />
+
     <Container maxW={"7xl"}>
       <SimpleGrid
         columns={{ base: 1, lg: 2 }}
@@ -205,5 +210,6 @@ export default function IceCream() {
         </Stack>
       </SimpleGrid>
     </Container>
+    </>
   );
 }

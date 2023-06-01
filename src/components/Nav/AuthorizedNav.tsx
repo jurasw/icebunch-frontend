@@ -1,15 +1,10 @@
 import {
   Avatar,
   Button,
-  Center,
   Flex,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
   Stack,
   useColorMode,
+  Text
 } from "@chakra-ui/react";
 import Flag from "./Flag";
 import { Language, useAuthStore } from "../../zustand";
@@ -27,54 +22,37 @@ export default function authorizedNav() {
     <Flex alignItems={"center"}>
       <Flag locale={Language.PL} src="../flag-pl.png" />
       <Flag locale={Language.EN} src="../flag-en.png" />
+      <Text
+      _hover={{
+        cursor: "pointer"
+      }}
+      onClick={() => {    
+          user && navigate("/");
+        }}
+      >
+          Ice Cream
+      </Text>
+
       <Stack direction={"row"} spacing={7}>
+        <Avatar
+          _hover={{
+            cursor: "pointer"
+          }}
+          onClick={() => {
+          
+            user && navigate("/my-profile");
+          }}
+          size={"sm"}
+          src={"https://avatars.dicebear.com/api/male/username.svg"}
+            />
+        <Button
+        onClick={logout}
+        >
+          Logout
+        </Button>
         <Button onClick={toggleColorMode}>
           {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
         </Button>
-        <Menu>
-          <MenuButton
-            as={Button}
-            rounded={"full"}
-            variant={"link"}
-            cursor={"pointer"}
-            minW={0}
-          >
-            <Avatar
-              size={"sm"}
-              src={"https://avatars.dicebear.com/api/male/username.svg"}
-            />
-          </MenuButton>
-          <MenuList alignItems={"center"}>
-            <br />
-            <Center>
-              <Avatar
-                size={"2xl"}
-                src={"https://avatars.dicebear.com/api/male/username.svg"}
-              />
-            </Center>
-            <br />
-            <Center>
-              <p>{user?.email}</p>
-            </Center>
-            <br />
-            <MenuDivider />
-            <MenuItem
-              onClick={() => {
-                user && navigate("/my-profile");
-              }}
-            >
-              Your Profile
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                user && navigate("/");
-              }}
-            >
-              Ice Cream
-            </MenuItem>
-            <MenuItem onClick={logout}>Logout</MenuItem>
-          </MenuList>
-        </Menu>
       </Stack>
     </Flex>
   );

@@ -188,7 +188,6 @@ export default function IceCream() {
             )}
 
             <Button
-              rounded={"none"}
               w={"full"}
               mt={8}
               size={"lg"}

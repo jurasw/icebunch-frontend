@@ -2,13 +2,11 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import {
-  ResetPasswordDTO,
-  ResetPasswordEmailDTO,
-  User,
-  UserForm,
-} from "../models/User";
 import { useAuthStore } from "../zustand";
+import { useToast } from "@chakra-ui/react";
+import { RegisterPayload } from "../models/auth/register";
+import { LoginPayload } from "../models/auth/login";
+import { NewPasswordDto, ResetPasswordDto } from "../models/auth/resetPassword";
 
 interface LoginResponse {
   email: string;
@@ -21,6 +19,7 @@ interface Token {
 export const useAuth = () => {
   const loginToStore = useAuthStore((state) => state.login);
   const navigate = useNavigate();
+  const toast = useToast();
 
   const googleLogin = async (token: string) => {
     const response = await axios.post("auth/google/login", {
@@ -29,12 +28,12 @@ export const useAuth = () => {
     return response.data;
   };
 
-  const formSignup = async (payload: UserForm): Promise<User> => {
+  const formSignup = async (payload: RegisterPayload) => {
     const response = await axios.post(`auth/register`, payload);
     return response.data;
   };
 
-  const formLogin = async (payload: UserForm): Promise<User> => {
+  const formLogin = async (payload: LoginPayload) => {
     const response = await axios.post(`auth/login`, payload);
     return response.data;
   };
@@ -76,7 +75,6 @@ export const useAuth = () => {
     }
   };
 
-  // const isLoggedIn = useAuthStore((state) => state.user != null);
   const isLoggedIn: boolean = !useAuthStore(
     (state) => state.user === null || tokenExpired(state.user.token)
   );
@@ -90,26 +88,47 @@ export const useAuth = () => {
     return response.data;
   };
 
-  const postResetPasswordEmail = async (payload: ResetPasswordEmailDTO) => {
+  const postResetPassword = async (payload: ResetPasswordDto) => {
     const response = await axios.post(`/auth/reset-password-email`, payload);
     return response.data;
   };
 
-  const postResetPassword = async (payload: ResetPasswordDTO) => {
+  const postNewPassword = async (payload: NewPasswordDto) => {
     const response = await axios.post(`/auth/reset-password`, payload);
     return response.data;
   };
 
   const getConfirmMutation = useMutation(getConfirm, {
-    onSuccess: () => {},
+    onSuccess: () => {
+      toast({
+        title: "Email successfully confirmed!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
   });
 
-  const postResetPasswordEmailMutation = useMutation(postResetPasswordEmail, {
-    onSuccess: () => {},
+  const postResetPassworMutation = useMutation(postResetPassword, {
+    onSuccess: () => {
+      toast({
+        title: "Email successfully sent!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
   });
 
-  const postResetPasswordMutation = useMutation(postResetPassword, {
-    onSuccess: () => {},
+  const postNewPasswordMutation = useMutation(postNewPassword, {
+    onSuccess: () => {
+      toast({
+        title: "Password successfully changed!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    },
   });
 
   return {
@@ -119,7 +138,7 @@ export const useAuth = () => {
     isLoggedIn,
     logout,
     getConfirmMutation,
-    postResetPasswordEmailMutation,
-    postResetPasswordMutation,
+    postResetPassworMutation,
+    postNewPasswordMutation,
   };
 };

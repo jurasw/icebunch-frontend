@@ -1,7 +1,7 @@
 import axios from 'axios';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
-import { User } from './models/User';
+import { User } from './models/auth/User';
 
 interface AuthState {
   user: User | null;

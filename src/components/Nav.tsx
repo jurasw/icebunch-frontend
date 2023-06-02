@@ -12,6 +12,7 @@ import {
   Stack,
   Spacer,
   useColorMode,
+  Text
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Flag from "./Nav/Flag";
@@ -54,7 +55,11 @@ export default function Nav() {
           />
           <HStack spacing={8} alignItems={"center"} w={"100%"}>
             <Box as={"a"} href="/">
+              <Text
+              as='b'
+              >
               iceBunch
+              </Text>
             </Box>
             <Spacer />
             <HStack

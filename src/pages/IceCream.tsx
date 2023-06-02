@@ -15,30 +15,30 @@ import {
   ListItem,
   Textarea,
 } from "@chakra-ui/react";
-// import { SendReviewDTO } from "../models/Review";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
-import { Review, SendReviewDTO } from "../models/Review";
 import ReviewParagraph from "../components/IceCream/ReviewParagraph";
 import { Language, useAuthStore, useLanguageStore } from "../zustand";
 import RatingWithCounter from "../components/IceCream/RatingWithCounter";
 import Nav from "../components/Nav";
 import { Path } from "./Paths";
+import { useReviews } from "../hooks/queries/useReviews";
 
 export default function IceCream() {
   const { id } = useParams();
   const language = useLanguageStore((state) => state.language);
   const user = useAuthStore((state) => state.user);
+  const navigate = useNavigate();
+
   const [userEmail, setUserEmail] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [iceCream, setIceCream] = useState<IceCream>();
-  const [reviews, setReviews] = useState<Review[]>();
+  // const [reviews, setReviews] = useState<Review[]>();
   const [reviewContent, setReviewContent] = useState("");
   const [reviewRating, setReviewRating] = useState<number>(1.5);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getUserEmail = async () => {
@@ -65,24 +65,33 @@ export default function IceCream() {
     fetchIceCream();
   }, []);
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      const result = await axios.get(`reviews/ice-cream/${id}`);
-      if (result) {
-        setReviews(result?.data);
-      }
-    };
-    fetchReviews();
-  }, []);
 
-  const sendReview = async (payload: SendReviewDTO) => {
-    await axios.put(`/reviews`, payload);
-  };
+
+  const { iceCreamReviewsQuery, putMutation} = useReviews({iceCreamId: id!})
+
+  useEffect(() => {
+    console.log(iceCreamReviewsQuery.data);
+    
+  }, [iceCreamReviewsQuery.data])
+
+  const sendReview = () => {
+    if (!user) {
+      navigate(Path.LOGIN);
+    }
+    if (id && userEmail) {
+      putMutation.mutate({
+        rating: reviewRating,
+        content: reviewContent,
+        iceCreamId: id,
+        userId: userId,
+        username: username,
+      });
+    }
+  }
 
   return (
     <>
       <Nav />
-
       <Container maxW={"7xl"}>
         <SimpleGrid
           columns={{ base: 1, lg: 2 }}
@@ -132,7 +141,7 @@ export default function IceCream() {
               <Box>
                 <Text
                   fontSize={{ base: "16px", lg: "18px" }}
-                  color={useColorModeValue("yellow.500", "yellow.300")}
+                  color="primary"
                   fontWeight={"500"}
                   textTransform={"uppercase"}
                   mb={"4"}
@@ -151,7 +160,7 @@ export default function IceCream() {
               <Box>
                 <Text
                   fontSize={{ base: "16px", lg: "18px" }}
-                  color={useColorModeValue("yellow.500", "yellow.300")}
+                  color="primary"
                   fontWeight={"500"}
                   textTransform={"uppercase"}
                   mb={"4"}
@@ -162,7 +171,7 @@ export default function IceCream() {
                 <List spacing={2}>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      <ReviewParagraph reviews={reviews} />
+                      <ReviewParagraph reviews={iceCreamReviewsQuery.data} />
                     </Text>
                   </ListItem>
                 </List>
@@ -185,28 +194,9 @@ export default function IceCream() {
               size={"lg"}
               py={"7"}
               as={"a"}
-              onClick={() => {
-                if (!user) {
-                  navigate(Path.LOGIN);
-                }
-                if (id && userEmail) {
-                  sendReview({
-                    rating: reviewRating,
-                    content: reviewContent,
-                    iceCreamId: id,
-                    userId: userId,
-                    username: username,
-                  });
-                }
-              }}
-              bg={useColorModeValue("gray.900", "gray.50")}
-              color={useColorModeValue("white", "gray.900")}
-              textTransform={"uppercase"}
-              _hover={{
-                transform: "translateY(2px)",
-                boxShadow: "lg",
-                cursor: "pointer",
-              }}
+              onClick={sendReview}
+              variant="primaryButton"
+              isLoading={putMutation.isLoading}
             >
               Add review
             </Button>

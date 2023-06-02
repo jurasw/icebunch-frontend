@@ -4,7 +4,11 @@ import { Review, SendReviewDTO } from "../../models/Review";
 
 export const REVIEWS_QUERY_KEY = "reviews";
 
-export const useReviews = () => {
+interface Params {
+  iceCreamId: string;
+}
+
+export const useReviews = (params: Params) => {
   const queryClient = useQueryClient();
 
   const getIceCreamReviews = async (id: string): Promise<Review[]> => {
@@ -13,21 +17,19 @@ export const useReviews = () => {
   };
 
   const putMyReview = async (payload: SendReviewDTO) => {
-    const response = await axios.post(`/reviews`, payload);
+    const response = await axios.put(`/reviews`, payload);
     return response.data;
   };
 
-  const iceCreamReviewsQuery = (id: string) =>
+  const iceCreamReviewsQuery =
     useQuery({
       queryKey: REVIEWS_QUERY_KEY,
-      queryFn: () => getIceCreamReviews(id),
-    });
+      queryFn: () => getIceCreamReviews(params.iceCreamId),
+    })
 
   const putMutation = useMutation(putMyReview, {
-    onSuccess: (revies: Review[]) => {
-      queryClient.setQueryData(REVIEWS_QUERY_KEY, (oldData: any) => {
-        return [...oldData, revies];
-      });
+    onSuccess: () => {
+      queryClient.invalidateQueries(REVIEWS_QUERY_KEY);
     },
   });
 

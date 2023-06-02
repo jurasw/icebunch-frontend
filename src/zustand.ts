@@ -1,5 +1,5 @@
 import axios from 'axios';
-import create from 'zustand';
+import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { User } from './models/auth/User';
 

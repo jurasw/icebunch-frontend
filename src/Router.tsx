@@ -11,6 +11,7 @@ import MyProfile from "./pages/MyProfile";
 import Profile from "./pages/Profile";
 import Confirm from "./pages/Confirm";
 import ConfirmRequest from "./pages/ConfirmRequest";
+import Settings from "./pages/Settings";
 
 export const Router = () => {
   const location = useLocation();
@@ -26,6 +27,8 @@ export const Router = () => {
         <Route path={Path.CONFIRM_REQUEST} element={<ConfirmRequest />} />
 
         <Route path={Path.LOGIN} element={<Login />} />
+        <Route path={Path.SETTINGS} element={<Settings />} />
+
         <Route path={Path.REGISTER} element={<Register />} />
         <Route path={Path.CONFIRM} element={<Confirm />} />
         <Route path={Path.FORGOT_PASSWORD} element={<ForgotPasswordForm />} />

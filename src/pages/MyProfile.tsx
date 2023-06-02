@@ -7,11 +7,25 @@ import { useAuthStore } from "../zustand";
 import Nav from "../components/Nav";
 import { useNavigate } from "react-router-dom";
 import { Path } from "./Paths";
+import { useUser } from "../hooks/queries/useUser";
+import { useEffect, useState } from "react";
 
 const MyProfile = () => {
   const navigate = useNavigate()
   //   const [iceCream, setIceCream] = useState<IceCream[]>([]);
+  const [avatarUrl, setAvatarUrl] = useState('')
   const user = useAuthStore((state) => state.user);
+
+  useEffect(() => {
+    const fetchAvatar = async () => {
+      if (user) {
+      const { getUserAvatarFromEmail } = useUser();
+      const result = await getUserAvatarFromEmail(user.email)
+      setAvatarUrl(result);
+    }
+    };
+    fetchAvatar();
+  }, []);
 
   return (
     <>
@@ -24,8 +38,7 @@ const MyProfile = () => {
       <Avatar
                       as={"a"}
                       size={"2xl"}
-                      src={
-                        "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                      src={avatarUrl
                       }
                     />
         <Button

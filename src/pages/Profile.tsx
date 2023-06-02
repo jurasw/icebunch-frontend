@@ -17,6 +17,7 @@ const Profile = () => {
   const [viewedUser, setViewedUser] = useState<any>();
 //   const user = useAuthStore((state) => state.user);
 
+
   useEffect(() => {
     const fetchViewedUser = async () => {
     const viewedUser = await axios.get(`/users/${viewedUserId}`);
@@ -35,7 +36,7 @@ const Profile = () => {
         as='b'
         >
         {viewedUser?.email}
-        {viewedUser?.profilePictureUrl}
+        {viewedUser?.avatarUrl}
         </Text>
       </Center>
     </>

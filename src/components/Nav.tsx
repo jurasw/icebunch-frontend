@@ -89,7 +89,7 @@ export default function Nav() {
                 </Menu>
                 <Button
                   variant={"solid"}
-                  colorScheme={"teal"}
+                  colorScheme={"blue"}
                   size={"sm"}
                   ml={4}
                   onClick={logout}

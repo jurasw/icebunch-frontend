@@ -3,6 +3,7 @@ export enum Path {
     LOGIN = '/login',
     REGISTER = '/register',
     CONFIRM = 'confirm/:token',
+    CONFIRM_REQUEST = '/confirm-request',
     FORGOT_PASSWORD = 'forgot-password',
     RESET_PASSWORD = 'reset-password/:token',
     SETTINGS = '/settings',

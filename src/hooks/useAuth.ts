@@ -51,8 +51,8 @@ export const useAuth = () => {
   });
 
   const formSignupMutation = useMutation(formSignup, {
-    onSuccess: async (response: LoginResponse) => {
-      onSuccessfulLogin(response);
+    onSuccess: async () => {
+      onSuccessfulRegistration();
     },
   });
 
@@ -61,6 +61,10 @@ export const useAuth = () => {
     axios.defaults.headers.common["Authorization"] = "Bearer " + response.token;
     console.log(response);
     navigate("/");
+  };
+
+  const onSuccessfulRegistration = () => {
+    navigate("/confirm-request");
   };
 
   const tokenExpired = (token: string | null): boolean => {

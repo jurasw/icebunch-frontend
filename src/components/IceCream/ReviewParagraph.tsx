@@ -3,7 +3,6 @@ import OneReview from "./OneReview";
 
 interface ReviewProps {
   reviews: Review[] | undefined;
-  avatarUrl: string;
 }
 
 function ReviewParagraph(props: ReviewProps) {

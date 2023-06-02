@@ -26,7 +26,6 @@ export const MenuItems = () => {
 
   return (
     <>
-
       <Flag locale={Language.PL} src="../flag-pl.png" />
       <Flag locale={Language.EN} src="../flag-en.png" />
       <Button onClick={toggleColorMode}>
@@ -40,16 +39,16 @@ export default function Nav() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const user = useAuthStore((state) => state.user);
   const { logout } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <IconButton      
+          <IconButton
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={"Open Menu"}
-            display={{ md: "none"}}
+            display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"} w={"100%"}>
@@ -70,7 +69,9 @@ export default function Nav() {
               <>
                 <Menu>
                   <MenuButton
-                    onClick={() => {navigate(Path.MY_PROFILE)}}
+                    onClick={() => {
+                      navigate(Path.MY_PROFILE);
+                    }}
                     ml={8}
                     as={Button}
                     rounded={"full"}
@@ -88,8 +89,7 @@ export default function Nav() {
                   </MenuButton>
                 </Menu>
                 <Button
-                  variant={"solid"}
-                  colorScheme={"blue"}
+                  variant={"primaryButton"}
                   size={"sm"}
                   ml={4}
                   onClick={logout}
@@ -100,18 +100,16 @@ export default function Nav() {
             ) : (
               <>
                 <Button
-                  variant={"solid"}
-                  colorScheme={"teal"}
+                  variant={"primaryOutlineButton"}
                   size={"sm"}
-                  mr={4}
+                  mx={4}
                   as={"a"}
                   href={Path.LOGIN}
                 >
                   Sign in
                 </Button>
                 <Button
-                  variant={"solid"}
-                  colorScheme={"teal"}
+                  variant={"primaryButton"}
                   size={"sm"}
                   mr={4}
                   as={"a"}

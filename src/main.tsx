@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { theme } from "./theme";
 
 
 axios.defaults.baseURL = "https://icebackend.bieda.it/";
@@ -14,7 +15,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <GoogleOAuthProvider clientId="670451075307-2g5qk2533aance5c2pbfvtvei4n9cl1d.apps.googleusercontent.com">
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <Router />
         </ChakraProvider>
       </QueryClientProvider>

@@ -14,9 +14,11 @@ import {
   List,
   ListItem,
   Textarea,
-  Divider
+  Divider,
+  HStack
 } from "@chakra-ui/react";
 import axios from "axios";
+import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
@@ -27,6 +29,7 @@ import Nav from "../components/Nav";
 import { Path } from "./Paths";
 import { useReviews } from "../hooks/queries/useReviews";
 import ReactStars from "react-stars";
+import { Review } from "../models/Review";
 
 export default function IceCream() {
   const { id } = useParams();
@@ -41,6 +44,10 @@ export default function IceCream() {
   // const [reviews, setReviews] = useState<Review[]>();
   const [reviewContent, setReviewContent] = useState("");
   const [reviewRating, setReviewRating] = useState<number>(0);
+  const [myReview, setMyReview] = useState<Review>()
+
+  const { iceCreamReviewsQuery, putMutation } = useReviews({iceCreamId: id!})
+
 
   useEffect(() => {
     const getUserEmail = async () => {
@@ -50,16 +57,13 @@ export default function IceCream() {
       const username = result.data.email.split("@")[0];
       setUsername(username);
     };
-    getUserEmail();
-
-    // setReviewRating(2);
+    getUserEmail();    
   }, []);
 
   const handleFieldContent = (event: any) => {
     setReviewContent(event.target.value);
     console.log(reviewContent)
     console.log(reviewRating)
-    
   };
 
   useEffect(() => {
@@ -72,12 +76,19 @@ export default function IceCream() {
 
 
 
-  const { iceCreamReviewsQuery, putMutation} = useReviews({iceCreamId: id!})
-
   useEffect(() => {
     console.log(iceCreamReviewsQuery.data);
-    
+
+    if (iceCreamReviewsQuery.data) {
+    for (const review of iceCreamReviewsQuery.data) {
+      if (review.userId == userId) {
+        setMyReview(review)
+      }
+    }
+  }
+
   }, [iceCreamReviewsQuery.data])
+
 
   const sendReview = () => {
     if (!user) {
@@ -196,21 +207,20 @@ export default function IceCream() {
                 >
                   MY REVIEW
                 </Text>
-               
-              <ReactStars
-              // initialValue={currentRating}
-              onChange={setReviewRating}
-              size={30}
-              color2={'#ffd700'} />
-              <Textarea
-                onChange={handleFieldContent}
-                resize={"none"}
-                placeholder="Share your thoughts about this one"
-              />
-              </>
-            )}
-
-            <Button
+               {!myReview ? 
+               (
+                <>
+                  <ReactStars
+                  // initialValue={currentRating}
+                  onChange={setReviewRating}
+                  size={30}
+                  color2={'#ffd700'} />
+                  <Textarea
+                    onChange={handleFieldContent}
+                    resize={"none"}
+                    placeholder="Share your thoughts about this one"
+                  />
+                     <Button
             _hover={{
               cursor: "pointer"
             }}
@@ -225,6 +235,25 @@ export default function IceCream() {
             >
               Add review
             </Button>
+              </>
+               ) : (
+                <>
+                <HStack>
+                <ReactStars
+                  value={myReview?.rating}
+                  edit={false}
+                  size={20}
+                  color2={'black'} />
+                <Text>
+                  {myReview?.content}
+                </Text>
+                <EditIcon/>
+                <DeleteIcon/>
+                </HStack>
+                </>
+               )}
+              </>
+            )}
           </Stack>
         </SimpleGrid>
       </Container>

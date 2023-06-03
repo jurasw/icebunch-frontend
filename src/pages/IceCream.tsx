@@ -14,6 +14,7 @@ import {
   List,
   ListItem,
   Textarea,
+  Divider
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -25,6 +26,7 @@ import RatingWithCounter from "../components/IceCream/RatingWithCounter";
 import Nav from "../components/Nav";
 import { Path } from "./Paths";
 import { useReviews } from "../hooks/queries/useReviews";
+import ReactStars from "react-stars";
 
 export default function IceCream() {
   const { id } = useParams();
@@ -38,7 +40,7 @@ export default function IceCream() {
   const [iceCream, setIceCream] = useState<IceCream>();
   // const [reviews, setReviews] = useState<Review[]>();
   const [reviewContent, setReviewContent] = useState("");
-  const [reviewRating, setReviewRating] = useState<number>(1.5);
+  const [reviewRating, setReviewRating] = useState<number>(0);
 
   useEffect(() => {
     const getUserEmail = async () => {
@@ -50,11 +52,14 @@ export default function IceCream() {
     };
     getUserEmail();
 
-    setReviewRating(2);
+    // setReviewRating(2);
   }, []);
 
   const handleFieldContent = (event: any) => {
     setReviewContent(event.target.value);
+    console.log(reviewContent)
+    console.log(reviewRating)
+    
   };
 
   useEffect(() => {
@@ -178,16 +183,37 @@ export default function IceCream() {
               </Box>
             </Stack>
             {user && (
+              <>
+               <Divider
+                  borderColor={useColorModeValue("gray.200", "gray.600")}
+                  />
+                <Text
+                  fontSize={{ base: "16px", lg: "18px" }}
+                  color="primary"
+                  fontWeight={"500"}
+                  textTransform={"uppercase"}
+                  // mb={"4"}
+                >
+                  MY REVIEW
+                </Text>
+               
+              <ReactStars
+              // initialValue={currentRating}
+              onChange={setReviewRating}
+              size={30}
+              color2={'#ffd700'} />
               <Textarea
-                // value={value}
                 onChange={handleFieldContent}
-                // onChange={handleFieldContent}
                 resize={"none"}
                 placeholder="Share your thoughts about this one"
               />
+              </>
             )}
 
             <Button
+            _hover={{
+              cursor: "pointer"
+            }}
               w={"full"}
               mt={8}
               size={"lg"}

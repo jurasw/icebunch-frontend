@@ -6,6 +6,7 @@ import {
   Textarea,
   Text,
   Avatar,
+  Box,
 } from "@chakra-ui/react";
 import { Review } from "../../../models/Review";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
@@ -90,7 +91,7 @@ function EditReview({ review, userId }: Props) {
           padding={"1em"}
           _hover={{ cursor: "pointer" }}
         >
-          <>
+          <Box fontWeight={"bold"}>
             <HStack mb={2}>
               <Avatar name={review?.username} src={""} mr={4} />
               <>
@@ -99,7 +100,7 @@ function EditReview({ review, userId }: Props) {
               </>
             </HStack>
             <p>{review?.content}</p>
-          </>
+          </Box>
           <Spacer />
           <IconButton
             aria-label="Search database"

@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 
 interface Props {
@@ -7,11 +6,10 @@ interface Props {
 
 function ReviewStars({ rating }: Props) {
   return (
-    <Box display="flex" alignItems="center">
+    <>
       {Array(5)
         .fill("")
         .map((_, i) => {
-          console.log(rating);
           if (rating) {
             const roundedRating = Math.round(rating * 2) / 2;
             if (roundedRating - i >= 1) {
@@ -29,7 +27,7 @@ function ReviewStars({ rating }: Props) {
             return <BsStar key={i} style={{ marginLeft: "1" }} />;
           }
         })}
-    </Box>
+    </>
   );
 }
 

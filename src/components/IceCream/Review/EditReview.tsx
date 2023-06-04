@@ -96,6 +96,7 @@ function EditReview({ review, userId }: Props) {
               <Avatar name={review?.username} src={""} mr={4} />
               <>
                 {review?.username}
+                <Spacer />
                 <ReviewStars rating={review?.rating} />
               </>
             </HStack>

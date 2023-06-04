@@ -18,13 +18,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
 import { Language, useAuthStore, useLanguageStore } from "../zustand";
-import RatingWithCounter from "../components/IceCream/RatingWithCounter";
 import Nav from "../components/Nav";
 import { useReviews } from "../hooks/queries/useReviews";
 import { useUser } from "../hooks/queries/useUser";
 import { UserDB } from "../models/User";
 import AddReview from "../components/IceCream/Review/AddReviews";
 import Reviews from "../components/IceCream/Review/Reviews";
+import ReviewStars from "../components/IceCream/ReviewStars";
 
 export default function IceCream() {
   const { iceCreamId } = useParams();
@@ -91,10 +91,14 @@ export default function IceCream() {
                 {language === Language.PL && iceCream?.name_pl}
                 {language === Language.EN && iceCream?.name_en}
               </Text>
-              <RatingWithCounter
-                rating={iceCream?.rating}
-                numReviews={iceCream?.number_of_ratings}
-              />
+              <Box marginTop={"0.25em"} display="flex" alignItems="center">
+                <ReviewStars rating={iceCream?.rating} />
+                <Box as="span" ml="2" color="gray.600" fontSize="md">
+                  {"("}
+                  {iceCream?.number_of_ratings}
+                  {") reviews"}
+                </Box>
+              </Box>
             </Box>
 
             <Stack

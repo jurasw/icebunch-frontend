@@ -1,6 +1,6 @@
 import { Flex, Box, useColorModeValue, Image, Text } from "@chakra-ui/react";
-import RatingWithCounter from "./IceCream/RatingWithCounter";
 import { Language, useLanguageStore } from "../zustand";
+import ReviewStars from "./IceCream/ReviewStars";
 
 interface Props {
   name_pl: string;
@@ -57,10 +57,14 @@ function IceCreamTile(props: Props) {
             </Box>
           </Flex>
           <Flex justifyContent="space-between" alignContent="center">
-            <RatingWithCounter
-              rating={props.rating}
-              numReviews={props.number_of_ratings}
-            />
+            <Box marginTop={"0.25em"} display="flex" alignItems="center">
+              <ReviewStars rating={props.rating} />
+              <Box as="span" ml="2" color="gray.600" fontSize="md">
+                {"("}
+                {props.number_of_ratings}
+                {") reviews"}
+              </Box>
+            </Box>
           </Flex>
         </Box>
       </Box>

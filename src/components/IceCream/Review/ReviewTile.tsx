@@ -1,4 +1,4 @@
-import { Avatar, HStack } from "@chakra-ui/react";
+import { Avatar, HStack, Spacer } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useUser } from "../../../hooks/queries/useUser";
 import { UserDB } from "../../../models/User";
@@ -28,6 +28,7 @@ function ReviewTile({ userId, content, rating }: Props) {
         <Avatar name={userData?.username} src={userData?.avatarUrl} mr={4} />
         <>
           {userData?.username}
+          <Spacer />
           <ReviewStars rating={rating} />
         </>
       </HStack>

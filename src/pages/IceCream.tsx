@@ -6,104 +6,57 @@ import {
   Image,
   Flex,
   VStack,
-  Button,
   Heading,
   SimpleGrid,
   StackDivider,
   useColorModeValue,
   List,
   ListItem,
-  Textarea,
-  Divider,
-  HStack
 } from "@chakra-ui/react";
 import axios from "axios";
-import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
-import ReviewParagraph from "../components/IceCream/ReviewParagraph";
 import { Language, useAuthStore, useLanguageStore } from "../zustand";
 import RatingWithCounter from "../components/IceCream/RatingWithCounter";
 import Nav from "../components/Nav";
-import { Path } from "./Paths";
 import { useReviews } from "../hooks/queries/useReviews";
-import ReactStars from "react-stars";
-import { Review } from "../models/Review";
+import Reviews from "../components/IceCream/Reviews";
+import AddReview from "../components/IceCream/AddReviews";
+import { useUser } from "../hooks/queries/useUser";
+import { UserDB } from "../models/User";
 
 export default function IceCream() {
-  const { id } = useParams();
-  const language = useLanguageStore((state) => state.language);
+  const { iceCreamId } = useParams();
+
   const user = useAuthStore((state) => state.user);
-  const navigate = useNavigate();
+  const language = useLanguageStore((state) => state.language);
 
-  const [userEmail, setUserEmail] = useState<string>("");
-  const [userId, setUserId] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
+  const { getUserFromEmail } = useUser();
+  const { iceCreamReviewsQuery } = useReviews({ iceCreamId: iceCreamId! });
+
   const [iceCream, setIceCream] = useState<IceCream>();
-  // const [reviews, setReviews] = useState<Review[]>();
-  const [reviewContent, setReviewContent] = useState("");
-  const [reviewRating, setReviewRating] = useState<number>(0);
-  const [myReview, setMyReview] = useState<Review>()
-
-  const { iceCreamReviewsQuery, putMutation } = useReviews({iceCreamId: id!})
-
-
-  useEffect(() => {
-    const getUserEmail = async () => {
-      const result = await axios.get(`/users/email/${user?.email}`);
-      setUserEmail(result.data.email);
-      setUserId(result.data._id);
-      const username = result.data.email.split("@")[0];
-      setUsername(username);
-    };
-    getUserEmail();    
-  }, []);
-
-  const handleFieldContent = (event: any) => {
-    setReviewContent(event.target.value);
-    console.log(reviewContent)
-    console.log(reviewRating)
-  };
+  const [userData, setUserData] = useState<UserDB>();
 
   useEffect(() => {
     const fetchIceCream = async () => {
-      const result = await axios.get(`/ice-creams/${id}`);
+      const result = await axios.get(`/ice-creams/${iceCreamId}`);
       setIceCream(result.data);
     };
     fetchIceCream();
   }, []);
 
-
-
   useEffect(() => {
-    console.log(iceCreamReviewsQuery.data);
-
-    if (iceCreamReviewsQuery.data) {
-    for (const review of iceCreamReviewsQuery.data) {
-      if (review.userId == userId) {
-        setMyReview(review)
+    const fetchUserData = async () => {
+      if (user) {
+        const result = await getUserFromEmail(user.email);
+        setUserData(result);
       }
-    }
-  }
+    };
+    fetchUserData();
+  }, []);
 
-  }, [iceCreamReviewsQuery.data])
-
-
-  const sendReview = () => {
-    if (!user) {
-      navigate(Path.LOGIN);
-    }
-    if (id && userEmail) {
-      putMutation.mutate({
-        rating: reviewRating,
-        content: reviewContent,
-        iceCreamId: id,
-        userId: userId,
-        username: username,
-      });
-    }
-  }
+  useEffect(() => {}, [iceCreamReviewsQuery.data]);
 
   return (
     <>
@@ -187,73 +140,17 @@ export default function IceCream() {
                 <List spacing={2}>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      <ReviewParagraph reviews={iceCreamReviewsQuery.data} />
+                      <Reviews
+                        reviews={iceCreamReviewsQuery.data?.filter(
+                          (x) => x.userId != userData?._id
+                        )}
+                      />
                     </Text>
                   </ListItem>
                 </List>
               </Box>
             </Stack>
-            {user && (
-              <>
-               <Divider
-                  borderColor={useColorModeValue("gray.200", "gray.600")}
-                  />
-                <Text
-                  fontSize={{ base: "16px", lg: "18px" }}
-                  color="primary"
-                  fontWeight={"500"}
-                  textTransform={"uppercase"}
-                  // mb={"4"}
-                >
-                  MY REVIEW
-                </Text>
-               {!myReview ? 
-               (
-                <>
-                  <ReactStars
-                  // initialValue={currentRating}
-                  onChange={setReviewRating}
-                  size={30}
-                  color2={'#ffd700'} />
-                  <Textarea
-                    onChange={handleFieldContent}
-                    resize={"none"}
-                    placeholder="Share your thoughts about this one"
-                  />
-                     <Button
-            _hover={{
-              cursor: "pointer"
-            }}
-              w={"full"}
-              mt={8}
-              size={"lg"}
-              py={"7"}
-              as={"a"}
-              onClick={sendReview}
-              variant="primaryButton"
-              isLoading={putMutation.isLoading}
-            >
-              Add review
-            </Button>
-              </>
-               ) : (
-                <>
-                <HStack>
-                <ReactStars
-                  value={myReview?.rating}
-                  edit={false}
-                  size={20}
-                  color2={'black'} />
-                <Text>
-                  {myReview?.content}
-                </Text>
-                <EditIcon/>
-                <DeleteIcon/>
-                </HStack>
-                </>
-               )}
-              </>
-            )}
+            <AddReview />
           </Stack>
         </SimpleGrid>
       </Container>

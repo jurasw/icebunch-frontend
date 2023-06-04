@@ -9,6 +9,6 @@ export enum Path {
     SETTINGS = '/settings',
     PROFILE = '/profile/:viewedUserId',
     MY_PROFILE = '/my-profile',
-    ICE_CREAM= '/:name/:id'
+    ICE_CREAM= '/:name/:iceCreamId'
   }
   

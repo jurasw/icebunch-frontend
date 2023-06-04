@@ -7,13 +7,13 @@ export const useUser = () => {
     return response.data;
   };
 
-  const getUserAvatarFromUserId = async (userId: string) => {
+  const getUserFromId = async (userId: string) => {
     const response = await axios.get(`/users/${userId}`);
-    return response.data.avatarUrl;
+    return response.data;
   };
 
   return {
     getUserFromEmail,
-    getUserAvatarFromUserId
+    getUserFromId
   };
 };

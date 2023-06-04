@@ -42,6 +42,7 @@ function ReviewTile({ review, userId }: Props) {
       userId: userId!,
       username: "test",
     });
+    setEditing(false)
   };
 
   return (
@@ -53,7 +54,7 @@ function ReviewTile({ review, userId }: Props) {
         textTransform={"uppercase"}
         mb={"4"}
       >
-        Edit Review
+        Your Review
       </Text>
       {editing ? (
         <>
@@ -76,7 +77,7 @@ function ReviewTile({ review, userId }: Props) {
             variant="primaryButton"
             isLoading={putMutation.isLoading}
           >
-            Add review
+            Edit review
           </Button>
         </>
       ) : (

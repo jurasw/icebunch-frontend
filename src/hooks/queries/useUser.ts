@@ -2,9 +2,9 @@ import axios from "axios";
 
 export const useUser = () => {
 
-  const getUserAvatarFromEmail = async (email: string) => {
+  const getUserFromEmail = async (email: string) => {
     const response = await axios.get(`/users/email/${email}`);
-    return response.data.avatarUrl;
+    return response.data;
   };
 
   const getUserAvatarFromUserId = async (userId: string) => {
@@ -13,7 +13,7 @@ export const useUser = () => {
   };
 
   return {
-    getUserAvatarFromEmail,
+    getUserFromEmail,
     getUserAvatarFromUserId
   };
 };

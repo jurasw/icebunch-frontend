@@ -1,4 +1,12 @@
-import { Box, Button, HStack, IconButton, Spacer, Textarea } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  IconButton,
+  Spacer,
+  Textarea,
+  Text,
+} from "@chakra-ui/react";
 import { Review } from "../../../models/Review";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useState } from "react";
@@ -14,7 +22,7 @@ interface Props {
 function ReviewTile({ review, userId }: Props) {
   const { iceCreamId } = useParams();
 
-  const { putMutation } = useReviews({
+  const { putMutation, deleteMutation } = useReviews({
     iceCreamId: iceCreamId!,
   });
 
@@ -38,6 +46,15 @@ function ReviewTile({ review, userId }: Props) {
 
   return (
     <>
+      <Text
+        fontSize={{ base: "16px", lg: "18px" }}
+        color="primary"
+        fontWeight={"500"}
+        textTransform={"uppercase"}
+        mb={"4"}
+      >
+        Your Review
+      </Text>
       {editing ? (
         <>
           <ReactStars onChange={setReviewRating} size={30} color2={"#ffd700"} />
@@ -54,7 +71,6 @@ function ReviewTile({ review, userId }: Props) {
             mt={8}
             size={"lg"}
             py={"7"}
-            as={"a"}
             onClick={sendReview}
             variant="primaryButton"
             isLoading={putMutation.isLoading}
@@ -72,7 +88,7 @@ function ReviewTile({ review, userId }: Props) {
           _hover={{ cursor: "pointer" }}
         >
           <Box>
-            {review?.username}
+            <strong>{review?.username}</strong>
             <p>{review?.content}</p>
           </Box>
           <Spacer />
@@ -85,6 +101,12 @@ function ReviewTile({ review, userId }: Props) {
             ml={4}
             aria-label="Search database"
             icon={<DeleteIcon />}
+            onClick={() =>
+              deleteMutation.mutate({
+                iceCreamId: review!._id,
+                userId: userId!,
+              })
+            }
           />
         </HStack>
       )}

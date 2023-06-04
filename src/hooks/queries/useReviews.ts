@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { Review, SendReviewDTO } from "../../models/Review";
+import { DeleteReviewDto, Review, SendReviewDto } from "../../models/Review";
 
 export const REVIEWS_QUERY_KEY = "reviews";
 
@@ -16,16 +16,20 @@ export const useReviews = (params: Params) => {
     return response.data;
   };
 
-  const putMyReview = async (payload: SendReviewDTO) => {
+  const putMyReview = async (payload: SendReviewDto) => {
     const response = await axios.put(`/reviews`, payload);
     return response.data;
   };
 
-  const iceCreamReviewsQuery =
-    useQuery({
-      queryKey: REVIEWS_QUERY_KEY,
-      queryFn: () => getIceCreamReviews(params.iceCreamId),
-    })
+  const deleteMyReview = async (payload: DeleteReviewDto) => {
+    const response = await axios.delete(`/reviews`, { data: payload });
+    return response.data;
+  };
+
+  const iceCreamReviewsQuery = useQuery({
+    queryKey: REVIEWS_QUERY_KEY,
+    queryFn: () => getIceCreamReviews(params.iceCreamId),
+  });
 
   const putMutation = useMutation(putMyReview, {
     onSuccess: () => {
@@ -33,8 +37,15 @@ export const useReviews = (params: Params) => {
     },
   });
 
+  const deleteMutation = useMutation(deleteMyReview, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(REVIEWS_QUERY_KEY);
+    },
+  });
+
   return {
     putMutation,
+    deleteMutation,
     iceCreamReviewsQuery,
   };
 };

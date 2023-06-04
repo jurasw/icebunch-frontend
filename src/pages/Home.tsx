@@ -9,7 +9,7 @@ import {
   HStack,
   GridItem,
 } from "@chakra-ui/react";
-import IceCreamTile from "../components/IceCream/IceCreamTile";
+import IceCreamTile from "../components/IceCreamTile";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IceCream } from "../models/IceCream";

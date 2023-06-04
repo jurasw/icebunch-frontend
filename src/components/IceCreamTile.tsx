@@ -1,6 +1,6 @@
 import { Flex, Box, useColorModeValue, Image, Text } from "@chakra-ui/react";
-import RatingWithCounter from "./RatingWithCounter";
-import { Language, useLanguageStore } from "../../zustand";
+import RatingWithCounter from "./IceCream/RatingWithCounter";
+import { Language, useLanguageStore } from "../zustand";
 
 interface Props {
   name_pl: string;

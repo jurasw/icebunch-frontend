@@ -126,30 +126,30 @@ export default function IceCream() {
                   {language === Language.EN && iceCream?.description_en}
                 </Text>
               </Box>
-              <Box>
-                <Text
-                  fontSize={{ base: "16px", lg: "18px" }}
-                  color="primary"
-                  fontWeight={"500"}
-                  textTransform={"uppercase"}
-                  mb={"4"}
-                >
-                  REVIEWS
-                </Text>
-
-                <List spacing={2}>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      <Reviews
-                        reviews={iceCreamReviewsQuery.data?.filter(
-                          (x) => x.userId != userData?._id
-                        )}
-                      />
-                    </Text>
-                  </ListItem>
-                </List>
-              </Box>
             </Stack>
+            <Box>
+              <Text
+                fontSize={{ base: "16px", lg: "18px" }}
+                color="primary"
+                fontWeight={"500"}
+                textTransform={"uppercase"}
+                mb={"4"}
+              >
+                REVIEWS
+              </Text>
+
+              <List spacing={2}>
+                <ListItem>
+                  <Text as={"span"} fontWeight={"bold"}>
+                    <Reviews
+                      reviews={iceCreamReviewsQuery.data?.filter(
+                        (x) => x.userId != userData?._id
+                      )}
+                    />
+                  </Text>
+                </ListItem>
+              </List>
+            </Box>
             <AddReview />
           </Stack>
         </SimpleGrid>

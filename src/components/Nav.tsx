@@ -12,7 +12,7 @@ import {
   Stack,
   Spacer,
   useColorMode,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Flag from "./Nav/Flag";
@@ -21,6 +21,9 @@ import { useAuth } from "../hooks/useAuth";
 import { Path } from "../pages/Paths";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/queries/useUser";
+import { UserDB } from "../models/User";
+import { useEffect, useState } from "react";
 
 export const MenuItems = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -42,6 +45,19 @@ export default function Nav() {
   const { logout } = useAuth();
   const navigate = useNavigate();
 
+  const { getUserFromEmail } = useUser();
+  const [userData, setUserData] = useState<UserDB>();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (user) {
+        const result = await getUserFromEmail(user.email);
+        setUserData(result);
+      }
+    };
+    fetchUserData();
+  }, []);
+
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
@@ -54,11 +70,7 @@ export default function Nav() {
           />
           <HStack spacing={8} alignItems={"center"} w={"100%"}>
             <Box as={"a"} href="/">
-              <Text
-              as='b'
-              >
-              iceBunch
-              </Text>
+              <Text as="b">iceBunch</Text>
             </Box>
             <Spacer />
             <HStack
@@ -84,13 +96,7 @@ export default function Nav() {
                     cursor={"pointer"}
                     minW={0}
                   >
-                    <Avatar
-                      as={"a"}
-                      size={"sm"}
-                      src={
-                        "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                      }
-                    />
+                    <Avatar as={"a"} size={"sm"} src={userData?.avatarUrl} />
                   </MenuButton>
                 </Menu>
                 <Button

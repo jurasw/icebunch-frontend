@@ -27,7 +27,7 @@ function ReviewTile({ review, userId }: Props) {
   });
 
   const [editing, setEditing] = useState(false);
-  const [reviewContent, setReviewContent] = useState("");
+  const [reviewContent, setReviewContent] = useState(review!.content);
   const [reviewRating, setReviewRating] = useState<number>(0);
 
   const handleFieldContent = (event: any) => {
@@ -53,7 +53,7 @@ function ReviewTile({ review, userId }: Props) {
         textTransform={"uppercase"}
         mb={"4"}
       >
-        Your Review
+        Edit Review
       </Text>
       {editing ? (
         <>
@@ -62,6 +62,7 @@ function ReviewTile({ review, userId }: Props) {
             onChange={handleFieldContent}
             resize={"none"}
             placeholder="Share your thoughts about this one"
+            value={reviewContent}
           />
           <Button
             _hover={{

@@ -5,7 +5,7 @@ interface Props {
   rating: number | undefined;
 }
 
-function RatingWithoutCounter({ rating }: Props) {
+function ReviewStars({ rating }: Props) {
   return (
     <Box display="flex" alignItems="center">
       {Array(5)
@@ -33,4 +33,4 @@ function RatingWithoutCounter({ rating }: Props) {
   );
 }
 
-export default RatingWithoutCounter;
+export default ReviewStars;

@@ -25,7 +25,11 @@ function Reviews({ reviews }: Props) {
             navigate(`/profile/${review.userId}`);
           }}
         >
-          <ReviewTile userId={review.userId} content={review.content} />
+          <ReviewTile
+            userId={review.userId}
+            content={review.content}
+            rating={review.rating}
+          />
         </Box>
       ))}
     </>

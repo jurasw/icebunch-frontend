@@ -1,11 +1,11 @@
 import {
-  Box,
   Button,
   HStack,
   IconButton,
   Spacer,
   Textarea,
   Text,
+  Avatar,
 } from "@chakra-ui/react";
 import { Review } from "../../../models/Review";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
@@ -13,13 +13,14 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useReviews } from "../../../hooks/queries/useReviews";
 import ReactStars from "react-stars";
+import ReviewStars from "../ReviewStars";
 
 interface Props {
   review: Review | undefined;
   userId: string | undefined;
 }
 
-function ReviewTile({ review, userId }: Props) {
+function EditReview({ review, userId }: Props) {
   const { iceCreamId } = useParams();
 
   const { putMutation, deleteMutation } = useReviews({
@@ -42,7 +43,7 @@ function ReviewTile({ review, userId }: Props) {
       userId: userId!,
       username: "test",
     });
-    setEditing(false)
+    setEditing(false);
   };
 
   return (
@@ -89,10 +90,16 @@ function ReviewTile({ review, userId }: Props) {
           padding={"1em"}
           _hover={{ cursor: "pointer" }}
         >
-          <Box>
-            <strong>{review?.username}</strong>
+          <>
+            <HStack mb={2}>
+              <Avatar name={review?.username} src={""} mr={4} />
+              <>
+                {review?.username}
+                <ReviewStars rating={review?.rating} />
+              </>
+            </HStack>
             <p>{review?.content}</p>
-          </Box>
+          </>
           <Spacer />
           <IconButton
             aria-label="Search database"
@@ -116,4 +123,4 @@ function ReviewTile({ review, userId }: Props) {
   );
 }
 
-export default ReviewTile;
+export default EditReview;

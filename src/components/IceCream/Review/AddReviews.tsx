@@ -9,7 +9,6 @@ import { UserDB } from "../../../models/User";
 import { useUser } from "../../../hooks/queries/useUser";
 import EditReview from "./EditReview";
 
-
 function AddReview() {
   const { iceCreamId } = useParams();
 
@@ -38,7 +37,6 @@ function AddReview() {
       }
     };
     fetchUserData();
-    
   }, [iceCreamReviewsQuery.data]);
 
   const sendReview = () => {

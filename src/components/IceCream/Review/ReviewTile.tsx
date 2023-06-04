@@ -1,14 +1,16 @@
-import { Avatar } from "@chakra-ui/react";
+import { Avatar, HStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useUser } from "../../../hooks/queries/useUser";
 import { UserDB } from "../../../models/User";
+import ReviewStars from "../ReviewStars";
 
 interface Props {
   userId: string;
   content: string;
+  rating: number | undefined;
 }
 
-function ReviewTile({ userId, content }: Props) {
+function ReviewTile({ userId, content, rating }: Props) {
   const { getUserFromId } = useUser();
   const [userData, setUserData] = useState<UserDB>();
 
@@ -22,8 +24,13 @@ function ReviewTile({ userId, content }: Props) {
 
   return (
     <>
-      <Avatar name={userData?.username} src={userData?.avatarUrl} />
-      {userData?.username}
+      <HStack mb={2}>
+        <Avatar name={userData?.username} src={userData?.avatarUrl} mr={4} />
+        <>
+          {userData?.username}
+          <ReviewStars rating={rating} />
+        </>
+      </HStack>
       <p>{content}</p>
     </>
   );

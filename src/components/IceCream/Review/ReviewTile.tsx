@@ -1,7 +1,7 @@
 import { Avatar } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useUser } from "../../hooks/queries/useUser";
-import { UserDB } from "../../models/User";
+import { useUser } from "../../../hooks/queries/useUser";
+import { UserDB } from "../../../models/User";
 
 interface Props {
   userId: string;

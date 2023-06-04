@@ -21,10 +21,10 @@ import { Language, useAuthStore, useLanguageStore } from "../zustand";
 import RatingWithCounter from "../components/IceCream/RatingWithCounter";
 import Nav from "../components/Nav";
 import { useReviews } from "../hooks/queries/useReviews";
-import Reviews from "../components/IceCream/Reviews";
-import AddReview from "../components/IceCream/AddReviews";
 import { useUser } from "../hooks/queries/useUser";
 import { UserDB } from "../models/User";
+import AddReview from "../components/IceCream/Review/AddReviews";
+import Reviews from "../components/IceCream/Review/Reviews";
 
 export default function IceCream() {
   const { iceCreamId } = useParams();

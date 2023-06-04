@@ -1,13 +1,14 @@
 import { Button, Textarea } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import ReactStars from "react-stars";
-import { useAuthStore } from "../../zustand";
+import { useAuthStore } from "../../../zustand";
 import { useNavigate, useParams } from "react-router-dom";
-import { useReviews } from "../../hooks/queries/useReviews";
-import { Path } from "../../pages/Paths";
-import { UserDB } from "../../models/User";
-import { useUser } from "../../hooks/queries/useUser";
+import { useReviews } from "../../../hooks/queries/useReviews";
+import { Path } from "../../../pages/Paths";
+import { UserDB } from "../../../models/User";
+import { useUser } from "../../../hooks/queries/useUser";
 import EditReview from "./EditReview";
+
 
 function AddReview() {
   const { iceCreamId } = useParams();
@@ -37,6 +38,7 @@ function AddReview() {
       }
     };
     fetchUserData();
+    
   }, [iceCreamReviewsQuery.data]);
 
   const sendReview = () => {

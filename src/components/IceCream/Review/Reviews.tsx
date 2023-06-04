@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { Review } from "../../models/Review";
 import ReviewTile from "./ReviewTile";
+import { Review } from "../../../models/Review";
 
 interface Props {
   reviews: Review[] | undefined;

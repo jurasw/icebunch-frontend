@@ -1,9 +1,9 @@
 import { Box, Button, HStack, IconButton, Spacer, Textarea } from "@chakra-ui/react";
-import { Review } from "../../models/Review";
+import { Review } from "../../../models/Review";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useReviews } from "../../hooks/queries/useReviews";
+import { useReviews } from "../../../hooks/queries/useReviews";
 import ReactStars from "react-stars";
 
 interface Props {

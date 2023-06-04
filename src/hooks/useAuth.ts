@@ -29,12 +29,12 @@ export const useAuth = () => {
   };
 
   const formSignup = async (payload: RegisterPayload) => {
-    const response = await axios.post(`auth/register`, payload);
+    const response = await axios.post(`auth/register`, payload, {timeout: 3000});
     return response.data;
   };
 
   const formLogin = async (payload: LoginPayload) => {
-    const response = await axios.post(`auth/login`, payload);
+    const response = await axios.post(`auth/login`, payload, {timeout: 3000});
     return response.data;
   };
 
@@ -45,16 +45,50 @@ export const useAuth = () => {
   });
 
   const formLoginMutation = useMutation(formLogin, {
+    onMutate: async () => {
+      toast({
+        title: "Logging..",
+        status: "loading",
+      });
+    },
+    onError: async () => {
+      toast({
+        title: "Some problem...",
+        status: "error",
+      });
+    },
     onSuccess: async (response: LoginResponse) => {
+      toast.closeAll()
+      toast({
+        title: "Succesfully logged in!",
+        status: "success",
+      });
       onSuccessfulLogin(response);
     },
   });
 
   const formSignupMutation = useMutation(formSignup, {
-    onSuccess: async () => {
-      onSuccessfulRegistration();
+    onMutate: async () => {
+      toast({
+        title: "Logging..",
+        status: "loading",
+      });
     },
-  });
+    onError: async () => {
+      toast({
+        title: "Some problem..",
+        status: "error",
+      });
+    },
+    onSuccess: async () => {
+      toast.closeAll()
+      toast({
+        title: "Email confirmation send!",
+        status: "success",
+      });
+      onSuccessfulRegistration();
+  }});
+
 
   const onSuccessfulLogin = (response: LoginResponse) => {
     loginToStore({ email: response.email, token: response.token });
@@ -107,7 +141,7 @@ export const useAuth = () => {
       toast({
         title: "Email successfully confirmed!",
         status: "success",
-        duration: 5000,
+        duration: 4000,
         isClosable: true,
       });
     },
@@ -116,10 +150,8 @@ export const useAuth = () => {
   const postResetPassworMutation = useMutation(postResetPassword, {
     onSuccess: () => {
       toast({
-        title: "Email successfully sent!",
+        title: "Email with password reset successfully sent!",
         status: "success",
-        duration: 5000,
-        isClosable: true,
       });
     },
   });
@@ -129,8 +161,6 @@ export const useAuth = () => {
       toast({
         title: "Password successfully changed!",
         status: "success",
-        duration: 5000,
-        isClosable: true,
       });
     },
   });

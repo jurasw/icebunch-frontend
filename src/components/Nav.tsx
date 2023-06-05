@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 
 export const MenuItems = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   return (
     <>
       <Flag locale={Language.PL} src="../flag-pl.png" />

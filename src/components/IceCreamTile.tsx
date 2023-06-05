@@ -1,6 +1,7 @@
 import { Flex, Box, useColorModeValue, Image, Text } from "@chakra-ui/react";
 import { Language, useLanguageStore } from "../zustand";
 import ReviewStars from "./IceCream/ReviewStars";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   name_pl: string;
@@ -15,6 +16,7 @@ interface Props {
 
 function IceCreamTile(props: Props) {
   const language = useLanguageStore((state) => state.language);
+  const { t } = useTranslation();
 
   return (
     <Flex m={1} w="full" alignItems="center" justifyContent="center">
@@ -62,7 +64,7 @@ function IceCreamTile(props: Props) {
               <Box as="span" ml="2" color="gray.600" fontSize="md">
                 {""}
                 {props.number_of_ratings}
-                {" reviewers"}
+                 {" "}{t('reviewers')}
               </Box>
             </Box>
           </Flex>

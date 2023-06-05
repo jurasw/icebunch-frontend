@@ -1,5 +1,6 @@
 import { Image } from "@chakra-ui/react";
 import { Language, useLanguageStore } from "../../zustand";
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   src: string;
@@ -7,12 +8,15 @@ interface Props {
 }
 
 function Flag(props: Props) {
+  const { i18n } = useTranslation();
   const changeLanguage = useLanguageStore((state) => state.changeLanguage);
 
   return (
     <Image
       onClick={() => {
         changeLanguage(props.locale);
+        i18n.changeLanguage(props.locale);
+        console.log(props.locale)
       }}
       _hover={{ cursor: "pointer" }}
       src={props.src}

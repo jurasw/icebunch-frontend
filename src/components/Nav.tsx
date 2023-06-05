@@ -24,20 +24,21 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/queries/useUser";
 import { UserDB } from "../models/User";
 import { useEffect, useState } from "react";
-export const MenuItems = () => {
+import { useTranslation } from "react-i18next";
 
+export const MenuItems = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const navigate = useNavigate()
   return (
     <>
       <Flag locale={Language.PL} src="../flag-pl.png" />
       <Flag locale={Language.EN} src="../flag-en.png" />
-      <Text
+      {/* <Text
           _hover={{
             cursor: "pointer"
           }}
           onClick={() => {navigate(Path.ABOUT)}}
-          >About</Text>
+          >About</Text> */}
       <Button onClick={toggleColorMode}>
         {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
       </Button>
@@ -46,6 +47,7 @@ export const MenuItems = () => {
 };
 
 export default function Nav() {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const user = useAuthStore((state) => state.user);
   const { logout } = useAuth();
@@ -91,7 +93,7 @@ export default function Nav() {
             cursor: "pointer"
           }}
           onClick={() => {navigate(Path.ABOUT)}}
-          >About</Text>
+          >{t('about')}</Text>
           </HStack>
           <Flex alignItems={"center"}>
             
@@ -118,7 +120,7 @@ export default function Nav() {
                   ml={4}
                   onClick={logout}
                 >
-                  Logout
+                  {t('logout')}
                 </Button>
               </>
             ) : (
@@ -130,7 +132,7 @@ export default function Nav() {
                   as={"a"}
                   href={Path.LOGIN}
                 >
-                  Sign in
+                  {t('sign-in')}
                 </Button>
                 <Button
                   variant={"primaryButton"}
@@ -139,7 +141,7 @@ export default function Nav() {
                   as={"a"}
                   href={Path.REGISTER}
                 >
-                  Sign up
+                  {t('sign-up')}
                 </Button>
               </>
             )}

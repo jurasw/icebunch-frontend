@@ -14,12 +14,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { IceCream } from "../models/IceCream";
 import Nav from "../components/Nav";
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
+
   const [iceCream, setIceCream] = useState<IceCream[]>([]);
   const [searchField, setSearchField] = useState("");
   const [isVegan, setIsVegan] = useState(false);
   const [sorting, setSorting] = useState<number>(-1);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,8 +43,10 @@ const Home = () => {
 
   function handleSortingChange(event: any) {
     setSorting(event.target.value);
-    console.log(sorting);
-    console.log(typeof sorting);
+  }
+
+  function translatePlaceholder() {
+    return t('search')
   }
 
   return (
@@ -53,7 +58,7 @@ const Home = () => {
           marginTop={"1.5rem"}
           justifySelf={"center"}
           width={{ sm: "60%", xl: "40%" }}
-          placeholder="Search..."
+          placeholder={translatePlaceholder()}
           size="lg"
         />
       </Center>
@@ -61,7 +66,7 @@ const Home = () => {
         <HStack>
           <FormControl display="flex" alignItems="center">
             <FormLabel htmlFor="vegan-form" mb="0">
-              Only Vegan
+              {t('only-vegan')}
             </FormLabel>
             <Switch
               onChange={() => {
@@ -71,8 +76,8 @@ const Home = () => {
             />
           </FormControl>
           <Select minW={"190px"} onChange={handleSortingChange}>
-            <option value={-1}>Rating Decreasing</option>
-            <option value={1}>Rating Increasing</option>
+            <option value={-1}>{t('rating-decreasing')}</option>
+            <option value={1}>{t('rating-increasing')}</option>
           </Select>
         </HStack>
       </Center>

@@ -17,12 +17,15 @@ import OAuthButtonGroup from "../components/Login/OAuthButtonGroup";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 
 export default function SimpleCard() {
   const navigate = useNavigate();
   const { formLoginMutation } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { t } = useTranslation();
 
   const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -55,7 +58,7 @@ export default function SimpleCard() {
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
-          <Heading fontSize={"4xl"}>Sign in to your account</Heading>
+          <Heading fontSize={"4xl"}>{t('login_header')}</Heading>
           <HStack spacing="1" justify="center">
             <Text color="muted">Don't have an account?</Text>
             <Button

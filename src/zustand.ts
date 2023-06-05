@@ -9,8 +9,8 @@ interface AuthState {
 }
 
 export enum Language{
-  PL = "PL",
-  EN = "EN"
+  PL = "pl",
+  EN = "en"
 }
 
 interface LanguageState {

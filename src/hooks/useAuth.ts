@@ -7,6 +7,8 @@ import { useToast } from "@chakra-ui/react";
 import { RegisterPayload } from "../models/auth/register";
 import { LoginPayload } from "../models/auth/login";
 import { NewPasswordDto, ResetPasswordDto } from "../models/auth/resetPassword";
+import { useOurExceptions } from "./useOurExceptions";
+import { AxiosError } from "axios";
 
 interface LoginResponse {
   email: string;
@@ -20,6 +22,7 @@ export const useAuth = () => {
   const loginToStore = useAuthStore((state) => state.login);
   const navigate = useNavigate();
   const toast = useToast();
+  const { handleLoginError } = useOurExceptions()
 
   const googleLogin = async (token: string) => {
     const response = await axios.post("auth/google/login", {
@@ -51,11 +54,9 @@ export const useAuth = () => {
         status: "loading",
       });
     },
-    onError: async () => {
-      toast({
-        title: "Some problem...",
-        status: "error",
-      });
+    onError: async (error: AxiosError) => {
+      toast.closeAll()
+      handleLoginError(error);
     },
     onSuccess: async (response: LoginResponse) => {
       toast.closeAll()
@@ -74,11 +75,9 @@ export const useAuth = () => {
         status: "loading",
       });
     },
-    onError: async () => {
-      toast({
-        title: "Some problem..",
-        status: "error",
-      });
+    onError: async (error: AxiosError) => {
+      toast.closeAll()
+      handleLoginError(error);
     },
     onSuccess: async () => {
       toast.closeAll()

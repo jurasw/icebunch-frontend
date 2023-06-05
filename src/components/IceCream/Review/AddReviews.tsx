@@ -50,6 +50,7 @@ function AddReview() {
   const sendReview = () => {
     if (!user) {
       navigate(Path.LOGIN);
+      return
     }
     if (reviewRating!=0) {
       putMutation.mutate({

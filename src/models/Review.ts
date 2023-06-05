@@ -16,6 +16,5 @@ export interface SendReviewDto {
 }
 
 export interface DeleteReviewDto {
-  iceCreamId: string;
-  userId: string;
+  reviewId: string;
 }

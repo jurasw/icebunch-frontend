@@ -10,11 +10,15 @@ import {
 } from "@chakra-ui/react";
 import { Review } from "../../../models/Review";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useAuthStore } from "../../../zustand";
 import { useReviews } from "../../../hooks/queries/useReviews";
 import ReactStars from "react-stars";
 import ReviewStars from "../ReviewStars";
+import { useUser } from "../../../hooks/queries/useUser";
+import { UserDB } from "../../../models/User";
+
 
 interface Props {
   review: Review | undefined;
@@ -27,6 +31,10 @@ function EditReview({ review, userId }: Props) {
   const { putMutation, deleteMutation } = useReviews({
     iceCreamId: iceCreamId!,
   });
+
+  const { getUserFromEmail } = useUser();
+  const [userData, setUserData] = useState<UserDB>();
+  const user = useAuthStore((state) => state.user);
 
   const [editing, setEditing] = useState(false);
   const [reviewContent, setReviewContent] = useState(review!.content);
@@ -46,6 +54,16 @@ function EditReview({ review, userId }: Props) {
     });
     setEditing(false);
   };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (user) {
+        const result = await getUserFromEmail(user.email);
+        setUserData(result);
+      }
+    };
+    fetchUserData();
+  }, []);
 
   return (
     <>
@@ -93,7 +111,7 @@ function EditReview({ review, userId }: Props) {
         >
           <Box fontWeight={"bold"}>
             <HStack mb={2}>
-              <Avatar name={review?.username} src={""} mr={4} />
+              <Avatar name={review?.username} src={userData?.avatarUrl} mr={4} />
               <>
                 {review?.username}
                 <Spacer />
@@ -114,8 +132,7 @@ function EditReview({ review, userId }: Props) {
             icon={<DeleteIcon />}
             onClick={() =>
               deleteMutation.mutate({
-                iceCreamId: review!._id,
-                userId: userId!,
+                reviewId: review!._id,
               })
             }
           />

@@ -17,11 +17,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
-import { Language, useAuthStore, useLanguageStore } from "../zustand";
+import { Language, useLanguageStore } from "../zustand";
 import Nav from "../components/Nav";
 import { useReviews } from "../hooks/queries/useReviews";
-import { useUser } from "../hooks/queries/useUser";
-import { UserDB } from "../models/User";
+// import { useUser } from "../hooks/queries/useUser";
+// import { UserDB } from "../models/User";
 import AddReview from "../components/IceCream/Review/AddReviews";
 import Reviews from "../components/IceCream/Review/Reviews";
 import ReviewStars from "../components/IceCream/ReviewStars";
@@ -29,14 +29,14 @@ import ReviewStars from "../components/IceCream/ReviewStars";
 export default function IceCream() {
   const { iceCreamId } = useParams();
 
-  const user = useAuthStore((state) => state.user);
+  // const user = useAuthStore((state) => state.user);
   const language = useLanguageStore((state) => state.language);
 
-  const { getUserFromEmail } = useUser();
+  // const { getUserFromEmail } = useUser();
   const { iceCreamReviewsQuery } = useReviews({ iceCreamId: iceCreamId! });
 
   const [iceCream, setIceCream] = useState<IceCream>();
-  const [userData, setUserData] = useState<UserDB>();
+  // const [userData, setUserData] = useState<UserDB>();
 
   useEffect(() => {
     const fetchIceCream = async () => {
@@ -46,15 +46,15 @@ export default function IceCream() {
     fetchIceCream();
   }, []);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      if (user) {
-        const result = await getUserFromEmail(user.email);
-        setUserData(result);
-      }
-    };
-    fetchUserData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     if (user) {
+  //       const result = await getUserFromEmail(user.email);
+  //       // setUserData(result);
+  //     }
+  //   };
+  //   fetchUserData();
+  // }, []);
 
   useEffect(() => {}, [iceCreamReviewsQuery.data]);
 
@@ -146,9 +146,7 @@ export default function IceCream() {
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
                     <Reviews
-                      reviews={iceCreamReviewsQuery.data?.filter(
-                        (x) => x.userId != userData?._id
-                      )}
+                      reviews={iceCreamReviewsQuery.data}
                     />
                   </Text>
                 </ListItem>

@@ -8,8 +8,10 @@ import { Path } from "../../../pages/Paths";
 import { UserDB } from "../../../models/User";
 import { useUser } from "../../../hooks/queries/useUser";
 import EditReview from "./EditReview";
+import { useToast } from "@chakra-ui/react";
 
 function AddReview() {
+  const toast = useToast()
   const { iceCreamId } = useParams();
 
   const user = useAuthStore((state) => state.user);
@@ -24,6 +26,12 @@ function AddReview() {
 
   const [reviewContent, setReviewContent] = useState("");
   const [reviewRating, setReviewRating] = useState<number>(0);
+
+  const handleRatingStars = (value: number) => {
+    setReviewRating(value)
+    console.log(reviewRating)
+  }
+
 
   const handleFieldContent = (event: any) => {
     setReviewContent(event.target.value);
@@ -43,13 +51,22 @@ function AddReview() {
     if (!user) {
       navigate(Path.LOGIN);
     }
-    putMutation.mutate({
-      rating: reviewRating,
-      content: reviewContent,
-      iceCreamId: iceCreamId!,
-      userId: userData!._id,
-      username: "test",
-    });
+    if (reviewRating!=0) {
+      putMutation.mutate({
+        rating: reviewRating,
+        content: reviewContent,
+        iceCreamId: iceCreamId!,
+        userId: userData!._id,
+        username: userData!.username,
+      });
+    }
+    else {
+      toast({
+        title: "Please choose rating",
+        status: "info",
+      });
+    }
+  
   };
 
   return (
@@ -66,10 +83,11 @@ function AddReview() {
           {user && (
             <>
               <ReactStars
-                // initialValue={currentRating}
-                onChange={setReviewRating}
-                size={30}
-                color2={"#ffd700"}
+              edit={true}
+              half={true}
+              onChange={handleRatingStars}
+              size={30}
+              color2={"#ffd700"}
               />
               <Textarea
                 onChange={handleFieldContent}

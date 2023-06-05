@@ -60,9 +60,9 @@ function IceCreamTile(props: Props) {
             <Box marginTop={"0.25em"} display="flex" alignItems="center">
               <ReviewStars rating={props.rating} />
               <Box as="span" ml="2" color="gray.600" fontSize="md">
-                {"("}
+                {""}
                 {props.number_of_ratings}
-                {") reviews"}
+                {" reviewers"}
               </Box>
             </Box>
           </Flex>

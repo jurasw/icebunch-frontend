@@ -26,6 +26,7 @@ function ReviewStars({ rating }: Props) {
             }
             return <BsStar key={i} style={{ marginLeft: "1" }} />;
           }
+          return <BsStar key={i} style={{ marginLeft: "1" }} />;
         })}
     </>
   );

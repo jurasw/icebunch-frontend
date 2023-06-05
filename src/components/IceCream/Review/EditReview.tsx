@@ -56,7 +56,7 @@ function EditReview({ review, userId }: Props) {
         textTransform={"uppercase"}
         mb={"4"}
       >
-        Your Review
+        My Review
       </Text>
       {editing ? (
         <>
@@ -79,7 +79,7 @@ function EditReview({ review, userId }: Props) {
             variant="primaryButton"
             isLoading={putMutation.isLoading}
           >
-            Edit review
+            Confirm my review
           </Button>
         </>
       ) : (

@@ -14,7 +14,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuthStore } from "../../../zustand";
 import { useReviews } from "../../../hooks/queries/useReviews";
-import ReactStars from "react-stars";
+import { Rate } from "antd";
 import ReviewStars from "../ReviewStars";
 import { useUser } from "../../../hooks/queries/useUser";
 import { UserDB } from "../../../models/User";
@@ -78,7 +78,12 @@ function EditReview({ review, userId }: Props) {
       </Text>
       {editing ? (
         <>
-          <ReactStars onChange={setReviewRating} size={30} color2={"#ffd700"} />
+          <Rate
+          allowHalf
+          style={{ color: 'black', fontSize: '30px' }}
+          defaultValue={review?.rating}
+          onChange={setReviewRating}
+          />
           <Textarea
             onChange={handleFieldContent}
             resize={"none"}

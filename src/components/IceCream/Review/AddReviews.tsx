@@ -1,6 +1,6 @@
 import { Button, Textarea } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import ReactStars from "react-stars";
+// import ReactStars from "react-stars";
 import { useAuthStore } from "../../../zustand";
 import { useNavigate, useParams } from "react-router-dom";
 import { useReviews } from "../../../hooks/queries/useReviews";
@@ -9,6 +9,8 @@ import { UserDB } from "../../../models/User";
 import { useUser } from "../../../hooks/queries/useUser";
 import EditReview from "./EditReview";
 import { useToast } from "@chakra-ui/react";
+import { Rate } from "antd";
+
 
 function AddReview() {
   const toast = useToast()
@@ -83,12 +85,11 @@ function AddReview() {
         <>
           {user && (
             <>
-              <ReactStars
-              edit={true}
-              half={true}
+
+              <Rate
+              allowHalf
+              style={{ color: 'black', fontSize: '30px' }}
               onChange={handleRatingStars}
-              size={30}
-              color2={"#ffd700"}
               />
               <Textarea
                 onChange={handleFieldContent}

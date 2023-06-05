@@ -28,17 +28,17 @@ import { useTranslation } from "react-i18next";
 
 export const MenuItems = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   return (
     <>
       <Flag locale={Language.PL} src="../flag-pl.png" />
       <Flag locale={Language.EN} src="../flag-en.png" />
-      {/* <Text
+      <Text
           _hover={{
             cursor: "pointer"
           }}
           onClick={() => {navigate(Path.ABOUT)}}
-          >About</Text> */}
+          >About</Text>
       <Button onClick={toggleColorMode}>
         {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
       </Button>
@@ -88,12 +88,12 @@ export default function Nav() {
             >
               <MenuItems />
             </HStack>
-          <Text
+          {/* <Text
           _hover={{
             cursor: "pointer"
           }}
           onClick={() => {navigate(Path.ABOUT)}}
-          >{t('about')}</Text>
+          >{t('about')}</Text> */}
           </HStack>
           <Flex alignItems={"center"}>
             

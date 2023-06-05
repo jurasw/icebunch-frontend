@@ -24,14 +24,20 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/queries/useUser";
 import { UserDB } from "../models/User";
 import { useEffect, useState } from "react";
-
 export const MenuItems = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
 
+  const { colorMode, toggleColorMode } = useColorMode();
+  const navigate = useNavigate()
   return (
     <>
       <Flag locale={Language.PL} src="../flag-pl.png" />
       <Flag locale={Language.EN} src="../flag-en.png" />
+      <Text
+          _hover={{
+            cursor: "pointer"
+          }}
+          onClick={() => {navigate(Path.ABOUT)}}
+          >About</Text>
       <Button onClick={toggleColorMode}>
         {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
       </Button>
@@ -80,8 +86,15 @@ export default function Nav() {
             >
               <MenuItems />
             </HStack>
+          <Text
+          _hover={{
+            cursor: "pointer"
+          }}
+          onClick={() => {navigate(Path.ABOUT)}}
+          >About</Text>
           </HStack>
           <Flex alignItems={"center"}>
+            
             {user ? (
               <>
                 <Menu>

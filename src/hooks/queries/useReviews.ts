@@ -22,7 +22,8 @@ export const useReviews = (params: Params) => {
   };
 
   const deleteMyReview = async (reviewId: DeleteReviewDto) => {  
-    const response = await axios.delete(`/reviews/${reviewId}`);
+    console.log('id:' + reviewId.reviewId)
+    const response = await axios.delete(`/reviews/${reviewId.reviewId}`);
     return response.data;
   };
 

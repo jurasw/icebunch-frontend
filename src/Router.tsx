@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import Confirm from "./pages/Confirm";
 import ConfirmRequest from "./pages/ConfirmRequest";
 import Settings from "./pages/Settings";
+import About from "./pages/About";
 
 export const Router = () => {
   const location = useLocation();
@@ -28,6 +29,8 @@ export const Router = () => {
 
         <Route path={Path.LOGIN} element={<Login />} />
         <Route path={Path.SETTINGS} element={<Settings />} />
+
+        <Route path={Path.ABOUT} element={<About />} />
 
         <Route path={Path.REGISTER} element={<Register />} />
         <Route path={Path.CONFIRM} element={<Confirm />} />

@@ -23,17 +23,25 @@
     "forgot-password": "Forgot your password?",
     "or": "or",
 
+    "sign-up-header": "Sign up",
+    "confirm-password": "Confirm Password",
+    "already-a-user": "Already a user?",
+    "sign-up-header2": "This website is 100% free",
+
+
+
+
     "welcome": "Welcome!",
     "settings": "Settings",
 
-    "message1" : "Celem strony jest stworzenie rzetelnej bazy lodów i opinii, która umożliwi każdej osobie wyrażenie opinii na temat danego loda.",
-    "message2" : "Obecnie pracujemy nad rozwojem aktualnej strony oraz poszerzeniem jej o nowe funkcje. Have a nice cream! :)",
-    "message3" : "Życie jest zbyt krótkie aby jeść niedobre lody.",
-    "faq": "Najczęściej zadawane pytania: ",
-    "faq1": "1. Dlaczego nie mogę dodać opinii bez założenia konta? ",
-    "ans1": "Jest to niezbędne do ochrony strony przed 'botami'. ",
-    "faq2": "2. Czy korzystanie ze strony icebunch.com jest płatne? ",
-    "ans2": "Korzystanie z serwisu icebunch.com jest w 100% darmowe.",
-    "faq3": "3. Dlaczego wyświetlają mi się reklamy?",
-    "ans3": "Finansujemy stronę z prywantnych pieniędzy, reklamy pomagają nam z kosztami domeny, hostingów oraz licencji."
+    "message1" : "The purpose of this site is to create reliable base of ice cream and reviews, where everyone can drop an opinion.",
+    "message2": "Currently we are working on user experience improvement and also adding some new features. Have a nice cream! :)",
+    "message3": "Life is to short to eat bad ice cream.",
+    "faq": "FAQ: ",
+    "faq1": "1. Why I can not drop an opinon without account? ",
+    "ans1": "It is necessary to restrain bot activity.",
+    "faq2": "2. How much does it cost to use icebunch.com? ",
+    "ans2": "Use of website is 100% free.",
+    "faq3": "3. Why am I seeing ads?",
+    "ans3": "We finance the website with private money. Advertising helps us with domain, hosting and license costs."
 }

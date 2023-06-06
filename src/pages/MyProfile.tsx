@@ -6,10 +6,11 @@ import { Path } from "./Paths";
 import { useUser } from "../hooks/queries/useUser";
 import { useEffect, useState } from "react";
 import { UserDB } from "../models/User";
+import { useTranslation } from "react-i18next";
 
 const MyProfile = () => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   const user = useAuthStore((state) => state.user);
   const { getUserFromEmail } = useUser();
 
@@ -31,7 +32,7 @@ const MyProfile = () => {
       <Center margin={8}>
         <VStack spacing={8}>
           <Text fontSize={"4xl"} as="b">
-            Welcome {user?.email}
+            {t('welcome')} {user?.email}
           </Text>
           <Avatar as={"a"} size={"2xl"} src={userData?.avatarUrl} />
           <Button
@@ -39,7 +40,7 @@ const MyProfile = () => {
               navigate(Path.SETTINGS);
             }}
           >
-            Settings
+            {t('settings')}
           </Button>
         </VStack>
       </Center>

@@ -20,12 +20,14 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useAuth } from "../hooks/useAuth";
 import OAuthButtonGroup from "../components/Login/OAuthButtonGroup";
 import { Path } from "./Paths";
+import { useTranslation } from "react-i18next";
 
 export default function SignupCard() {
   const [showPassword, setShowPassword] = useState(false);
   const { formSignupMutation } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { t } = useTranslation();
 
   const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -48,10 +50,10 @@ export default function SignupCard() {
       <Stack spacing={8} width={"50%"} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"} textAlign={"center"}>
-            Sign up
+            {t('sign-up-header')}
           </Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
-            to enjoy all of our cool features
+            {t('sign-up-header2')}
           </Text>
         </Stack>
         <Box
@@ -62,11 +64,11 @@ export default function SignupCard() {
         >
           <Stack spacing={4}>
             <FormControl id="email" isRequired>
-              <FormLabel>Email address</FormLabel>
+              <FormLabel>{t('email-adress')}</FormLabel>
               <Input type="email" onChange={handleEmail} />
             </FormControl>
             <FormControl id="password" isRequired>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t('password')}</FormLabel>
               <InputGroup>
                 <Input
                   type={showPassword ? "text" : "password"}
@@ -85,7 +87,7 @@ export default function SignupCard() {
               </InputGroup>
             </FormControl>
             <FormControl id="confir-password" isRequired>
-              <FormLabel>Confirm Password</FormLabel>
+              <FormLabel>{t('confirm-password')}</FormLabel>
               <InputGroup>
                 <Input
                   type={showPassword ? "text" : "password"}
@@ -115,13 +117,13 @@ export default function SignupCard() {
                 }}
                 onClick={register}
               >
-                Sign up
+                {t('sign-up')}
               </Button>
 
               <HStack>
                 <Divider />
                 <Text fontSize="sm" whiteSpace="nowrap" color="muted">
-                  or
+                  {t('or')}
                 </Text>
                 <Divider />
               </HStack>
@@ -129,10 +131,10 @@ export default function SignupCard() {
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>
-                Already a user?
+                {t('already-a-user')}
                 <Link href={Path.LOGIN} color={"blue.400"}>
                   {" "}
-                  Login
+                  {t('sign-in')}
                 </Link>
               </Text>
             </Stack>

@@ -41,10 +41,12 @@ const Home = () => {
 
   function handleSearchChange(event: any) {
     setSearchField(event.target.value);
+    setCurrentPage(1);
   }
 
   function handleSortingChange(event: any) {
     setSorting(event.target.value);
+    setCurrentPage(1);
   }
 
   const onChange: PaginationProps["onChange"] = (page) => {
@@ -77,6 +79,7 @@ const Home = () => {
             <Switch
               onChange={() => {
                 setIsVegan(!isVegan);
+                setCurrentPage(1);
               }}
               id="vegan"
             />
@@ -120,7 +123,7 @@ const Home = () => {
         ))}
       </Grid>
       <Center my={4}>
-        <Pagination  current={currentPage} onChange={onChange} total={50} />
+        <Pagination current={currentPage} onChange={onChange} total={50} />
       </Center>
     </>
   );

@@ -1,10 +1,11 @@
 export interface Review {
   _id: string;
+  rating: number;
+  content: string;
+  iceCreamId: string;
   userId: string;
   username: string;
-  iceCreamId: string;
-  content: string;
-  rating: number;
+  lastUpdate: Date;
 }
 
 export interface SendReviewDto {
@@ -13,6 +14,7 @@ export interface SendReviewDto {
   iceCreamId: string;
   userId: string;
   username: string;
+  lastUpdate: Date;
 }
 
 export interface DeleteReviewDto {

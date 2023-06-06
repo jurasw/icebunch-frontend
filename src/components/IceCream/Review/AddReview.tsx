@@ -62,6 +62,7 @@ function AddReview() {
         iceCreamId: iceCreamId!,
         userId: userData!._id,
         username: userData!.username,
+        lastUpdate: new Date(),
       });
     }
     else {

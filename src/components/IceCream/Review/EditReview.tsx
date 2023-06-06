@@ -56,7 +56,8 @@ function EditReview({ review, userId }: Props) {
       content: reviewContent,
       iceCreamId: iceCreamId!,
       userId: userId!,
-      username: "test",
+      username: userData!.username,
+      lastUpdate: new Date()
     });
     setEditing(false);
   };

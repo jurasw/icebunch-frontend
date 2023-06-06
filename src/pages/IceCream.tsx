@@ -83,7 +83,7 @@ export default function IceCream() {
                   <ReviewStars rating={iceCreamQuery?.data?.rating} />
                   <Box as="span" ml="2" color="gray.600" fontSize="md">
                     {""}
-                    {iceCreamQuery?.data?.number_of_ratings} {t("reviewers")}
+                    {iceCreamQuery?.data?.numberOfRatings} {t("reviewers")}
                   </Box>
                 </Box>
               </Skeleton>

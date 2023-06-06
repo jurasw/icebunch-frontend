@@ -7,7 +7,7 @@ export interface IceCream {
   name_en: string;
   description_en: string;
   rating: number;
-  number_of_ratings: number;
+  numberOfRatings: number;
   image: string;
   vegan: boolean | null;
   tags: string[];

@@ -105,7 +105,7 @@ const Home = () => {
               brand_en={icecream.brand_en}
               imageURL={icecream.image}
               rating={icecream.rating}
-              number_of_ratings={icecream.number_of_ratings}
+              numberOfRatings={icecream.numberOfRatings}
               href={`/${icecream.name_pl}-${icecream.brand_pl}/${icecream._id}`}
               isVegan={icecream.vegan!}
             />

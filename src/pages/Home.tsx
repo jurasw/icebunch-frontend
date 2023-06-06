@@ -15,12 +15,15 @@ import axios from "axios";
 import { IceCream } from "../models/IceCream";
 import Nav from "../components/Nav";
 import { useTranslation } from "react-i18next";
+import { Pagination, PaginationProps } from "antd";
 
 const Home = () => {
   const [iceCream, setIceCream] = useState<IceCream[]>([]);
   const [searchField, setSearchField] = useState("");
   const [isVegan, setIsVegan] = useState(false);
   const [sorting, setSorting] = useState<number>(-1);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -29,12 +32,12 @@ const Home = () => {
         searchField: searchField,
         isVegan: isVegan,
         sortKey: Number(sorting),
-        page: 1,
+        page: currentPage,
       });
       setIceCream(result.data);
     };
     fetchData();
-  }, [searchField, isVegan, sorting]);
+  }, [searchField, isVegan, sorting, currentPage]);
 
   function handleSearchChange(event: any) {
     setSearchField(event.target.value);
@@ -43,6 +46,10 @@ const Home = () => {
   function handleSortingChange(event: any) {
     setSorting(event.target.value);
   }
+
+  const onChange: PaginationProps["onChange"] = (page) => {
+    setCurrentPage(page);
+  };
 
   function translatePlaceholder() {
     return t("search");
@@ -112,6 +119,9 @@ const Home = () => {
           </GridItem>
         ))}
       </Grid>
+      <Center my={4}>
+        <Pagination  current={currentPage} onChange={onChange} total={50} />
+      </Center>
     </>
   );
 };

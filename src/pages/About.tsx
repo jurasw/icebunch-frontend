@@ -1,4 +1,4 @@
-import { Center, Text, VStack } from "@chakra-ui/react";
+import { Text, VStack } from "@chakra-ui/react";
 import Nav from "../components/Nav";
 import { useTranslation } from "react-i18next";
 

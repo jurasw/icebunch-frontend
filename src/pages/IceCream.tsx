@@ -12,53 +12,32 @@ import {
   useColorModeValue,
   List,
   ListItem,
+  Skeleton,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
 import { Language, useLanguageStore } from "../zustand";
 import Nav from "../components/Nav";
 import { useReviews } from "../hooks/queries/useReviews";
-// import { useUser } from "../hooks/queries/useUser";
-// import { UserDB } from "../models/User";
-import AddReview from "../components/IceCream/Review/AddReviews";
+import AddReview from "../components/IceCream/Review/AddReview";
 import Reviews from "../components/IceCream/Review/Reviews";
 import ReviewStars from "../components/IceCream/ReviewStars";
 import { useTranslation } from "react-i18next";
+import { useIceCream } from "../hooks/queries/useIceCream";
+import ReviewSkeleton from "../components/IceCream/Skletons/ReviewSkeleton";
 
 export default function IceCream() {
   const { iceCreamId } = useParams();
 
-  // const user = useAuthStore((state) => state.user);
   const language = useLanguageStore((state) => state.language);
 
-  // const { getUserFromEmail } = useUser();
   const { iceCreamReviewsQuery } = useReviews({ iceCreamId: iceCreamId! });
+  const { iceCreamQuery } = useIceCream({ iceCreamId: iceCreamId! });
 
-  const [iceCream, setIceCream] = useState<IceCream>();
-  // const [userData, setUserData] = useState<UserDB>();
   const { t } = useTranslation();
 
-  useEffect(() => {
-    const fetchIceCream = async () => {
-      const result = await axios.get(`/ice-creams/${iceCreamId}`);
-      setIceCream(result.data);
-    };
-    fetchIceCream();
-  }, []);
-
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     if (user) {
-  //       const result = await getUserFromEmail(user.email);
-  //       // setUserData(result);
-  //     }
-  //   };
-  //   fetchUserData();
-  // }, []);
-
-  useEffect(() => {}, [iceCreamReviewsQuery.data]);
+  useEffect(() => {}, [iceCreamReviewsQuery.data, iceCreamQuery.data]);
 
   return (
     <>
@@ -70,37 +49,44 @@ export default function IceCream() {
           py={{ base: 18, md: 24 }}
         >
           <Flex justifyContent={"center"}>
-            <Image
-              objectFit="contain"
-              alt={"product image"}
-              src={iceCream?.image}
-              align={"center"}
-              maxW={"100%"}
-              maxH="95vh"
-            />
+            <Skeleton isLoaded={!iceCreamQuery.isLoading}>
+              <Image
+                objectFit="contain"
+                alt={"product image"}
+                src={iceCreamQuery?.data?.image}
+                align={"center"}
+                maxW={"100%"}
+                maxH="95vh"
+              />
+            </Skeleton>
           </Flex>
           <Stack spacing={{ base: 6, md: 10 }}>
             <Box as={"header"}>
-              <Heading
-                lineHeight={1.1}
-                fontWeight={600}
-                fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
-              >
-                {language === Language.PL && iceCream?.brand_pl}
-                {language === Language.EN && iceCream?.brand_en}
-              </Heading>
-              <Text fontSize={{ base: "l", sm: "xl", lg: "2xl" }}>
-                {language === Language.PL && iceCream?.name_pl}
-                {language === Language.EN && iceCream?.name_en}
-              </Text>
-              <Box marginTop={"0.25em"} display="flex" alignItems="center">
-                <ReviewStars rating={iceCream?.rating} />
-                <Box as="span" ml="2" color="gray.600" fontSize="md">
-                  {""}
-                  {iceCream?.number_of_ratings}
-                  {" "}{t('reviewers')}
+              <Skeleton isLoaded={!iceCreamQuery.isLoading}>
+                <Heading
+                  lineHeight={1.1}
+                  fontWeight={600}
+                  fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
+                >
+                  {language === Language.PL && iceCreamQuery?.data?.brand_pl}
+                  {language === Language.EN && iceCreamQuery?.data?.brand_en}
+                </Heading>
+              </Skeleton>
+              <Skeleton isLoaded={!iceCreamQuery.isLoading}>
+                <Text fontSize={{ base: "l", sm: "xl", lg: "2xl" }}>
+                  {language === Language.PL && iceCreamQuery?.data?.name_pl}
+                  {language === Language.EN && iceCreamQuery?.data?.name_en}
+                </Text>
+              </Skeleton>
+              <Skeleton isLoaded={!iceCreamQuery.isLoading}>
+                <Box marginTop={"0.25em"} display="flex" alignItems="center">
+                  <ReviewStars rating={iceCreamQuery?.data?.rating} />
+                  <Box as="span" ml="2" color="gray.600" fontSize="md">
+                    {""}
+                    {iceCreamQuery?.data?.number_of_ratings} {t("reviewers")}
+                  </Box>
                 </Box>
-              </Box>
+              </Skeleton>
             </Box>
 
             <Stack
@@ -121,16 +107,20 @@ export default function IceCream() {
                   textTransform={"uppercase"}
                   mb={"4"}
                 >
-                  {t('description')}
+                  {t("description")}
                 </Text>
-                <Text
-                  color={useColorModeValue("gray.500", "gray.400")}
-                  fontSize={"2xl"}
-                  fontWeight={"300"}
-                >
-                  {language === Language.PL && iceCream?.description_pl}
-                  {language === Language.EN && iceCream?.description_en}
-                </Text>
+                <Skeleton isLoaded={!iceCreamQuery.isLoading}>
+                  <Text
+                    color={useColorModeValue("gray.500", "gray.400")}
+                    fontSize={"2xl"}
+                    fontWeight={"300"}
+                  >
+                    {language === Language.PL &&
+                      iceCreamQuery?.data?.description_pl}
+                    {language === Language.EN &&
+                      iceCreamQuery?.data?.description_en}
+                  </Text>
+                </Skeleton>
               </Box>
             </Stack>
             <Box>
@@ -141,15 +131,20 @@ export default function IceCream() {
                 textTransform={"uppercase"}
                 mb={"4"}
               >
-                {t('reviews')}
+                {t("reviews")}
               </Text>
 
               <List spacing={2}>
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
-                    <Reviews
-                      reviews={iceCreamReviewsQuery.data}
-                    />
+                    <Reviews reviews={iceCreamReviewsQuery.data} />
+                    {iceCreamReviewsQuery.isLoading && (
+                      <>
+                        {[0, 1, 2].map((skelet) => (
+                          <ReviewSkeleton key={skelet} />
+                        ))}
+                      </>
+                    )}
                   </Text>
                 </ListItem>
               </List>

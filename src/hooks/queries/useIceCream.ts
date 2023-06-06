@@ -2,7 +2,8 @@ import axios from "axios";
 import { AllIceCreamDto, IceCream } from "../../models/IceCream";
 import { useQuery } from "react-query";
 
-export const ICE_CREAM_QUERY_KEY = "icecream";
+export const ICE_CREAM_QUERY_KEY = "iceCream";
+export const ALL_ICE_CREAM_QUERY_KEY = "allIceCream";
 
 interface Params {
   iceCreamId: string;
@@ -25,6 +26,7 @@ export const useIceCream = (params: Params) => {
     queryKey: ICE_CREAM_QUERY_KEY,
     queryFn: () => getIceCream(params.iceCreamId),
   });
+
 
   return {
     getAllIceCream,

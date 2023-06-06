@@ -12,6 +12,7 @@ interface Props {
   rating: number;
   number_of_ratings: number;
   href: string;
+  isVegan: boolean;
 }
 
 function IceCreamTile(props: Props) {
@@ -31,6 +32,9 @@ function IceCreamTile(props: Props) {
         shadow="lg"
         position="relative"
       >
+        {props.isVegan && (
+          <Image src={"/vegan.png"} w={"20%"} position="absolute" bottom={2} right={2} />
+        )}
         <Image
           mt={5}
           src={props.imageURL}
@@ -63,8 +67,7 @@ function IceCreamTile(props: Props) {
               <ReviewStars rating={props.rating} />
               <Box as="span" ml="2" color="gray.600" fontSize="md">
                 {""}
-                {props.number_of_ratings}
-                 {" "}{t('reviewers')}
+                {props.number_of_ratings} {t("reviewers")}
               </Box>
             </Box>
           </Flex>

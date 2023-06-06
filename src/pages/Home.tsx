@@ -14,10 +14,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { IceCream } from "../models/IceCream";
 import Nav from "../components/Nav";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
-
   const [iceCream, setIceCream] = useState<IceCream[]>([]);
   const [searchField, setSearchField] = useState("");
   const [isVegan, setIsVegan] = useState(false);
@@ -46,7 +45,7 @@ const Home = () => {
   }
 
   function translatePlaceholder() {
-    return t('search')
+    return t("search");
   }
 
   return (
@@ -66,7 +65,7 @@ const Home = () => {
         <HStack>
           <FormControl display="flex" alignItems="center">
             <FormLabel htmlFor="vegan-form" mb="0">
-              {t('only-vegan')}
+              {t("only-vegan")}
             </FormLabel>
             <Switch
               onChange={() => {
@@ -76,8 +75,8 @@ const Home = () => {
             />
           </FormControl>
           <Select minW={"190px"} onChange={handleSortingChange}>
-            <option value={-1}>{t('rating-decreasing')}</option>
-            <option value={1}>{t('rating-increasing')}</option>
+            <option value={-1}>{t("rating-decreasing")}</option>
+            <option value={1}>{t("rating-increasing")}</option>
           </Select>
         </HStack>
       </Center>
@@ -95,6 +94,7 @@ const Home = () => {
         gap={1}
       >
         {/* Grid items */}
+        {}
         {iceCream.map((icecream, index) => (
           <GridItem>
             <IceCreamTile
@@ -107,6 +107,7 @@ const Home = () => {
               rating={icecream.rating}
               number_of_ratings={icecream.number_of_ratings}
               href={`/${icecream.name_pl}-${icecream.brand_pl}/${icecream._id}`}
+              isVegan={icecream.vegan!}
             />
           </GridItem>
         ))}

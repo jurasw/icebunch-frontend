@@ -18,6 +18,7 @@ import { Rate } from "antd";
 import ReviewStars from "../ReviewStars";
 import { useUser } from "../../../hooks/queries/useUser";
 import { UserDB } from "../../../models/User";
+import { useTranslation } from "react-i18next";
 
 
 interface Props {
@@ -27,6 +28,7 @@ interface Props {
 
 function EditReview({ review, userId }: Props) {
   const { iceCreamId } = useParams();
+  const { t } = useTranslation();
 
   const { putMutation, deleteMutation } = useReviews({
     iceCreamId: iceCreamId!,
@@ -43,6 +45,10 @@ function EditReview({ review, userId }: Props) {
   const handleFieldContent = (event: any) => {
     setReviewContent(event.target.value);
   };
+
+  const translatePlaceholder = () => {
+    return t('share-your-thoughts')
+  }
 
   const sendReview = () => {
     putMutation.mutate({
@@ -74,7 +80,7 @@ function EditReview({ review, userId }: Props) {
         textTransform={"uppercase"}
         mb={"4"}
       >
-        My Review
+        {t('my-review')}
       </Text>
       {editing ? (
         <>
@@ -87,7 +93,7 @@ function EditReview({ review, userId }: Props) {
           <Textarea
             onChange={handleFieldContent}
             resize={"none"}
-            placeholder="Share your thoughts about this one"
+            placeholder={translatePlaceholder()}
             value={reviewContent}
           />
           <Button
@@ -102,7 +108,7 @@ function EditReview({ review, userId }: Props) {
             variant="primaryButton"
             isLoading={putMutation.isLoading}
           >
-            Confirm my review
+            {t('confirm-changes')}
           </Button>
         </>
       ) : (

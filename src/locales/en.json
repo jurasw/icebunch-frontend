@@ -1,5 +1,4 @@
 {
-    "login_header": "Sign in to your account",
     "search": "Search...",
     "only-vegan" : "Only Vegan",
     "rating-decreasing": "Rating Decreasing",
@@ -8,5 +7,33 @@
     "sign-in": "Sign in",
     "sign-up": "Sign up",
     "about": "About",
-    "logout": "Logout"
+    "logout": "Logout",
+    "descriptions": "DESCRIPTION",
+    "reviews": "REVIEWS",
+    "share-your-thoughts": "Share your thoughts about this one...",
+    "add-review": "Add review",
+    "my-review": "My review",
+    "confirm-changes": "Confirm changes",
+    "toast-rating": "Please chose rating",
+
+    "login-header": "Sign in to your account",
+    "dont-have-account": "Don't have an account?",
+    "email-adress": "Email adress",
+    "password": "Password",
+    "forgot-password": "Forgot your password?",
+    "or": "or",
+
+    "welcome": "Welcome!",
+    "settings": "Settings",
+
+    "message1" : "Celem strony jest stworzenie rzetelnej bazy lodów i opinii, która umożliwi każdej osobie wyrażenie opinii na temat danego loda.",
+    "message2" : "Obecnie pracujemy nad rozwojem aktualnej strony oraz poszerzeniem jej o nowe funkcje. Have a nice cream! :)",
+    "message3" : "Życie jest zbyt krótkie aby jeść niedobre lody.",
+    "faq": "Najczęściej zadawane pytania: ",
+    "faq1": "1. Dlaczego nie mogę dodać opinii bez założenia konta? ",
+    "ans1": "Jest to niezbędne do ochrony strony przed 'botami'. ",
+    "faq2": "2. Czy korzystanie ze strony icebunch.com jest płatne? ",
+    "ans2": "Korzystanie z serwisu icebunch.com jest w 100% darmowe.",
+    "faq3": "3. Dlaczego wyświetlają mi się reklamy?",
+    "ans3": "Finansujemy stronę z prywantnych pieniędzy, reklamy pomagają nam z kosztami domeny, hostingów oraz licencji."
 }

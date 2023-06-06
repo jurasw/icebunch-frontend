@@ -58,16 +58,16 @@ export default function SimpleCard() {
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
-          <Heading fontSize={"4xl"}>{t('login_header')}</Heading>
+          <Heading fontSize={"4xl"}>{t('login-header')}</Heading>
           <HStack spacing="1" justify="center">
-            <Text color="muted">Don't have an account?</Text>
+            <Text color="muted">{t('dont-have-account')}</Text>
             <Button
             as={"a"}
             href={"/register"}
             variant="link"
             colorScheme="blue"
             >
-              Sign up
+              {t('sign-up')}
             </Button>
           </HStack>
         </Stack>
@@ -79,11 +79,11 @@ export default function SimpleCard() {
         >
           <Stack spacing={4}>
             <FormControl id="email">
-              <FormLabel>Email address</FormLabel>
+              <FormLabel>{t('email-adress')}</FormLabel>
               <Input type="email" onChange={handleEmail} />
             </FormControl>
             <FormControl id="password">
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t('password')}</FormLabel>
               <Input type="password" onChange={handlePassword} />
             </FormControl>
             <Stack spacing={8}>
@@ -92,7 +92,7 @@ export default function SimpleCard() {
                 align={"start"}
                 justify={"center"}
               >
-                <Link href={"/forgot-password"} color={"blue.400"}>Forgot password?</Link>
+                <Link href={"/forgot-password"} color={"blue.400"}>{t('forgot-password')}</Link>
               </Stack>
               <Button
                 bg={"blue.400"}
@@ -102,13 +102,13 @@ export default function SimpleCard() {
                 }}
                 onClick={login}
               >
-                Sign in
+                {t('sign-in')}
               </Button>
 
               <HStack>
               <Divider />
               <Text fontSize="sm" whiteSpace="nowrap" color="muted">
-                or
+                {t('or')}
               </Text>
               <Divider />
             </HStack>

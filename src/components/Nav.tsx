@@ -28,7 +28,8 @@ import { useTranslation } from "react-i18next";
 
 export const MenuItems = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <>
       <Flag locale={Language.PL} src="../flag-pl.png" />
@@ -38,7 +39,7 @@ export const MenuItems = () => {
             cursor: "pointer"
           }}
           onClick={() => {navigate(Path.ABOUT)}}
-          >About</Text>
+          >{t('about')}</Text>
       <Button onClick={toggleColorMode}>
         {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
       </Button>

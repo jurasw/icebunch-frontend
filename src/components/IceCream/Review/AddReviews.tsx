@@ -10,11 +10,12 @@ import { useUser } from "../../../hooks/queries/useUser";
 import EditReview from "./EditReview";
 import { useToast } from "@chakra-ui/react";
 import { Rate } from "antd";
-
+import { useTranslation } from "react-i18next";
 
 function AddReview() {
   const toast = useToast()
   const { iceCreamId } = useParams();
+  const { t } = useTranslation();
 
   const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
@@ -65,12 +66,15 @@ function AddReview() {
     }
     else {
       toast({
-        title: "Please choose rating",
+        title: t('toast-rating'),
         status: "info",
       });
     }
   
   };
+  const translatePlaceholder = () => {
+    return t('share-your-thoughts')
+  }
 
   return (
     <>
@@ -94,7 +98,7 @@ function AddReview() {
               <Textarea
                 onChange={handleFieldContent}
                 resize={"none"}
-                placeholder="Share your thoughts about this one"
+                placeholder={translatePlaceholder()}
               />
             </>
           )}
@@ -111,7 +115,7 @@ function AddReview() {
             variant="primaryButton"
             isLoading={putMutation.isLoading}
           >
-            Add review
+            {t('add-review')}
           </Button>
         </>
       )}

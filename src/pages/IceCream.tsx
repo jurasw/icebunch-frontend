@@ -25,6 +25,7 @@ import { useReviews } from "../hooks/queries/useReviews";
 import AddReview from "../components/IceCream/Review/AddReviews";
 import Reviews from "../components/IceCream/Review/Reviews";
 import ReviewStars from "../components/IceCream/ReviewStars";
+import { useTranslation } from "react-i18next";
 
 export default function IceCream() {
   const { iceCreamId } = useParams();
@@ -37,6 +38,7 @@ export default function IceCream() {
 
   const [iceCream, setIceCream] = useState<IceCream>();
   // const [userData, setUserData] = useState<UserDB>();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchIceCream = async () => {
@@ -96,7 +98,7 @@ export default function IceCream() {
                 <Box as="span" ml="2" color="gray.600" fontSize="md">
                   {""}
                   {iceCream?.number_of_ratings}
-                  {" reviewers"}
+                  {" "}{t('reviewers')}
                 </Box>
               </Box>
             </Box>
@@ -119,7 +121,7 @@ export default function IceCream() {
                   textTransform={"uppercase"}
                   mb={"4"}
                 >
-                  Description
+                  {t('description')}
                 </Text>
                 <Text
                   color={useColorModeValue("gray.500", "gray.400")}
@@ -139,7 +141,7 @@ export default function IceCream() {
                 textTransform={"uppercase"}
                 mb={"4"}
               >
-                REVIEWS
+                {t('reviews')}
               </Text>
 
               <List spacing={2}>

@@ -10,12 +10,14 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from 'i18next';
 import en from './locales/en.json'
 import pl from './locales/pl.json'
+// import login_pl from './locales/Login/login_pl.json'
+// import login_en from './locales/Login/login_en.json'
 
 
 
 i18n.init({
-  lng: 'pl', // Set the default language
-  fallbackLng: 'pl', // Fallback language if a translation is missing
+  lng: 'en', // Set the default language
+  fallbackLng: 'en', // Fallback language if a translation is missing
   resources: {
     en: {
       translation: en // Import English translations

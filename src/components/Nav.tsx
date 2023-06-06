@@ -32,14 +32,19 @@ export const MenuItems = () => {
   const { t } = useTranslation();
   return (
     <>
+      <Button
+        _hover={{
+          cursor: "pointer",
+        }}
+        onClick={() => {
+          navigate(Path.ABOUT);
+        }}
+      >
+        {t("about")}
+      </Button>
       <Flag locale={Language.PL} src="../flag-pl.png" />
       <Flag locale={Language.EN} src="../flag-en.png" />
-      <Text
-          _hover={{
-            cursor: "pointer"
-          }}
-          onClick={() => {navigate(Path.ABOUT)}}
-          >{t('about')}</Text>
+
       <Button onClick={toggleColorMode}>
         {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
       </Button>
@@ -89,7 +94,7 @@ export default function Nav() {
             >
               <MenuItems />
             </HStack>
-          {/* <Text
+            {/* <Text
           _hover={{
             cursor: "pointer"
           }}
@@ -97,7 +102,6 @@ export default function Nav() {
           >{t('about')}</Text> */}
           </HStack>
           <Flex alignItems={"center"}>
-            
             {user ? (
               <>
                 <Menu>
@@ -121,7 +125,7 @@ export default function Nav() {
                   ml={4}
                   onClick={logout}
                 >
-                  {t('logout')}
+                  {t("logout")}
                 </Button>
               </>
             ) : (
@@ -133,7 +137,7 @@ export default function Nav() {
                   as={"a"}
                   href={Path.LOGIN}
                 >
-                  {t('sign-in')}
+                  {t("sign-in")}
                 </Button>
                 <Button
                   variant={"primaryButton"}
@@ -142,7 +146,7 @@ export default function Nav() {
                   as={"a"}
                   href={Path.REGISTER}
                 >
-                  {t('sign-up')}
+                  {t("sign-up")}
                 </Button>
               </>
             )}

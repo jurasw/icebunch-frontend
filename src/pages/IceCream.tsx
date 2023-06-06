@@ -56,7 +56,7 @@ export default function IceCream() {
                 src={iceCreamQuery?.data?.image}
                 align={"center"}
                 maxW={"100%"}
-                maxH="95vh"
+                maxH={["40vh", "40vh", "90vh"]}
               />
             </Skeleton>
           </Flex>

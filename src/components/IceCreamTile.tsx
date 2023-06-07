@@ -54,8 +54,8 @@ function IceCreamTile(props: Props) {
           <Box display="flex" alignItems="baseline"></Box>
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
-              maxW={"250px"}
-              w={"250px"}
+              maxW={"190px"}
+              w={"190px"}
               fontSize="2xl"
               fontWeight="semibold"
               as="h4"
@@ -64,7 +64,7 @@ function IceCreamTile(props: Props) {
             >
               {language === Language.PL && props.brand_pl}
               {language === Language.EN && props.brand_en}
-              <Text fontSize="lg">
+              <Text fontSize="lg" isTruncated>
                 {language === Language.PL && props.name_pl}
                 {language === Language.EN && props.name_en}
               </Text>

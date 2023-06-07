@@ -11,33 +11,41 @@ import {
 } from "@chakra-ui/react";
 import IceCreamTile from "../components/IceCreamTile";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { IceCream } from "../models/IceCream";
 import Nav from "../components/Nav";
 import { useTranslation } from "react-i18next";
 import { Pagination, PaginationProps } from "antd";
-import { useIceCreamQuery } from "../hooks/queries/useIceCream";
 import IceCreamTileSkeleton from "../components/IceCreamTileSkeleton";
 
 const Home = () => {
+  const [iceCream, setIceCream] = useState<IceCream[]>([]);
   const [searchField, setSearchField] = useState("");
   const [isVegan, setIsVegan] = useState(false);
   const [sorting, setSorting] = useState<number>(-1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalEntities, setTotalEntities] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const { t } = useTranslation();
-  const { allIceCreamQuery } = useIceCreamQuery({
-    searchField: searchField,
-    isVegan: isVegan,
-    sortKey: sorting,
-    page: currentPage,
-  });
 
-  useEffect(() => {}, [
-    allIceCreamQuery.data,
-    searchField,
-    isVegan,
-    sorting,
-    currentPage,
-  ]);
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .post("/ice-creams", {
+          searchField: searchField,
+          isVegan: isVegan,
+          sortKey: Number(sorting),
+          page: currentPage,
+        })
+        .then((response) => {
+          setIceCream(response.data.iceCreams);
+          setTotalEntities(response.data.meta.queryEntitiesCount);
+          setLoading(false);
+        });
+    };
+    fetchData();
+  }, [searchField, isVegan, sorting, currentPage]);
 
   function handleSearchChange(event: any) {
     setSearchField(event.target.value);
@@ -104,18 +112,16 @@ const Home = () => {
         gap={1}
       >
         {/* Grid items */}
-        {allIceCreamQuery.isLoading ? (
+
+        {loading ? (
           <>
-            {[
-              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-              20,
-            ].map((skelet) => (
-              <IceCreamTileSkeleton key={skelet} />
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((fakeIceCream) => (
+              <IceCreamTileSkeleton key={fakeIceCream} />
             ))}
           </>
         ) : (
           <>
-            {allIceCreamQuery?.data?.iceCreams?.map((icecream, index) => (
+            {iceCream.map((icecream, index) => (
               <GridItem key={index}>
                 <IceCreamTile
                   key={index}
@@ -139,7 +145,7 @@ const Home = () => {
           current={currentPage}
           onChange={onChange}
           pageSize={20}
-          total={allIceCreamQuery?.data?.meta?.queryEntitiesCount}
+          total={totalEntities}
           showSizeChanger={false}
         />
       </Center>

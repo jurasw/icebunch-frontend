@@ -14,7 +14,7 @@ function IceCreamTileSkeleton() {
         shadow="lg"
         position="relative"
       >
-        <Skeleton>
+        <Skeleton w={"85%"} m={"auto"} rounded="lg">
           <Box
             mt={5}
             roundedTop="lg"
@@ -35,17 +35,20 @@ function IceCreamTileSkeleton() {
               lineHeight="tight"
               isTruncated
             >
-              <Skeleton>
-                <Text fontSize="lg" mb={2}> name </Text>
+              <Skeleton rounded="lg" w={"45%"}>
+                <Text fontSize="lg" mb={2}>
+                  {" "}
+                  name{" "}
+                </Text>
               </Skeleton>
-              <Skeleton>
+              <Skeleton mb={1} rounded="lg">
                 <Text fontSize="lg"> brand </Text>
               </Skeleton>
             </Box>
           </Flex>
           <Flex justifyContent="space-between" alignContent="center">
             <Box marginTop={"0.25em"} display="flex" alignItems="center">
-              <ReviewStars rating={5} />
+              <ReviewStars rating={0} />
             </Box>
           </Flex>
         </Box>

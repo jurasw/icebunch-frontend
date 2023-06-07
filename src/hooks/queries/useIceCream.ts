@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AllIceCreamDto, IceCream } from "../../models/IceCream";
+import { AllIceCream, AllIceCreamDto, IceCream } from "../../models/IceCream";
 import { useQuery } from "react-query";
 
 export const ICE_CREAM_QUERY_KEY = "iceCream";
@@ -12,6 +12,24 @@ interface Params {
 export const getAllIceCream = async (): Promise<IceCream[]> => {
   const response = await axios.get("/ice-creams");
   return response.data;
+};
+
+export const useIceCreamQuery = (params: AllIceCreamDto) => {
+  const getIceCreamQuery = async (
+    payload: AllIceCreamDto
+  ): Promise<AllIceCream> => {
+    const response = await axios.post("/ice-creams", payload);
+    return response.data;
+  };
+
+  const allIceCreamQuery = useQuery({
+    queryKey: ICE_CREAM_QUERY_KEY,
+    queryFn: () => getIceCreamQuery(params),
+  });
+
+  return {
+    allIceCreamQuery,
+  };
 };
 
 export const useIceCream = (params: Params) => {

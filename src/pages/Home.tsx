@@ -11,35 +11,33 @@ import {
 } from "@chakra-ui/react";
 import IceCreamTile from "../components/IceCreamTile";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { IceCream } from "../models/IceCream";
 import Nav from "../components/Nav";
 import { useTranslation } from "react-i18next";
 import { Pagination, PaginationProps } from "antd";
+import { useIceCreamQuery } from "../hooks/queries/useIceCream";
+import IceCreamTileSkeleton from "../components/IceCreamTileSkeleton";
 
 const Home = () => {
-  const [iceCream, setIceCream] = useState<IceCream[]>([]);
   const [searchField, setSearchField] = useState("");
   const [isVegan, setIsVegan] = useState(false);
   const [sorting, setSorting] = useState<number>(-1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalEntities, setTotalEntities] = useState(0);
 
   const { t } = useTranslation();
+  const { allIceCreamQuery } = useIceCreamQuery({
+    searchField: searchField,
+    isVegan: isVegan,
+    sortKey: sorting,
+    page: currentPage,
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.post("/ice-creams", {
-        searchField: searchField,
-        isVegan: isVegan,
-        sortKey: Number(sorting),
-        page: currentPage,
-      });
-      setIceCream(result.data.iceCreams);
-      setTotalEntities(result.data.meta.queryEntitiesCount);
-    };
-    fetchData();
-  }, [searchField, isVegan, sorting, currentPage]);
+  useEffect(() => {}, [
+    allIceCreamQuery.data,
+    searchField,
+    isVegan,
+    sorting,
+    currentPage,
+  ]);
 
   function handleSearchChange(event: any) {
     setSearchField(event.target.value);
@@ -106,29 +104,42 @@ const Home = () => {
         gap={1}
       >
         {/* Grid items */}
-        {iceCream.map((icecream, index) => (
-          <GridItem key={index}>
-            <IceCreamTile
-              key={index}
-              name_pl={icecream.name_pl}
-              brand_pl={icecream.brand_pl}
-              name_en={icecream.name_en}
-              brand_en={icecream.brand_en}
-              imageURL={icecream.image}
-              rating={icecream.rating}
-              numberOfRatings={icecream.numberOfRatings}
-              href={`/${icecream.name_pl}-${icecream.brand_pl}/${icecream._id}`}
-              isVegan={icecream.vegan!}
-            />
-          </GridItem>
-        ))}
+        {allIceCreamQuery.isLoading ? (
+          <>
+            {[
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+              20,
+            ].map((skelet) => (
+              <IceCreamTileSkeleton key={skelet} />
+            ))}
+          </>
+        ) : (
+          <>
+            {allIceCreamQuery?.data?.iceCreams?.map((icecream, index) => (
+              <GridItem key={index}>
+                <IceCreamTile
+                  key={index}
+                  name_pl={icecream.name_pl}
+                  brand_pl={icecream.brand_pl}
+                  name_en={icecream.name_en}
+                  brand_en={icecream.brand_en}
+                  imageURL={icecream.image}
+                  rating={icecream.rating}
+                  numberOfRatings={icecream.numberOfRatings}
+                  href={`/${icecream.name_pl}-${icecream.brand_pl}/${icecream._id}`}
+                  isVegan={icecream.vegan!}
+                />
+              </GridItem>
+            ))}
+          </>
+        )}
       </Grid>
       <Center my={4}>
         <Pagination
           current={currentPage}
           onChange={onChange}
           pageSize={20}
-          total={totalEntities}
+          total={allIceCreamQuery?.data?.meta?.queryEntitiesCount}
           showSizeChanger={false}
         />
       </Center>

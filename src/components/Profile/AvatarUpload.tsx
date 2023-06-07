@@ -1,41 +1,57 @@
-import React from "react";
+import { Upload, Button } from "antd";
+import axios from "axios";
+import { useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
-import type { UploadProps } from "antd";
-import { message, Upload } from "antd";
 
 const { Dragger } = Upload;
 
-const props: UploadProps = {
-  name: "file",
-  multiple: true,
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
-  },
-};
+interface Props {
+  userId: string | undefined;
+}
 
-const AvatarUpload: React.FC = () => (
-  <Dragger {...props}>
-    <p className="ant-upload-drag-icon">
-      <InboxOutlined />
-    </p>
-    <p className="ant-upload-text">Click or drag file to this area to upload</p>
-    <p className="ant-upload-hint">
-      Support for a single or bulk upload. Strictly prohibited from uploading
-      company data or other banned files.
-    </p>
-  </Dragger>
-);
+const AvatarUpload = ({ userId }: Props) => {
+  const [uploadedFile, setUploadedFile] = useState(null);
+
+  const handleFileUpload = (file: any, setUploadedFile: any) => {
+    setUploadedFile(file);
+  };
+
+  const sendRequest = async (uploadedFile: any) => {
+    const formData = new FormData();
+
+    formData.append("file", uploadedFile);
+    const response = await axios.post(
+      `/users/image/upload/${userId}`,
+      formData
+    );
+
+    console.log(response);
+  };
+
+  return (
+    <div>
+      <Dragger
+        beforeUpload={(file) => {
+          handleFileUpload(file, setUploadedFile);
+          return false;
+        }}
+      >
+        <p className="ant-upload-drag-icon">
+          <InboxOutlined />
+        </p>
+        <p className="ant-upload-text">
+          Click or drag file to this area to upload
+        </p>
+        <p className="ant-upload-hint">
+          Support for a single or bulk upload. Strictly prohibited from
+          uploading company data or other banned files.
+        </p>
+      </Dragger>
+      {uploadedFile && (
+        <Button onClick={() => sendRequest(uploadedFile)}>Save</Button>
+      )}
+    </div>
+  );
+};
 
 export default AvatarUpload;

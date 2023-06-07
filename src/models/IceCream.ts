@@ -16,6 +16,14 @@ export interface IceCream {
   __v: number;
 }
 
+export interface AllIceCream {
+  iceCreams: IceCream[];
+  meta: {
+    totalEntitiesCount: number;
+    queryEntitiesCount: number;
+  };
+}
+
 export enum Sort {
   DESC = 1,
   ASC = -1,

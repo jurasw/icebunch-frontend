@@ -1,7 +1,6 @@
 import {
   Center,
   Text,
-  Button,
   Avatar,
   VStack,
   AvatarBadge,
@@ -10,7 +9,6 @@ import {
   ModalOverlay,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
   ModalHeader,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -64,15 +62,8 @@ const MyProfile = () => {
           <ModalHeader>Upload Avatar</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <AvatarUpload />
+            <AvatarUpload userId={userData?._id} />
           </ModalBody>
-
-          <ModalFooter>
-            <Button>Close</Button>
-            <Button colorScheme="blue" ml={3} onClick={onClose}>
-              Save
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

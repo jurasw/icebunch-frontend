@@ -11,7 +11,7 @@ function Reviews({ reviews }: Props) {
   const navigate = useNavigate();
 
   return (
-    <>
+    <Box overflow={"scroll"} maxH={"350px"}>
       {reviews?.map((review) => (
         <Box
           key={review.userId}
@@ -32,7 +32,7 @@ function Reviews({ reviews }: Props) {
           />
         </Box>
       ))}
-    </>
+    </Box>
   );
 }
 

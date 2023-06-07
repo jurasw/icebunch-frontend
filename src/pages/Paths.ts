@@ -7,7 +7,7 @@ export enum Path {
     FORGOT_PASSWORD = 'forgot-password',
     RESET_PASSWORD = 'reset-password/:token',
     SETTINGS = '/settings',
-    PROFILE = '/profile/:viewedUserId',
+    PROFILE = '/profile/:userId',
     MY_PROFILE = '/my-profile',
     ICE_CREAM= '/:name/:iceCreamId',
     ABOUT = '/about'

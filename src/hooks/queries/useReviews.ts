@@ -4,6 +4,13 @@ import { DeleteReviewDto, Review, SendReviewDto } from "../../models/Review";
 
 export const REVIEWS_QUERY_KEY = "reviews";
 
+export const getUserReviewsById = async (
+  userId: string
+): Promise<Review[]> => {
+  const response = await axios.get(`/reviews/user/${userId}`);
+  return response.data;
+};
+
 interface Params {
   iceCreamId: string;
 }
@@ -21,8 +28,8 @@ export const useReviews = (params: Params) => {
     return response.data;
   };
 
-  const deleteMyReview = async (reviewId: DeleteReviewDto) => {  
-    console.log('id:' + reviewId.reviewId)
+  const deleteMyReview = async (reviewId: DeleteReviewDto) => {
+    console.log("id:" + reviewId.reviewId);
     const response = await axios.delete(`/reviews/${reviewId.reviewId}`);
     return response.data;
   };

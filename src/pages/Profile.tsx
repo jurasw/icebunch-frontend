@@ -1,28 +1,19 @@
-import { Center, Text } from "@chakra-ui/react";
-// import { SearchIcon } from "@chakra-ui/icons";
-// import { useEffect, useState } from "react";
-// import axios from "axios";
-// import { IceCream } from "../models/IceCream";
-// import { useAuthStore } from "../zustand";
+import { Avatar, Center, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Nav from "../components/Nav";
-
-
+import ReviewsProfile from "../components/Profile/ReviewsProfile";
 
 const Profile = () => {
-
-  const { viewedUserId } = useParams();
+  const { userId } = useParams();
   const [viewedUser, setViewedUser] = useState<any>();
-//   const user = useAuthStore((state) => state.user);
-
 
   useEffect(() => {
     const fetchViewedUser = async () => {
-    const viewedUser = await axios.get(`/users/${viewedUserId}`);
-    console.log('viewed user' + viewedUser.data.email)
-    setViewedUser(viewedUser.data)
+      const viewedUser = await axios.get(`/users/${userId}`);
+      console.log("viewed user" + viewedUser.data.email);
+      setViewedUser(viewedUser.data);
     };
     fetchViewedUser();
   }, []);
@@ -30,17 +21,17 @@ const Profile = () => {
   return (
     <>
       <Nav />
-      <Center>
-        <Text
-        fontSize={"6xl"}
-        as='b'
-        >
-        {viewedUser?.email}
-        {viewedUser?.avatarUrl}
-        </Text>
+      <Center margin={8}>
+        <VStack spacing={8}>
+          <Text fontSize={"4xl"} as="b">
+            {viewedUser?.email}
+          </Text>
+          <Avatar size="2xl" src={viewedUser?.avatarUrl} />
+          <ReviewsProfile userId={userId!} />
+        </VStack>
       </Center>
     </>
-  )
+  );
 };
 
 export default Profile;

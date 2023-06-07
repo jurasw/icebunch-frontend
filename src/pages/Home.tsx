@@ -36,7 +36,7 @@ const Home = () => {
         page: currentPage,
       });
       setIceCream(result.data.iceCreams);
-      setTotal(result.data.total)
+      setTotal(result.data.total);
     };
     fetchData();
   }, [searchField, isVegan, sorting, currentPage]);
@@ -124,7 +124,12 @@ const Home = () => {
         ))}
       </Grid>
       <Center my={4}>
-        <Pagination current={currentPage} onChange={onChange} total={total} />
+        <Pagination
+          current={currentPage}
+          onChange={onChange}
+          pageSize={5}
+          total={total}
+        />
       </Center>
     </>
   );

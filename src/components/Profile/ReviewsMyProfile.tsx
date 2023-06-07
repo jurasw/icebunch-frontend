@@ -1,14 +1,14 @@
 import {
-  Button,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   Grid,
   GridItem,
   Heading,
   Text,
   Box,
+  Image,
+  HStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getUserReviewsById } from "../../hooks/queries/useReviews";
@@ -16,21 +16,32 @@ import { Review } from "../../models/Review";
 import ReviewStars from "../IceCream/ReviewStars";
 import { useAuthStore } from "../../zustand";
 import { useUser } from "../../hooks/queries/useUser";
+import { getAllIceCream } from "../../hooks/queries/useIceCream";
+import { IceCream } from "../../models/IceCream";
 
 const ReviewsMyProfile = () => {
   const [reviews, setReviews] = useState<Review[]>();
+  const [iceCream, setIceCream] = useState<IceCream[]>();
   const user = useAuthStore((state) => state.user);
-  const { getUserFromEmail } = useUser();
 
+  const { getUserFromEmail } = useUser();
   useEffect(() => {
     const fetchReviews = async () => {
       if (user) {
         const userData = await getUserFromEmail(user.email);
         setReviews(await getUserReviewsById(userData._id));
+        setIceCream(await getAllIceCream());
       }
     };
     fetchReviews();
   }, []);
+
+  const getIceCreamImage = (userIceCreamId: string): string | undefined => {
+    const thisIceCream = iceCream?.find(
+      (element) => element._id == userIceCreamId
+    );
+    return thisIceCream?.image;
+  };
 
   return (
     <Grid
@@ -58,11 +69,16 @@ const ReviewsMyProfile = () => {
               </Heading>
             </CardHeader>
             <CardBody>
-              <Text>{review.content} </Text>
+              <HStack>
+                <Image
+                  mr={3}
+                  h="75px"
+                  w="auto"
+                  src={getIceCreamImage(review.iceCreamId)}
+                />
+                <Text>{review.content} </Text>
+              </HStack>
             </CardBody>
-            <CardFooter>
-              <Button>View here</Button>
-            </CardFooter>
           </Card>
         </GridItem>
       ))}

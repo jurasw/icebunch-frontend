@@ -9,8 +9,13 @@ interface Params {
   iceCreamId: string;
 }
 
+export const getAllIceCream = async (): Promise<IceCream[]> => {
+  const response = await axios.get("/ice-creams");
+  return response.data;
+};
+
 export const useIceCream = (params: Params) => {
-  const getAllIceCream = async (
+  const getIceCreamQuery = async (
     payload: AllIceCreamDto
   ): Promise<IceCream[]> => {
     const response = await axios.post("/ice-creams", payload);
@@ -27,9 +32,8 @@ export const useIceCream = (params: Params) => {
     queryFn: () => getIceCream(params.iceCreamId),
   });
 
-
   return {
-    getAllIceCream,
+    getIceCreamQuery,
     getIceCream,
     iceCreamQuery,
   };

@@ -36,7 +36,7 @@ const Home = () => {
         page: currentPage,
       });
       setIceCream(result.data.iceCreams);
-      setTotalEntities(result.data.meta.totalEntities);
+      setTotalEntities(result.data.meta.queryEntitiesCount);
     };
     fetchData();
   }, [searchField, isVegan, sorting, currentPage]);

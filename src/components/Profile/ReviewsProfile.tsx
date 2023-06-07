@@ -1,19 +1,21 @@
 import {
-  Button,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   Grid,
   GridItem,
   Heading,
   Text,
   Box,
+  Image,
+  HStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getUserReviewsById } from "../../hooks/queries/useReviews";
 import { Review } from "../../models/Review";
 import ReviewStars from "../IceCream/ReviewStars";
+import { getAllIceCream } from "../../hooks/queries/useIceCream";
+import { IceCream } from "../../models/IceCream";
 
 interface Params {
   userId: string;
@@ -21,13 +23,22 @@ interface Params {
 
 const ReviewsProfile = ({ userId }: Params) => {
   const [reviews, setReviews] = useState<Review[]>();
+  const [iceCream, setIceCream] = useState<IceCream[]>();
 
   useEffect(() => {
     const fetchReviews = async () => {
       setReviews(await getUserReviewsById(userId));
+      setIceCream(await getAllIceCream());
     };
     fetchReviews();
   }, []);
+
+  const getIceCreamImage = (userIceCreamId: string): string | undefined => {
+    const thisIceCream = iceCream?.find(
+      (element) => element._id == userIceCreamId
+    );
+    return thisIceCream?.image;
+  };
 
   return (
     <Grid
@@ -48,18 +59,22 @@ const ReviewsProfile = ({ userId }: Params) => {
           <Card>
             <CardHeader>
               <Heading size="md">
-                {" "}
                 <Box marginTop={"0.25em"} display="flex" alignItems="center">
                   <ReviewStars rating={review.rating} />
                 </Box>
               </Heading>
             </CardHeader>
             <CardBody>
-              <Text>{review.content} </Text>
+              <HStack>
+                <Image
+                  mr={3}
+                  h="75px"
+                  w="auto"
+                  src={getIceCreamImage(review.iceCreamId)}
+                />
+                <Text>{review.content} </Text>
+              </HStack>
             </CardBody>
-            <CardFooter>
-              <Button>View here</Button>
-            </CardFooter>
           </Card>
         </GridItem>
       ))}

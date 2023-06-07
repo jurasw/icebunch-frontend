@@ -23,7 +23,7 @@ const Home = () => {
   const [isVegan, setIsVegan] = useState(false);
   const [sorting, setSorting] = useState<number>(-1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [total, setTotal] = useState(0);
+  const [totalEntities, setTotalEntities] = useState(0);
 
   const { t } = useTranslation();
 
@@ -36,7 +36,7 @@ const Home = () => {
         page: currentPage,
       });
       setIceCream(result.data.iceCreams);
-      setTotal(result.data.total);
+      setTotalEntities(result.data.meta.totalEntities);
     };
     fetchData();
   }, [searchField, isVegan, sorting, currentPage]);
@@ -127,8 +127,8 @@ const Home = () => {
         <Pagination
           current={currentPage}
           onChange={onChange}
-          pageSize={5}
-          total={total}
+          pageSize={20}
+          total={totalEntities}
           showSizeChanger={false}
         />
       </Center>

@@ -23,17 +23,23 @@ function IceCreamTile(props: Props) {
     <Flex m={1} w="full" alignItems="center" justifyContent="center">
       <Box
         as="a"
+        maxW="90%"
         w="90%"
         href={props.href}
         bg={useColorModeValue("white", "gray.800")}
-        maxW="lg"
         borderWidth="1px"
         rounded="lg"
         shadow="lg"
         position="relative"
       >
         {props.isVegan && (
-          <Image src={"/vegan.png"} w={"20%"} position="absolute" top={2} right={2} />
+          <Image
+            src={"/vegan.png"}
+            w={"20%"}
+            position="absolute"
+            top={2}
+            right={2}
+          />
         )}
         <Image
           mt={5}

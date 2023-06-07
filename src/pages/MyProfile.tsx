@@ -43,6 +43,7 @@ const MyProfile = () => {
             {t('settings')}
           </Button>
         </VStack>
+        
       </Center>
     </>
   );

@@ -129,6 +129,7 @@ const Home = () => {
           onChange={onChange}
           pageSize={5}
           total={total}
+          showSizeChanger={false}
         />
       </Center>
     </>

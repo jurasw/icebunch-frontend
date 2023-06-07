@@ -54,6 +54,7 @@ function IceCreamTile(props: Props) {
           <Box display="flex" alignItems="baseline"></Box>
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
+              maxW={"250px"}
               fontSize="2xl"
               fontWeight="semibold"
               as="h4"

@@ -49,7 +49,11 @@ export default function IceCream() {
           py={{ base: 18, md: 24 }}
         >
           <Flex justifyContent={"center"}>
-            <Skeleton isLoaded={!iceCreamQuery.isLoading}>
+            <Skeleton
+              w={"90%"}
+              rounded="lg"
+              isLoaded={!iceCreamQuery.isLoading}
+            >
               <Image
                 objectFit="contain"
                 alt={"product image"}
@@ -62,31 +66,30 @@ export default function IceCream() {
           </Flex>
           <Stack spacing={{ base: 6, md: 10 }}>
             <Box as={"header"}>
-              <Skeleton isLoaded={!iceCreamQuery.isLoading}>
-                <Heading
-                  lineHeight={1.1}
-                  fontWeight={600}
-                  fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
-                >
-                  {language === Language.PL && iceCreamQuery?.data?.brand_pl}
-                  {language === Language.EN && iceCreamQuery?.data?.brand_en}
-                </Heading>
-              </Skeleton>
-              <Skeleton isLoaded={!iceCreamQuery.isLoading}>
-                <Text fontSize={{ base: "l", sm: "xl", lg: "2xl" }}>
-                  {language === Language.PL && iceCreamQuery?.data?.name_pl}
-                  {language === Language.EN && iceCreamQuery?.data?.name_en}
-                </Text>
-              </Skeleton>
-              <Skeleton isLoaded={!iceCreamQuery.isLoading}>
-                <Box marginTop={"0.25em"} display="flex" alignItems="center">
-                  <ReviewStars rating={iceCreamQuery?.data?.rating} />
-                  <Box as="span" ml="2" color="gray.600" fontSize="md">
-                    {""}
-                    {iceCreamQuery?.data?.numberOfRatings} {t("reviewers")}
-                  </Box>
+              <Skeleton isLoaded={!iceCreamQuery.isLoading} h={30} mb={2} />
+
+              <Skeleton isLoaded={!iceCreamQuery.isLoading} h={30} mb={2} />
+
+              <Skeleton isLoaded={!iceCreamQuery.isLoading} h={30} mb={2} />
+
+              <Heading
+                lineHeight={1.1}
+                fontWeight={600}
+                fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
+              >
+                {language === Language.PL && iceCreamQuery?.data?.brand_pl}
+                {language === Language.EN && iceCreamQuery?.data?.brand_en}
+              </Heading>
+              <Text fontSize={{ base: "l", sm: "xl", lg: "2xl" }}>
+                {language === Language.PL && iceCreamQuery?.data?.name_pl}
+                {language === Language.EN && iceCreamQuery?.data?.name_en}
+              </Text>
+              <Box marginTop={"0.25em"} display="flex" alignItems="center">
+                <ReviewStars rating={iceCreamQuery?.data?.rating} />
+                <Box as="span" ml="2" color="gray.600" fontSize="md">
+                  {iceCreamQuery?.data?.numberOfRatings} {t("reviewers")}
                 </Box>
-              </Skeleton>
+              </Box>
             </Box>
 
             <Stack
@@ -109,18 +112,26 @@ export default function IceCream() {
                 >
                   {t("description")}
                 </Text>
-                <Skeleton isLoaded={!iceCreamQuery.isLoading}>
-                  <Text
-                    color={useColorModeValue("gray.500", "gray.400")}
-                    fontSize={"2xl"}
-                    fontWeight={"300"}
-                  >
-                    {language === Language.PL &&
-                      iceCreamQuery?.data?.description_pl}
-                    {language === Language.EN &&
-                      iceCreamQuery?.data?.description_en}
-                  </Text>
-                </Skeleton>
+                <Skeleton isLoaded={!iceCreamQuery.isLoading} h={30} mb={2} />
+
+                <Text
+                  color={useColorModeValue("gray.500", "gray.400")}
+                  fontSize={"2xl"}
+                  fontWeight={"300"}
+                >
+                  Przykladowy Opis
+                </Text>
+
+                <Text
+                  color={useColorModeValue("gray.500", "gray.400")}
+                  fontSize={"2xl"}
+                  fontWeight={"300"}
+                >
+                  {language === Language.PL &&
+                    iceCreamQuery?.data?.description_pl}
+                  {language === Language.EN &&
+                    iceCreamQuery?.data?.description_en}
+                </Text>
               </Box>
             </Stack>
             <Box>

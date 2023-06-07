@@ -23,6 +23,7 @@ const Home = () => {
   const [isVegan, setIsVegan] = useState(false);
   const [sorting, setSorting] = useState<number>(-1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [total, setTotal] = useState(0);
 
   const { t } = useTranslation();
 
@@ -34,7 +35,8 @@ const Home = () => {
         sortKey: Number(sorting),
         page: currentPage,
       });
-      setIceCream(result.data);
+      setIceCream(result.data.iceCreams);
+      setTotal(result.data.total)
     };
     fetchData();
   }, [searchField, isVegan, sorting, currentPage]);
@@ -104,9 +106,8 @@ const Home = () => {
         gap={1}
       >
         {/* Grid items */}
-        {}
         {iceCream.map((icecream, index) => (
-          <GridItem>
+          <GridItem key={index}>
             <IceCreamTile
               key={index}
               name_pl={icecream.name_pl}
@@ -123,7 +124,7 @@ const Home = () => {
         ))}
       </Grid>
       <Center my={4}>
-        <Pagination current={currentPage} onChange={onChange} total={50} />
+        <Pagination current={currentPage} onChange={onChange} total={total} />
       </Center>
     </>
   );

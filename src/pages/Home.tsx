@@ -33,7 +33,7 @@ const Home = () => {
     const fetchData = async () => {
       setLoading(true);
       await axios
-        .post("/ice-creamss", {
+        .post("/ice-creams", {
           searchField: searchField,
           isVegan: isVegan,
           sortKey: Number(sorting),

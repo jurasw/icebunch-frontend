@@ -120,7 +120,7 @@ export default function Nav() {
                   </MenuButton>
                 </Menu>
                 <Button
-                  variant={"primaryButton"}
+                  variant={"primaryOutlineButton"}
                   size={"sm"}
                   ml={4}
                   onClick={logout}

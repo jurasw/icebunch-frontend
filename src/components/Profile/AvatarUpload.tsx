@@ -1,7 +1,8 @@
-import { Upload, Button } from "antd";
+import { Upload } from "antd";
 import axios from "axios";
 import { useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
+import { Button } from "@chakra-ui/react";
 
 const { Dragger } = Upload;
 
@@ -48,7 +49,14 @@ const AvatarUpload = ({ userId }: Props) => {
         </p>
       </Dragger>
       {uploadedFile && (
-        <Button onClick={() => sendRequest(uploadedFile)}>Save</Button>
+        <Button
+          mt={4}
+          float="right"
+          variant="primaryButton"
+          onClick={() => sendRequest(uploadedFile)}
+        >
+          Save
+        </Button>
       )}
     </div>
   );

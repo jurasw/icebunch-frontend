@@ -67,7 +67,7 @@ const MyProfile = () => {
         <ModalContent>
           <ModalHeader>Upload Avatar</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody pb={6}>
             <AvatarUpload userId={userData?._id} />
           </ModalBody>
         </ModalContent>

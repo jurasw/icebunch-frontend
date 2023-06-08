@@ -66,11 +66,12 @@ export default function IceCream() {
           </Flex>
           <Stack spacing={{ base: 6, md: 10 }}>
             <Box as={"header"}>
-              <Skeleton isLoaded={!iceCreamQuery.isLoading} h={30} mb={2} />
-
-              <Skeleton isLoaded={!iceCreamQuery.isLoading} h={30} mb={2} />
-
-              <Skeleton isLoaded={!iceCreamQuery.isLoading} h={30} mb={2} />
+              {iceCreamQuery.isLoading && (
+                <>
+                  <Skeleton h={50} mb={2} />
+                  <Skeleton h={30} mb={2} />
+                </>
+              )}
 
               <Heading
                 lineHeight={1.1}
@@ -84,12 +85,15 @@ export default function IceCream() {
                 {language === Language.PL && iceCreamQuery?.data?.name_pl}
                 {language === Language.EN && iceCreamQuery?.data?.name_en}
               </Text>
-              <Box marginTop={"0.25em"} display="flex" alignItems="center">
-                <ReviewStars rating={iceCreamQuery?.data?.rating} />
-                <Box as="span" ml="2" color="gray.600" fontSize="md">
-                  {iceCreamQuery?.data?.numberOfRatings} {t("reviewers")}
+
+              <Skeleton h={30} mb={2} isLoaded={!iceCreamQuery.isLoading}>
+                <Box marginTop={"0.25em"} display="flex" alignItems="center">
+                  <ReviewStars rating={iceCreamQuery?.data?.rating} />
+                  <Box as="span" ml="2" color="gray.600" fontSize="md">
+                    {iceCreamQuery?.data?.numberOfRatings} {t("reviewers")}
+                  </Box>
                 </Box>
-              </Box>
+              </Skeleton>
             </Box>
 
             <Stack
@@ -112,15 +116,8 @@ export default function IceCream() {
                 >
                   {t("description")}
                 </Text>
-                <Skeleton isLoaded={!iceCreamQuery.isLoading} h={30} mb={2} />
 
-                <Text
-                  color={useColorModeValue("gray.500", "gray.400")}
-                  fontSize={"2xl"}
-                  fontWeight={"300"}
-                >
-                  Przykladowy Opis
-                </Text>
+                {iceCreamQuery.isLoading && <Skeleton h={30} mb={2} />}
 
                 <Text
                   color={useColorModeValue("gray.500", "gray.400")}

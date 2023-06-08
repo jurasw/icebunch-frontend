@@ -13,6 +13,7 @@ import {
   List,
   ListItem,
   Skeleton,
+  HStack,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -73,15 +74,19 @@ export default function IceCream() {
                   <Skeleton h={30} mb={2} />
                 </>
               )}
+              <HStack>
+                <Heading
+                  lineHeight={1.1}
+                  fontWeight={600}
+                  fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
+                  mr={4}
+                >
+                  {language === Language.PL && iceCreamQuery?.data?.brand_pl}
+                  {language === Language.EN && iceCreamQuery?.data?.brand_en}
+                </Heading>
+                <Image src="/vegan.png" h={50} />
+              </HStack>
 
-              <Heading
-                lineHeight={1.1}
-                fontWeight={600}
-                fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
-              >
-                {language === Language.PL && iceCreamQuery?.data?.brand_pl}
-                {language === Language.EN && iceCreamQuery?.data?.brand_en}
-              </Heading>
               <Text fontSize={{ base: "l", sm: "xl", lg: "2xl" }}>
                 {language === Language.PL && iceCreamQuery?.data?.name_pl}
                 {language === Language.EN && iceCreamQuery?.data?.name_en}

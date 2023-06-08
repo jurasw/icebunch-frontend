@@ -51,9 +51,8 @@ export default function IceCream() {
         >
           <Flex justifyContent={"center"}>
             <Skeleton
-              w={"90%"}
+              w={["40%", "40%", "40%", "90%"]}
               h={["40vh", "40vh", "40vh", "90vh"]}
-
               rounded="lg"
               isLoaded={!iceCreamQuery.isLoading}
             >

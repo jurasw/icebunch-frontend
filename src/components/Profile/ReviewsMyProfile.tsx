@@ -18,10 +18,13 @@ import { useAuthStore } from "../../zustand";
 import { useUser } from "../../hooks/queries/useUser";
 import { getAllIceCream } from "../../hooks/queries/useIceCream";
 import { IceCream } from "../../models/IceCream";
+import SkeletonProfileReview from "./SkeletonProfileReview";
 
 const ReviewsMyProfile = () => {
   const [reviews, setReviews] = useState<Review[]>();
   const [iceCream, setIceCream] = useState<IceCream[]>();
+  const [loading, setLoading] = useState(true);
+
   const user = useAuthStore((state) => state.user);
 
   const { getUserFromEmail } = useUser();
@@ -30,7 +33,10 @@ const ReviewsMyProfile = () => {
       if (user) {
         const userData = await getUserFromEmail(user.email);
         setReviews(await getUserReviewsById(userData._id));
-        setIceCream(await getAllIceCream());
+        await getAllIceCream().then((response) => {
+          setIceCream(response);
+          setLoading(false);
+        });
       }
     };
     fetchReviews();
@@ -56,32 +62,40 @@ const ReviewsMyProfile = () => {
       }}
       gap={1}
     >
-      {/* Grid items */}
-      {reviews?.map((review, index) => (
-        <GridItem key={index}>
-          <Card>
-            <CardHeader>
-              <Heading size="md">
-                {" "}
-                <Box marginTop={"0.25em"} display="flex" alignItems="center">
-                  <ReviewStars rating={review.rating} />
-                </Box>
-              </Heading>
-            </CardHeader>
-            <CardBody>
-              <HStack>
-                <Image
-                  mr={3}
-                  h="75px"
-                  w="auto"
-                  src={getIceCreamImage(review.iceCreamId)}
-                />
-                <Text>{review.content} </Text>
-              </HStack>
-            </CardBody>
-          </Card>
-        </GridItem>
-      ))}
+      {loading ? (
+        <SkeletonProfileReview />
+      ) : (
+        <>
+          {reviews?.map((review, index) => (
+            <GridItem key={index}>
+              <Card>
+                <CardHeader>
+                  <Heading size="md">
+                    <Box
+                      marginTop={"0.25em"}
+                      display="flex"
+                      alignItems="center"
+                    >
+                      <ReviewStars rating={review.rating} />
+                    </Box>
+                  </Heading>
+                </CardHeader>
+                <CardBody>
+                  <HStack>
+                    <Image
+                      mr={3}
+                      h="75px"
+                      w="auto"
+                      src={getIceCreamImage(review.iceCreamId)}
+                    />
+                    <Text>{review.content} </Text>
+                  </HStack>
+                </CardBody>
+              </Card>
+            </GridItem>
+          ))}
+        </>
+      )}
     </Grid>
   );
 };

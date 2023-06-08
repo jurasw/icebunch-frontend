@@ -62,7 +62,7 @@ export default function IceCream() {
                 align={"center"}
                 maxW={"100%"}
                 m="auto"
-                maxH={["40vh", "40vh", "40vh","90vh"]}
+                maxH={["40vh", "40vh", "40vh", "90vh"]}
               />
             </Skeleton>
           </Flex>
@@ -84,7 +84,9 @@ export default function IceCream() {
                   {language === Language.PL && iceCreamQuery?.data?.brand_pl}
                   {language === Language.EN && iceCreamQuery?.data?.brand_en}
                 </Heading>
-                <Image src="/vegan.png" h={[35,35,35,50]} />
+                {iceCreamQuery?.data?.vegan && (
+                  <Image src="/vegan.png" h={[35, 35, 35, 50]} />
+                )}
               </HStack>
 
               <Text fontSize={{ base: "l", sm: "xl", lg: "2xl" }}>
@@ -163,6 +165,18 @@ export default function IceCream() {
                 </ListItem>
               </List>
             </Box>
+            <Text
+              fontSize={{ base: "16px", lg: "18px" }}
+              color="primary"
+              fontWeight={"500"}
+              textTransform={"uppercase"}
+              mb={"4"}
+            >
+              {t("my-review")}
+            </Text>
+            <StackDivider
+              borderColor={useColorModeValue("gray.200", "gray.600")}
+            />
             <AddReview />
           </Stack>
         </SimpleGrid>

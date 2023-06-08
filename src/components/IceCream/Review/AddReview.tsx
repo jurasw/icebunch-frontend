@@ -1,4 +1,4 @@
-import { Button, Textarea } from "@chakra-ui/react";
+import { Button, Textarea, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 // import ReactStars from "react-stars";
 import { useAuthStore } from "../../../zustand";
@@ -79,6 +79,16 @@ function AddReview() {
 
   return (
     <>
+
+<Text
+              fontSize={{ base: "16px", lg: "18px" }}
+              color="primary"
+              fontWeight={"500"}
+              textTransform={"uppercase"}
+              mb={"4"}
+            >
+              {t("my-review")}
+            </Text>
       {iceCreamReviewsQuery.data?.some((el) => el.userId == userData?._id) ? (
         <EditReview
           review={iceCreamReviewsQuery.data.find(
@@ -97,6 +107,7 @@ function AddReview() {
               onChange={handleRatingStars}
               />
               <Textarea
+              marginTop={'1rem'}
                 onChange={handleFieldContent}
                 resize={"none"}
                 placeholder={translatePlaceholder()}

@@ -45,6 +45,7 @@ const Home = () => {
         });
     };
     fetchData();
+    window.scrollTo(0, 0)
   }, [searchField, isVegan, sorting, currentPage]);
 
   function handleSearchChange(event: any) {

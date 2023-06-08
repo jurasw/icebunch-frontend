@@ -152,7 +152,9 @@ export default function IceCream() {
                     iceCreamQuery?.data?.description_en}
                 </Text>
               </Box>
-            </Stack>
+            {/* </Stack> */}
+          
+            <AddReview />
             <Box>
               <HStack pr={2}>
                 <Text
@@ -198,16 +200,10 @@ export default function IceCream() {
                 </ListItem>
               </List>
             </Box>
-            <Text
-              fontSize={{ base: "16px", lg: "18px" }}
-              color="primary"
-              fontWeight={"500"}
-              textTransform={"uppercase"}
-              mb={"4"}
-            >
-              {t("my-review")}
-            </Text>
-            <AddReview />
+          
+
+            </Stack>
+
           </Stack>
         </SimpleGrid>
       </Container>

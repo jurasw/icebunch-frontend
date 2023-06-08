@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import ReviewTile from "./ReviewTile";
 import { Review } from "../../../models/Review";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export enum ReviewSortProps {
   DATE_DESC = "DATE_DESC",
@@ -19,27 +19,24 @@ interface Props {
 function Reviews({ reviews , sort }: Props) {
   const navigate = useNavigate();
 
-  const [reviewsArray, setReviewsArray] = useState<Review[]>(reviews!);
-
   useEffect(() => {
-    let reviewsData = reviews;
 
     if (sort == ReviewSortProps.RATE_ASC) {
-      reviewsData = reviews
+      reviews
         ?.map((item, index) => ({ index, item }))
         .sort((a, b) => a.item.rating - b.item.rating)
         .map((entry) => entry.item);
     }
 
     if (sort == ReviewSortProps.RATE_DESC) {
-      reviewsData = reviews
+      reviews
         ?.map((item, index) => ({ index, item }))
         .sort((a, b) => b.item.rating - a.item.rating)
         .map((entry) => entry.item);
     }
 
     if (sort == ReviewSortProps.DATE_ASC) {
-      reviewsData = reviews
+      reviews
         ?.map((item, index) => ({ index, item }))
         .sort(
           (a, b) =>
@@ -50,7 +47,7 @@ function Reviews({ reviews , sort }: Props) {
     }
 
     if (sort == ReviewSortProps.DATE_DESC) {
-      reviewsData = reviews
+      reviews
         ?.map((item, index) => ({ index, item }))
         .sort(
           (a, b) =>
@@ -59,13 +56,11 @@ function Reviews({ reviews , sort }: Props) {
         )
         .map((entry) => entry.item);
     }
-
-    setReviewsArray(reviewsData!);
-  }, [sort]);
+  });
 
   return (
     <Box overflow={"scroll"} maxH={"350px"}>
-      {reviewsArray?.map((review) => (
+      {reviews?.map((review) => (
         <Box
           key={review.userId}
           borderWidth="1px"

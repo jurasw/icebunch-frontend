@@ -15,12 +15,14 @@ import {
   HStack,
   Divider,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useAuth } from "../hooks/useAuth";
 import OAuthButtonGroup from "../components/Login/OAuthButtonGroup";
 import { Path } from "./Paths";
 import { useTranslation } from "react-i18next";
+import { useAuthStore } from "../zustand";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupCard() {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,6 +30,15 @@ export default function SignupCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { t } = useTranslation();
+  const user = useAuthStore((state) => state.user);
+  const navigate = useNavigate();
+
+
+  useEffect(()=> {
+    if(user) {
+      navigate(Path.HOME)
+    }
+  })
 
   const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);

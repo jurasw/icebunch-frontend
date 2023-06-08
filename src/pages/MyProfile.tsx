@@ -21,15 +21,24 @@ import { UserDB } from "../models/User";
 import AvatarUpload from "../components/Profile/AvatarUpload";
 import ReviewsMyProfile from "../components/Profile/ReviewsMyProfile";
 import { EditIcon } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
+import { Path } from "./Paths";
 
 const MyProfile = () => {
   const user = useAuthStore((state) => state.user);
   const { getUserFromEmail } = useUser();
-
+  const navigate = useNavigate()
   const [userData, setUserData] = useState<UserDB>();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+
+
   useEffect(() => {
+    
+    if (!user) {
+      navigate(Path.LOGIN)
+    }
+
     const fetchUserData = async () => {
       if (user) {
         const result = await getUserFromEmail(user.email);
@@ -39,6 +48,7 @@ const MyProfile = () => {
     fetchUserData();
   }, []);
 
+  
   return (
     <>
       <Nav />

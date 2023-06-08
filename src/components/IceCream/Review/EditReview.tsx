@@ -39,7 +39,7 @@ function EditReview({ review, userId }: Props) {
 
   const [editing, setEditing] = useState(false);
   const [reviewContent, setReviewContent] = useState(review!.content);
-  const [reviewRating, setReviewRating] = useState<number>(0);
+  const [reviewRating, setReviewRating] = useState<number>(review!.rating);
 
   const handleFieldContent = (event: any) => {
     setReviewContent(event.target.value);
@@ -50,6 +50,7 @@ function EditReview({ review, userId }: Props) {
   }
 
   const sendReview = () => {
+    console.log(reviewRating)
     putMutation.mutate({
       rating: reviewRating,
       content: reviewContent,
@@ -78,10 +79,12 @@ function EditReview({ review, userId }: Props) {
           <Rate
           allowHalf
           style={{ color: 'black', fontSize: '30px' }}
-          defaultValue={review?.rating}
+          defaultValue={reviewRating}
           onChange={setReviewRating}
           />
           <Textarea
+              marginTop={'1rem'}
+
             onChange={handleFieldContent}
             resize={"none"}
             placeholder={translatePlaceholder()}

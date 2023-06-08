@@ -14,11 +14,12 @@ import {
   Divider
 } from "@chakra-ui/react";
 import OAuthButtonGroup from "../components/Login/OAuthButtonGroup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-
+import { useAuthStore } from "../zustand";
+import { Path } from "./Paths";
 
 export default function SimpleCard() {
   const navigate = useNavigate();
@@ -26,6 +27,14 @@ export default function SimpleCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { t } = useTranslation();
+  const user = useAuthStore((state) => state.user);
+
+
+  useEffect(()=> {
+    if(user) {
+      navigate(Path.HOME)
+    }
+  })
 
   const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -50,7 +59,8 @@ export default function SimpleCard() {
   };
 
   return (
-    <Flex
+
+      <Flex
       minH={"100vh"}
       align={"center"}
       justify={"center"}
@@ -119,5 +129,5 @@ export default function SimpleCard() {
         </Box>
       </Stack>
     </Flex>
-  );
-}
+    )
+  }

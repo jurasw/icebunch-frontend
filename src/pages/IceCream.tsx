@@ -60,6 +60,7 @@ export default function IceCream() {
                 src={iceCreamQuery?.data?.image}
                 align={"center"}
                 maxW={"100%"}
+                m="auto"
                 maxH={["40vh", "40vh", "90vh"]}
               />
             </Skeleton>

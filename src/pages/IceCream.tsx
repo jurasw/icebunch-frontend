@@ -62,7 +62,7 @@ export default function IceCream() {
                 align={"center"}
                 maxW={"100%"}
                 m="auto"
-                maxH={["40vh", "40vh", "90vh"]}
+                maxH={["40vh", "40vh", "40vh","90vh"]}
               />
             </Skeleton>
           </Flex>
@@ -84,7 +84,7 @@ export default function IceCream() {
                   {language === Language.PL && iceCreamQuery?.data?.brand_pl}
                   {language === Language.EN && iceCreamQuery?.data?.brand_en}
                 </Heading>
-                <Image src="/vegan.png" h={50} />
+                <Image src="/vegan.png" h={[35,35,35,50]} />
               </HStack>
 
               <Text fontSize={{ base: "l", sm: "xl", lg: "2xl" }}>

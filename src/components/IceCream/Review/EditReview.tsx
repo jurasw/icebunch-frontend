@@ -4,7 +4,6 @@ import {
   IconButton,
   Spacer,
   Textarea,
-  Text,
   Avatar,
   Box,
 } from "@chakra-ui/react";
@@ -74,15 +73,6 @@ function EditReview({ review, userId }: Props) {
 
   return (
     <>
-      <Text
-        fontSize={{ base: "16px", lg: "18px" }}
-        color="primary"
-        fontWeight={"500"}
-        textTransform={"uppercase"}
-        mb={"4"}
-      >
-        {t('my-review')}
-      </Text>
       {editing ? (
         <>
           <Rate

@@ -16,10 +16,10 @@ interface Props {
   sort: ReviewSortProps;
 }
 
-function Reviews({ reviews, sort }: Props) {
+function Reviews({ reviews , sort }: Props) {
   const navigate = useNavigate();
 
-  const [reviewsArray, setReviewsArray] = useState<Review[]>();
+  const [reviewsArray, setReviewsArray] = useState<Review[]>(reviews!);
 
   useEffect(() => {
     let reviewsData = reviews;
@@ -60,7 +60,7 @@ function Reviews({ reviews, sort }: Props) {
         .map((entry) => entry.item);
     }
 
-    setReviewsArray(reviewsData);
+    setReviewsArray(reviewsData!);
   }, [sort]);
 
   return (

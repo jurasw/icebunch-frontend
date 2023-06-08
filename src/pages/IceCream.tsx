@@ -15,6 +15,7 @@ import {
   Skeleton,
   HStack,
   Select,
+  Spacer,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -153,17 +154,18 @@ export default function IceCream() {
               </Box>
             </Stack>
             <Box>
-              <HStack>
+              <HStack pr={2}>
                 <Text
                   fontSize={{ base: "16px", lg: "18px" }}
                   color="primary"
                   fontWeight={"500"}
                   textTransform={"uppercase"}
-                  mb={"4"}
+                  my={"auto"}
                 >
                   {t("reviews")}
                 </Text>
-                <Select maxW={"190px"} onChange={handleSortingChange}>
+                <Spacer />
+                <Select maxW={"190px"} onChange={handleSortingChange} >
                   <option value={ReviewSortProps.DATE_DESC}>
                     {t("date-decreasing")}
                   </option>
@@ -205,9 +207,6 @@ export default function IceCream() {
             >
               {t("my-review")}
             </Text>
-            <StackDivider
-              borderColor={useColorModeValue("gray.200", "gray.600")}
-            />
             <AddReview />
           </Stack>
         </SimpleGrid>

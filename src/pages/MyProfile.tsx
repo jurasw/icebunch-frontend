@@ -11,6 +11,7 @@ import {
   ModalBody,
   ModalHeader,
   useDisclosure,
+  IconButton,
 } from "@chakra-ui/react";
 import { useAuthStore } from "../zustand";
 import Nav from "../components/Nav";
@@ -19,6 +20,7 @@ import { useEffect, useState } from "react";
 import { UserDB } from "../models/User";
 import AvatarUpload from "../components/Profile/AvatarUpload";
 import ReviewsMyProfile from "../components/Profile/ReviewsMyProfile";
+import { EditIcon } from "@chakra-ui/icons";
 
 const MyProfile = () => {
   const user = useAuthStore((state) => state.user);
@@ -47,9 +49,13 @@ const MyProfile = () => {
           </Text>
           <Avatar size="2xl" src={userData?.avatarUrl}>
             <AvatarBadge
-              borderColor="papayawhip"
-              bg="tomato"
-              boxSize="1.25em"
+              as={IconButton}
+              size="lg"
+              rounded="full"
+              top="-10px"
+              bg="primary"
+              aria-label="remove Image"
+              icon={<EditIcon />}
               onClick={onOpen}
             />
           </Avatar>

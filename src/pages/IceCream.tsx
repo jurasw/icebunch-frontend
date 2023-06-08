@@ -14,15 +14,18 @@ import {
   ListItem,
   Skeleton,
   HStack,
+  Select,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
 import { Language, useLanguageStore } from "../zustand";
 import Nav from "../components/Nav";
 import { useReviews } from "../hooks/queries/useReviews";
 import AddReview from "../components/IceCream/Review/AddReview";
-import Reviews from "../components/IceCream/Review/Reviews";
+import Reviews, {
+  ReviewSortProps,
+} from "../components/IceCream/Review/Reviews";
 import ReviewStars from "../components/IceCream/ReviewStars";
 import { useTranslation } from "react-i18next";
 import { useIceCream } from "../hooks/queries/useIceCream";
@@ -36,9 +39,17 @@ export default function IceCream() {
   const { iceCreamReviewsQuery } = useReviews({ iceCreamId: iceCreamId! });
   const { iceCreamQuery } = useIceCream({ iceCreamId: iceCreamId! });
 
+  const [sorting, setSorting] = useState<ReviewSortProps>(
+    ReviewSortProps.DATE_DESC
+  );
+
   const { t } = useTranslation();
 
   useEffect(() => {}, [iceCreamReviewsQuery.data, iceCreamQuery.data]);
+
+  function handleSortingChange(event: any) {
+    setSorting(event.target.value);
+  }
 
   return (
     <>
@@ -50,22 +61,23 @@ export default function IceCream() {
           py={{ base: 18, md: 24 }}
         >
           <Flex justifyContent={"center"}>
-            <Skeleton
-              w={["40%", "40%", "40%", "90%"]}
-              h={["40vh", "40vh", "40vh", "90vh"]}
-              rounded="lg"
-              isLoaded={!iceCreamQuery.isLoading}
-            >
+            {iceCreamQuery.isLoading ? (
+              <Skeleton
+                w={["40%", "40%", "40%", "90%"]}
+                h={["40vh", "40vh", "40vh", "90vh"]}
+                rounded="lg"
+              ></Skeleton>
+            ) : (
               <Image
                 objectFit="contain"
                 alt={"product image"}
                 src={iceCreamQuery?.data?.image}
                 align={"center"}
                 maxW={"100%"}
-                m="auto"
+                mx="auto"
                 maxH={["40vh", "40vh", "40vh", "90vh"]}
               />
-            </Skeleton>
+            )}
           </Flex>
           <Stack spacing={{ base: 6, md: 10 }}>
             <Box as={"header"}>
@@ -141,20 +153,38 @@ export default function IceCream() {
               </Box>
             </Stack>
             <Box>
-              <Text
-                fontSize={{ base: "16px", lg: "18px" }}
-                color="primary"
-                fontWeight={"500"}
-                textTransform={"uppercase"}
-                mb={"4"}
-              >
-                {t("reviews")}
-              </Text>
-
+              <HStack>
+                <Text
+                  fontSize={{ base: "16px", lg: "18px" }}
+                  color="primary"
+                  fontWeight={"500"}
+                  textTransform={"uppercase"}
+                  mb={"4"}
+                >
+                  {t("reviews")}
+                </Text>
+                <Select maxW={"190px"} onChange={handleSortingChange}>
+                  <option value={ReviewSortProps.DATE_DESC}>
+                    {t("date-decreasing")}
+                  </option>
+                  <option value={ReviewSortProps.DATE_ASC}>
+                    {t("date-increasing")}
+                  </option>
+                  <option value={ReviewSortProps.RATE_DESC}>
+                    {t("rating-decreasing")}
+                  </option>
+                  <option value={ReviewSortProps.RATE_ASC}>
+                    {t("rating-increasing")}
+                  </option>
+                </Select>
+              </HStack>
               <List spacing={2}>
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
-                    <Reviews reviews={iceCreamReviewsQuery.data} />
+                    <Reviews
+                      reviews={iceCreamReviewsQuery.data}
+                      sort={sorting}
+                    />
                     {iceCreamReviewsQuery.isLoading && (
                       <>
                         {[0, 1, 2].map((skelet) => (

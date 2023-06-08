@@ -31,8 +31,9 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       await axios
-        .post("/ice-creams", {
+        .post("/ice-creamss", {
           searchField: searchField,
           isVegan: isVegan,
           sortKey: Number(sorting),
@@ -45,7 +46,7 @@ const Home = () => {
         });
     };
     fetchData();
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }, [searchField, isVegan, sorting, currentPage]);
 
   function handleSearchChange(event: any) {

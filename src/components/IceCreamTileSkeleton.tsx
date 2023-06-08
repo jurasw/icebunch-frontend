@@ -14,21 +14,21 @@ function IceCreamTileSkeleton() {
         shadow="lg"
         position="relative"
       >
-        <Skeleton w={"85%"} m={"auto"} rounded="lg">
-          <Box
-            mt={5}
-            roundedTop="lg"
-            objectFit="contain"
-            height="300px"
-            width="250px"
-          />
-        </Skeleton>
+        <Skeleton
+          mt={5}
+          mx={"auto"}
+          height="300px"
+          width="85%"
+          rounded="lg"
+          roundedTop="lg"
+        />
+
         <Box p="6">
           <Box display="flex" alignItems="baseline"></Box>
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
-              maxW={"250px"}
-              w={"250px"}
+              maxW={"190px"}
+              w={"190px"}
               fontSize="2xl"
               fontWeight="semibold"
               as="h4"
@@ -41,7 +41,7 @@ function IceCreamTileSkeleton() {
                   name{" "}
                 </Text>
               </Skeleton>
-              <Skeleton mb={1} rounded="lg">
+              <Skeleton mb={1} rounded="lg" w={"90%"}>
                 <Text fontSize="lg"> brand </Text>
               </Skeleton>
             </Box>

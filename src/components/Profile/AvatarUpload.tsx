@@ -44,8 +44,7 @@ const AvatarUpload = ({ userId }: Props) => {
           Click or drag file to this area to upload
         </p>
         <p className="ant-upload-hint">
-          Support for a single or bulk upload. Strictly prohibited from
-          uploading company data or other banned files.
+        Image can have maximum 2MB
         </p>
       </Dragger>
       {uploadedFile && (

@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import ReviewTile from "./ReviewTile";
 import { Review } from "../../../models/Review";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export enum ReviewSortProps {
   DATE_DESC = "DATE_DESC",
@@ -16,51 +16,59 @@ interface Props {
   sort: ReviewSortProps;
 }
 
-function Reviews({ reviews , sort }: Props) {
+function Reviews({ reviews, sort }: Props) {
   const navigate = useNavigate();
+  const [reviewData, setReviewData] = useState(reviews);
 
   useEffect(() => {
-
     if (sort == ReviewSortProps.RATE_ASC) {
-      reviews
-        ?.map((item, index) => ({ index, item }))
-        .sort((a, b) => a.item.rating - b.item.rating)
-        .map((entry) => entry.item);
+      setReviewData(
+        reviews
+          ?.map((item, index) => ({ index, item }))
+          .sort((a, b) => a.item.rating - b.item.rating)
+          .map((entry) => entry.item)
+      );
     }
 
     if (sort == ReviewSortProps.RATE_DESC) {
-      reviews
-        ?.map((item, index) => ({ index, item }))
-        .sort((a, b) => b.item.rating - a.item.rating)
-        .map((entry) => entry.item);
+      setReviewData(
+        reviews
+          ?.map((item, index) => ({ index, item }))
+          .sort((a, b) => b.item.rating - a.item.rating)
+          .map((entry) => entry.item)
+      );
     }
 
     if (sort == ReviewSortProps.DATE_ASC) {
-      reviews
-        ?.map((item, index) => ({ index, item }))
-        .sort(
-          (a, b) =>
-            new Date(a.item.lastUpdate).getTime() -
-            new Date(b.item.lastUpdate).getTime()
-        )
-        .map((entry) => entry.item);
+      setReviewData(
+        reviews
+          ?.map((item, index) => ({ index, item }))
+          .sort(
+            (a, b) =>
+              new Date(a.item.lastUpdate).getTime() -
+              new Date(b.item.lastUpdate).getTime()
+          )
+          .map((entry) => entry.item)
+      );
     }
 
     if (sort == ReviewSortProps.DATE_DESC) {
-      reviews
-        ?.map((item, index) => ({ index, item }))
-        .sort(
-          (a, b) =>
-            new Date(b.item.lastUpdate).getTime() -
-            new Date(a.item.lastUpdate).getTime()
-        )
-        .map((entry) => entry.item);
+      setReviewData(
+        reviews
+          ?.map((item, index) => ({ index, item }))
+          .sort(
+            (a, b) =>
+              new Date(b.item.lastUpdate).getTime() -
+              new Date(a.item.lastUpdate).getTime()
+          )
+          .map((entry) => entry.item)
+      );
     }
-  });
+  }, [sort, reviews]);
 
   return (
     <Box overflow={"scroll"} maxH={"350px"}>
-      {reviews?.map((review) => (
+      {reviewData?.map((review) => (
         <Box
           key={review.userId}
           borderWidth="1px"

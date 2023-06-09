@@ -152,58 +152,53 @@ export default function IceCream() {
                     iceCreamQuery?.data?.description_en}
                 </Text>
               </Box>
-            {/* </Stack> */}
-          
-            <AddReview />
-            <Box>
-              <HStack pr={2}>
-                <Text
-                  fontSize={{ base: "16px", lg: "18px" }}
-                  color="primary"
-                  fontWeight={"500"}
-                  textTransform={"uppercase"}
-                  my={"auto"}
-                >
-                  {t("reviews")}
-                </Text>
-                <Spacer />
-                <Select maxW={"190px"} onChange={handleSortingChange} >
-                  <option value={ReviewSortProps.DATE_DESC}>
-                    {t("date-decreasing")}
-                  </option>
-                  <option value={ReviewSortProps.DATE_ASC}>
-                    {t("date-increasing")}
-                  </option>
-                  <option value={ReviewSortProps.RATE_DESC}>
-                    {t("rating-decreasing")}
-                  </option>
-                  <option value={ReviewSortProps.RATE_ASC}>
-                    {t("rating-increasing")}
-                  </option>
-                </Select>
-              </HStack>
-              <List spacing={2}>
-                <ListItem>
-                  <Text as={"span"} fontWeight={"bold"}>
-                    <Reviews
-                      reviews={iceCreamReviewsQuery.data}
-                      sort={sorting}
-                    />
-                    {iceCreamReviewsQuery.isLoading && (
-                      <>
-                        {[0, 1, 2].map((skelet) => (
-                          <ReviewSkeleton key={skelet} />
-                        ))}
-                      </>
-                    )}
+              <AddReview />
+              <Box>
+                <HStack pr={2}>
+                  <Text
+                    fontSize={{ base: "16px", lg: "18px" }}
+                    color="primary"
+                    fontWeight={"500"}
+                    textTransform={"uppercase"}
+                    my={"auto"}
+                  >
+                    {t("reviews")}
                   </Text>
-                </ListItem>
-              </List>
-            </Box>
-          
-
+                  <Spacer />
+                  <Select maxW={"190px"} onChange={handleSortingChange}>
+                    <option value={ReviewSortProps.DATE_DESC}>
+                      {t("date-decreasing")}
+                    </option>
+                    <option value={ReviewSortProps.DATE_ASC}>
+                      {t("date-increasing")}
+                    </option>
+                    <option value={ReviewSortProps.RATE_DESC}>
+                      {t("rating-decreasing")}
+                    </option>
+                    <option value={ReviewSortProps.RATE_ASC}>
+                      {t("rating-increasing")}
+                    </option>
+                  </Select>
+                </HStack>
+                <List spacing={2}>
+                  <ListItem>
+                    <Text as={"span"} fontWeight={"bold"}>
+                      <Reviews
+                        reviews={iceCreamReviewsQuery.data}
+                        sort={sorting}
+                      />
+                      {iceCreamReviewsQuery.isLoading && (
+                        <>
+                          {[0, 1, 2].map((skelet) => (
+                            <ReviewSkeleton key={skelet} />
+                          ))}
+                        </>
+                      )}
+                    </Text>
+                  </ListItem>
+                </List>
+              </Box>
             </Stack>
-
           </Stack>
         </SimpleGrid>
       </Container>

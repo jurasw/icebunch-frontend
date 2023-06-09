@@ -49,6 +49,13 @@ const ReviewsMyProfile = () => {
     return thisIceCream?.image;
   };
 
+  const getIceCreamHref = (userIceCreamId: string): string | undefined => {
+    const thisIceCream = iceCream?.find(
+      (element) => element._id == userIceCreamId
+    );
+    return `${thisIceCream?.name_pl}=${thisIceCream?.brand_pl}/${thisIceCream?._id}`;
+  };
+
   return (
     <Grid
       maxW={"100%"}
@@ -68,7 +75,7 @@ const ReviewsMyProfile = () => {
         <>
           {reviews?.map((review, index) => (
             <GridItem key={index}>
-              <Card>
+              <Card as={"a"} href={getIceCreamHref(review.iceCreamId)}>
                 <CardHeader>
                   <Heading size="md">
                     <Box

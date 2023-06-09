@@ -78,7 +78,7 @@ const ReviewsProfile = ({ userId }: Params) => {
                 </CardHeader>
                 <CardBody>
                   <HStack>
-                    <Image
+                    <Image                    
                       mr={3}
                       h="75px"
                       w="auto"

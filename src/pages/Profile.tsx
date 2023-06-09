@@ -27,6 +27,7 @@ const Profile = () => {
             {viewedUser?.email}
           </Text>
           <Avatar size="2xl" src={viewedUser?.avatarUrl} />
+          <Text fontSize='xl' as='b'>Reviews: </Text>
           <ReviewsProfile userId={userId!} />
         </VStack>
       </Center>

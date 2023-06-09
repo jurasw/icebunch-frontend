@@ -34,7 +34,7 @@ const MyProfile = () => {
 
 
   useEffect(() => {
-    
+
     if (!user) {
       navigate(Path.LOGIN)
     }
@@ -69,6 +69,7 @@ const MyProfile = () => {
               onClick={onOpen}
             />
           </Avatar>
+          <Text fontSize='xl' as='b'>My Reviews: </Text>
           <ReviewsMyProfile />
         </VStack>
       </Center>

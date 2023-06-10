@@ -13,6 +13,8 @@ import Confirm from "./pages/Confirm";
 import ConfirmRequest from "./pages/ConfirmRequest";
 import Settings from "./pages/Settings";
 import About from "./pages/About";
+import LandingPage from "./pages/Landingpage";
+import Terms from "./pages/Terms";
 
 export const Router = () => {
   const location = useLocation();
@@ -20,6 +22,7 @@ export const Router = () => {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
+        <Route path={Path.INDEX} element={<LandingPage />} />
         <Route path={Path.HOME} element={<Home />} />
         <Route path={Path.ICE_CREAM} element={<IceCream />} />
 
@@ -36,6 +39,8 @@ export const Router = () => {
         <Route path={Path.CONFIRM} element={<Confirm />} />
         <Route path={Path.FORGOT_PASSWORD} element={<ForgotPasswordForm />} />
         <Route path={Path.RESET_PASSWORD} element={<ResetPasswordForm />} />
+
+        <Route path={Path.TERMS} element={<Terms />} />
       </Routes>
     </AnimatePresence>
   );

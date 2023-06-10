@@ -6,6 +6,13 @@ import {
   Textarea,
   Avatar,
   Box,
+  Modal,
+  ModalContent,
+  ModalCloseButton,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { Review } from "../../../models/Review";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
@@ -19,7 +26,6 @@ import { useUser } from "../../../hooks/queries/useUser";
 import { UserDB } from "../../../models/User";
 import { useTranslation } from "react-i18next";
 
-
 interface Props {
   review: Review | undefined;
   userId: string | undefined;
@@ -27,6 +33,7 @@ interface Props {
 
 function EditReview({ review, userId }: Props) {
   const { iceCreamId } = useParams();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
 
   const { putMutation, deleteMutation } = useReviews({
@@ -46,18 +53,18 @@ function EditReview({ review, userId }: Props) {
   };
 
   const translatePlaceholder = () => {
-    return t('share-your-thoughts')
-  }
+    return t("share-your-thoughts");
+  };
 
   const sendReview = () => {
-    console.log(reviewRating)
+    console.log(reviewRating);
     putMutation.mutate({
       rating: reviewRating,
       content: reviewContent,
       iceCreamId: iceCreamId!,
       userId: userId!,
       username: userData!.username,
-      lastUpdate: new Date()
+      lastUpdate: new Date(),
     });
     setEditing(false);
   };
@@ -77,14 +84,13 @@ function EditReview({ review, userId }: Props) {
       {editing ? (
         <>
           <Rate
-          allowHalf
-          style={{ color: 'black', fontSize: '30px' }}
-          defaultValue={reviewRating}
-          onChange={setReviewRating}
+            allowHalf
+            style={{ color: "black", fontSize: "30px" }}
+            defaultValue={reviewRating}
+            onChange={setReviewRating}
           />
           <Textarea
-              marginTop={'1rem'}
-
+            marginTop={"1rem"}
             onChange={handleFieldContent}
             resize={"none"}
             placeholder={translatePlaceholder()}
@@ -102,7 +108,7 @@ function EditReview({ review, userId }: Props) {
             variant="primaryButton"
             isLoading={putMutation.isLoading}
           >
-            {t('confirm-changes')}
+            {t("confirm-changes")}
           </Button>
         </>
       ) : (
@@ -116,7 +122,11 @@ function EditReview({ review, userId }: Props) {
         >
           <Box fontWeight={"bold"}>
             <HStack mb={2}>
-              <Avatar name={review?.username} src={userData?.avatarUrl} mr={4} />
+              <Avatar
+                name={review?.username}
+                src={userData?.avatarUrl}
+                mr={4}
+              />
               <>
                 {review?.username}
                 <Spacer />
@@ -135,14 +145,31 @@ function EditReview({ review, userId }: Props) {
             ml={4}
             aria-label="Search database"
             icon={<DeleteIcon />}
-            onClick={() =>
-              deleteMutation.mutate({
-                reviewId: review!._id,
-              })
-            }
+            onClick={onOpen}
           />
         </HStack>
       )}
+      <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Delete your review</ModalHeader>
+          <ModalCloseButton />
+          <ModalFooter>
+            <Button
+              colorScheme="red"
+              mr={3}
+              onClick={() =>
+                deleteMutation.mutate({
+                  reviewId: review!._id,
+                })
+              }
+            >
+              Delete
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 }

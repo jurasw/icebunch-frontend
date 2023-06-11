@@ -15,6 +15,9 @@ import Settings from "./pages/Settings";
 import About from "./pages/About";
 import LandingPage from "./pages/LandingPage";
 import Terms from "./pages/Terms";
+import ReactGA from 'react-ga4';
+
+ReactGA.initialize("G-TFDGCF5R9M");
 
 export const Router = () => {
   const location = useLocation();

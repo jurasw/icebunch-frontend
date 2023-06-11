@@ -13,7 +13,7 @@ import Confirm from "./pages/Confirm";
 import ConfirmRequest from "./pages/ConfirmRequest";
 import Settings from "./pages/Settings";
 import About from "./pages/About";
-import LandingPage from "./pages/Landingpage";
+import LandingPage from "./pages/LandingPage";
 import Terms from "./pages/Terms";
 
 export const Router = () => {

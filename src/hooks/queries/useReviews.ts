@@ -24,7 +24,7 @@ export const useReviews = (params: Params) => {
   };
 
   const updateMyReview = async (payload: UpdateReviewDto) => {
-    const response = await axios.put(`/reviews${payload.reviewId}`, payload);
+    const response = await axios.put(`/reviews/${payload.reviewId}`, payload);
     return response.data;
   };
 

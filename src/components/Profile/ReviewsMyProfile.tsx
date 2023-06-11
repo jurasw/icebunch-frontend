@@ -53,7 +53,7 @@ const ReviewsMyProfile = () => {
     const thisIceCream = iceCream?.find(
       (element) => element._id == userIceCreamId
     );
-    return `${thisIceCream?.name_pl}=${thisIceCream?.brand_pl}/${thisIceCream?._id}`;
+    return `../${thisIceCream?.name_pl}=${thisIceCream?.brand_pl}/${thisIceCream?._id}`;
   };
 
   return (

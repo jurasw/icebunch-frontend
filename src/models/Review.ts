@@ -18,12 +18,13 @@ export interface CreateReviewDto {
 }
 
 export interface UpdateReviewDto {
+  reviewId: String;
+  body: {
   rating: number;
   content: string;
   iceCreamId: string;
   userId: string;
-  lastUpdate: Date;
-  reviewId: string;
+  lastUpdate: Date;}
 }
 
 

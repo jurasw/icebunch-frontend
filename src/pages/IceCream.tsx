@@ -72,7 +72,7 @@ export default function IceCream() {
   return (
     <>
     <Helmet>
-        <title>{language === Language.PL && iceCreamQuery?.data?.brand_pl} {language === Language.EN && iceCreamQuery?.data?.brand_en}{" "}{language === Language.PL && iceCreamQuery?.data?.name_pl}{language === Language.EN && iceCreamQuery?.data?.name_en}</title>
+        <title>{`${iceCreamQuery?.data?.brand_pl} ${iceCreamQuery?.data?.name_pl}`}</title>
         <meta name="description" content='' />
         <script type="application/ld+json">
         {JSON.stringify(ldJson)}

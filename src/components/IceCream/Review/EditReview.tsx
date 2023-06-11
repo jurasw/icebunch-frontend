@@ -36,7 +36,7 @@ function EditReview({ review, userId }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
 
-  const { putMutation, deleteMutation } = useReviews({
+  const { updateMutation, deleteMutation } = useReviews({
     iceCreamId: iceCreamId!,
   });
 
@@ -56,15 +56,15 @@ function EditReview({ review, userId }: Props) {
     return t("share-your-thoughts");
   };
 
-  const sendReview = () => {
+  const updateReview = () => {
     console.log(reviewRating);
-    putMutation.mutate({
+    updateMutation.mutate({
       rating: reviewRating,
       content: reviewContent,
       iceCreamId: iceCreamId!,
       userId: userId!,
-      username: userData!.username,
       lastUpdate: new Date(),
+      reviewId: review!._id
     });
     setEditing(false);
   };
@@ -104,9 +104,9 @@ function EditReview({ review, userId }: Props) {
             mt={8}
             size={"lg"}
             py={"7"}
-            onClick={sendReview}
+            onClick={updateReview}
             variant="primaryButton"
-            isLoading={putMutation.isLoading}
+            isLoading={updateMutation.isLoading}
           >
             {t("confirm-changes")}
           </Button>

@@ -20,7 +20,7 @@ function AddReview() {
   const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
 
-  const { iceCreamReviewsQuery, putMutation } = useReviews({
+  const { iceCreamReviewsQuery, createMutation } = useReviews({
     iceCreamId: iceCreamId!,
   });
   const { getUserFromEmail } = useUser();
@@ -50,13 +50,13 @@ function AddReview() {
     fetchUserData();
   }, [iceCreamReviewsQuery.data]);
 
-  const sendReview = () => {
+  const createReview = () => {
     if (!user) {
       navigate(Path.LOGIN);
       return
     }
     if (reviewRating!=0) {
-      putMutation.mutate({
+      createMutation.mutate({
         rating: reviewRating,
         content: reviewContent,
         iceCreamId: iceCreamId!,
@@ -123,9 +123,9 @@ function AddReview() {
             size={"lg"}
             py={"7"}
             as={"a"}
-            onClick={sendReview}
+            onClick={createReview}
             variant="primaryButton"
-            isLoading={putMutation.isLoading}
+            isLoading={createMutation.isLoading}
           >
             {t('add-review')}
           </Button>

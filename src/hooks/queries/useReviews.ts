@@ -23,8 +23,8 @@ export const useReviews = (params: Params) => {
     return response.data;
   };
 
-  const updateMyReview = async ( payload: UpdateReviewDto ) => {
-   const {reviewId, body} = payload
+  const updateMyReview = async ( dto: UpdateReviewDto ) => {
+   const {reviewId, body} = dto
     const response = await axios.put(`/reviews/${reviewId}`, body);
     return response.data;
   };

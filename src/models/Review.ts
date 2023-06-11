@@ -18,7 +18,7 @@ export interface CreateReviewDto {
 }
 
 export interface UpdateReviewDto {
-  reviewId: String;
+  reviewId: string;
   body: {
   rating: number;
   content: string;

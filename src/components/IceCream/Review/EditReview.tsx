@@ -58,14 +58,13 @@ function EditReview({ review, userId }: Props) {
 
   const updateReview = () => {
     console.log(reviewRating);
-    updateMutation.mutate({
+    updateMutation.mutate({reviewId: review!._id, body:{
       rating: reviewRating,
       content: reviewContent,
       iceCreamId: iceCreamId!,
       userId: userId!,
       lastUpdate: new Date(),
-      reviewId: review!._id
-    });
+    }});
     setEditing(false);
   };
 

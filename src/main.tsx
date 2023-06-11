@@ -13,7 +13,7 @@ axios.defaults.baseURL = "https://icebackend.bieda.it/";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <GoogleOAuthProvider clientId="670451075307-2g5qk2533aance5c2pbfvtvei4n9cl1d.apps.googleusercontent.com">
+  <GoogleOAuthProvider clientId="753040770269-inet4cgh5nlldd2o3hvgvei6tkvu84qh.apps.googleusercontent.com">
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <ChakraProvider theme={theme} toastOptions={{ defaultOptions: { position: 'top', isClosable: true, duration: 3000}}}>

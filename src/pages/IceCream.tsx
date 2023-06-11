@@ -31,6 +31,7 @@ import ReviewStars from "../components/IceCream/ReviewStars";
 import { useTranslation } from "react-i18next";
 import { useIceCream } from "../hooks/queries/useIceCream";
 import ReviewSkeleton from "../components/IceCream/Skletons/ReviewSkeleton";
+import { Helmet } from "react-helmet";
 
 export default function IceCream() {
   const { iceCreamId } = useParams();
@@ -52,8 +53,31 @@ export default function IceCream() {
     setSorting(event.target.value);
   }
 
+
+
+  const ldJson = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": `${iceCreamQuery?.data?.brand_pl}{" "}${iceCreamQuery?.data?.description_pl}`,
+    "image": `${iceCreamQuery?.data?.image}`,
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": `${iceCreamQuery?.data?.rating}`,
+      "bestRating": "",
+      "worstRating": "",
+      "ratingCount": `${iceCreamQuery?.data?.numberOfRatings}`
+    }
+  }
+
   return (
     <>
+    <Helmet>
+        <title>{language === Language.PL && iceCreamQuery?.data?.brand_pl} {language === Language.EN && iceCreamQuery?.data?.brand_en}{" "}{language === Language.PL && iceCreamQuery?.data?.name_pl}{language === Language.EN && iceCreamQuery?.data?.name_en}</title>
+        <meta name="description" content='' />
+        <script type="application/ld+json">
+        {JSON.stringify(ldJson)}
+      </script>
+    </Helmet>
       <Nav />
       <Container maxW={"7xl"}>
         <SimpleGrid

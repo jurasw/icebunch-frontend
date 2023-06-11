@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://icebunch.com
+
+# Sitemaps
+Sitemap: https://icebunch.com/sitemap.xml
+Sitemap: https://icebunch.com/sitemap-0.xml
+

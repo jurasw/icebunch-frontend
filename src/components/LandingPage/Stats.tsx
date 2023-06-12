@@ -38,7 +38,7 @@ export default function Stats() {
   const { t } = useTranslation();
 
   return (
-    <Box maxW="7xl" h={"50vh"} m={"auto"} px={{ base: 2, sm: 12, md: 17 }}>
+    <Box maxW="7xl" minH={"50vh"} m={"auto"} px={{ base: 2, sm: 12, md: 17 }}>
       <chakra.h1
         textAlign={"center"}
         fontSize={"4xl"}

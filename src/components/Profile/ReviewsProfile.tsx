@@ -17,6 +17,7 @@ import ReviewStars from "../IceCream/ReviewStars";
 import { getAllIceCream } from "../../hooks/queries/useIceCream";
 import { IceCream } from "../../models/IceCream";
 import SkeletonProfileReview from "./SkeletonProfileReview";
+import { Path } from "../../pages/Paths";
 
 interface Params {
   userId: string;
@@ -49,7 +50,7 @@ const ReviewsProfile = ({ userId }: Params) => {
     const thisIceCream = iceCream?.find(
       (element) => element._id == userIceCreamId
     );
-    return `../${thisIceCream?.name_pl}=${thisIceCream?.brand_pl}/${thisIceCream?._id}`;
+    return `..${Path.HOME}/${thisIceCream?.name_pl}=${thisIceCream?.brand_pl}/${thisIceCream?._id}`;
   };
 
   return (

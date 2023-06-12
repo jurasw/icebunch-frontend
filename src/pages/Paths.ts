@@ -1,6 +1,6 @@
 export enum Path {
-  HOME = "/",
-  INDEX = "/index",
+  HOME = "/ice-cream",
+  INDEX = "/",
   LOGIN = "/login",
   REGISTER = "/register",
   CONFIRM = "confirm/:token",
@@ -10,7 +10,7 @@ export enum Path {
   SETTINGS = "/settings",
   PROFILE = "/profile/:userId",
   MY_PROFILE = "/my-profile",
-  ICE_CREAM = "/:name/:iceCreamId",
+  ICE_CREAM = "ice-cream/:name/:iceCreamId",
   ABOUT = "/about",
   TERMS = "/terms-of-service",
 }

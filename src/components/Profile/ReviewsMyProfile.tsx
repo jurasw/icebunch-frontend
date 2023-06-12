@@ -19,6 +19,7 @@ import { useUser } from "../../hooks/queries/useUser";
 import { getAllIceCream } from "../../hooks/queries/useIceCream";
 import { IceCream } from "../../models/IceCream";
 import SkeletonProfileReview from "./SkeletonProfileReview";
+import { Path } from "../../pages/Paths";
 
 const ReviewsMyProfile = () => {
   const [reviews, setReviews] = useState<Review[]>();
@@ -53,7 +54,7 @@ const ReviewsMyProfile = () => {
     const thisIceCream = iceCream?.find(
       (element) => element._id == userIceCreamId
     );
-    return `../${thisIceCream?.name_pl}=${thisIceCream?.brand_pl}/${thisIceCream?._id}`;
+    return `..${Path.HOME}/${thisIceCream?.name_pl}=${thisIceCream?.brand_pl}/${thisIceCream?._id}`;
   };
 
   return (

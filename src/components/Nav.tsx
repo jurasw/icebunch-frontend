@@ -84,7 +84,7 @@ export default function Nav() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"} w={"100%"}>
-            <Box as={"a"} href="/index">
+            <Box as={"a"} href={Path.INDEX}>
               <HStack>
 
               <Text as="b">iceBunch</Text>

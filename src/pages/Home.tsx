@@ -17,6 +17,7 @@ import Nav from "../components/Nav";
 import { useTranslation } from "react-i18next";
 import { Pagination, PaginationProps } from "antd";
 import IceCreamTileSkeleton from "../components/IceCreamTileSkeleton";
+import { Path } from "./Paths";
 
 const Home = () => {
   const [iceCream, setIceCream] = useState<IceCream[]>([]);
@@ -134,7 +135,7 @@ const Home = () => {
                   imageURL={icecream.image}
                   rating={icecream.rating}
                   numberOfRatings={icecream.numberOfRatings}
-                  href={`/${icecream.name_pl}-${icecream.brand_pl}/${icecream._id}`}
+                  href={`${Path.HOME}/${icecream.name_pl}-${icecream.brand_pl}/${icecream._id}`}
                   isVegan={icecream.vegan!}
                 />
               </GridItem>

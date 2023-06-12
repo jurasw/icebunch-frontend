@@ -1,7 +1,10 @@
 import { Center, Text } from "@chakra-ui/react";
 import { Flex, useColorModeValue } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
+
 
 export default function ConfirmRequest(): JSX.Element {
+  const { t } = useTranslation();
 
   return (
     <Flex
@@ -16,7 +19,7 @@ export default function ConfirmRequest(): JSX.Element {
             <Text
             size={'2xl'}
             >
-                Email confirmation send. Please check your email.
+              {t('email-confirm')}
                 </Text>
             </Center>
           </>

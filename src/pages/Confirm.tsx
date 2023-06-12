@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { Path } from "./Paths";
+import { useTranslation } from "react-i18next";
 
 export default function Confirm(): JSX.Element {
+  const { t } = useTranslation();
   const { token } = useParams();
   const { getConfirmMutation } = useAuth();
 
@@ -47,19 +49,19 @@ export default function Confirm(): JSX.Element {
           <>
             <Center>
               <Heading lineHeight={1.1} fontSize={{ base: "2xl", md: "3xl" }}>
-                Email successfully confirmed!
+                {t('email-confirmed')}
               </Heading>
             </Center>
             <Center
               fontSize={{ base: "sm", sm: "md" }}
               color={useColorModeValue("gray.800", "gray.400")}
             >
-              Thank you for confirming your e-mail, and we wish you a pleasant
-              use of the platform
+              {t('confirmed-message')}
+    
             </Center>
             <Stack spacing={6}>
               <Button as={"a"} href={Path.HOME}>
-                Go to App
+                {t('go-to-app')}
               </Button>
             </Stack>
           </>
@@ -67,14 +69,14 @@ export default function Confirm(): JSX.Element {
           <>
             <Center>
               <Heading lineHeight={1.1} fontSize={{ base: "2xl", md: "3xl" }}>
-                Confirmation failed!
+                {t('confirmation-failed')}
               </Heading>
             </Center>
             <Center
               fontSize={{ base: "sm", sm: "md" }}
               color={useColorModeValue("gray.800", "gray.400")}
             >
-              Please check your email again or contact support.
+              {t('confirmation-failed-message')}
             </Center>
           </>
         )}

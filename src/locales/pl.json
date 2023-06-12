@@ -9,6 +9,7 @@
     "sign-in": "Zaloguj",
     "sign-up": "Zarejejstruj",
     "about": "O co chodzi?",
+    "ice-cream":"Lody",
     "logout": "Wyloguj",
     "description": "OPIS",
     "reviews": "OPINIE",
@@ -33,14 +34,27 @@
     "welcome": "Witaj!",
     "settings": "Ustawienia",
 
-    "message1" : "Celem strony jest stworzenie rzetelnej bazy lodów i opinii, która umożliwi każdej osobie wyrażenie opinii na temat danego loda.",
-    "message2" : "Obecnie pracujemy nad rozwojem aktualnej strony oraz poszerzeniem jej o nowe funkcje. Have a nice cream! :)",
-    "message3" : "Życie jest zbyt krótkie aby jeść niedobre lody.",
-    "faq": "Najczęściej zadawane pytania: ",
-    "faq1": "1. Dlaczego nie mogę dodać opinii bez założenia konta? ",
-    "ans1": "Jest to niezbędne do ochrony strony przed 'botami'. ",
-    "faq2": "2. Czy korzystanie ze strony icebunch.com jest płatne? ",
-    "ans2": "Korzystanie z serwisu icebunch.com jest w 100% darmowe.",
-    "faq3": "3. Dlaczego wyświetlają mi się reklamy?",
-    "ans3": "Finansujemy stronę z prywantnych pieniędzy, reklamy pomagają nam z kosztami domeny, hostingów oraz licencji."
+    "welcome-to": "Witaj w",
+    "the-ice-cream-world":"świecie lodów",
+    "hero-first": "Znajdziesz tutaj największy ranking lodów oraz opinie na ich temat.",
+    "show-me": "Pokaż mi lody",
+    "read-more": "Czytaj dalej",
+    "website-offer": "Co oferuje strona?",
+    "we-created": "Stworzyliśmy",
+    "we-support": "Wspieramy",
+    "we-enabled": "Umożliwiamy",
+    "the-biggest-online": "największą cyfrową bazę lodów",
+    "freedom": "wolnośc słowa",
+    "stats-share" : "podziel się opinią z innymi miłośnikami lodów",
+    "privacy-policy": "Polityka prywatności",
+    "our-mission": "Naszą misją",
+    "features-long":"jest podtrzymanie darmowej, rzetelnej i niezależnej platformy dla miłosników lodów z całego świata",
+    "free-usage": "Strona w 100% darmowa",
+    "rapidly-growing": "Szybko rosnąca baza danych",
+    "fast-search": "Przyspieszony algorytm szukający"
+
+
+
+
+
 }

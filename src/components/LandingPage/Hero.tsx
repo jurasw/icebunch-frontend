@@ -1,6 +1,11 @@
 import { Box, Container, Text, Button, Stack } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { Path } from "../../pages/Paths";
+import { useTranslation } from "react-i18next";
 
 export default function Hero() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   return (
     <Container
       minW={"100%"}
@@ -25,13 +30,11 @@ export default function Hero() {
           fontWeight="extrabold"
           textTransform="uppercase"
         >
-          Welcome to <br />
-          the Ice cream world
+          {t('welcome-to')}<br />
+          {t('the-ice-cream-world')}
         </Text>
-        <Text color={"gray.500"}>
-          Monetize your content by charging your most loyal readers and reward
-          them loyalty points. Give back to your loyal readers by granting them
-          access to your pre-releases and sneak-peaks.
+        <Text fontSize='xl' color={"gray.500"}>
+          {t('hero-first')}
         </Text>
         <Stack
           direction={"column"}
@@ -40,9 +43,12 @@ export default function Hero() {
           alignSelf={"center"}
           position={"relative"}
         >
-          <Button variant="primaryButton">Get Started</Button>
-          <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
-            Learn more
+          <Button 
+             onClick={() => {
+              navigate(Path.HOME);
+            }} variant="primaryButton">{t('show-me')}</Button>
+          <Button onClick={()=> {window.scrollTo(600, 600);}} variant={"link"} colorScheme={"blue"} size={"sm"}>
+            {t('read-more')}
           </Button>
         </Stack>
       </Stack>

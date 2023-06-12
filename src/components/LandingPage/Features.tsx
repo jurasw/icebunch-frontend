@@ -16,6 +16,8 @@ import {
     IoSearchSharp,
   } from 'react-icons/io5';
   import { ReactElement } from 'react';
+import { useTranslation } from "react-i18next";
+
   
   interface FeatureProps {
     text: string;
@@ -41,6 +43,8 @@ import {
   };
   
   export default function Features() {
+  const { t } = useTranslation();
+
     return (
       <Container maxW={'5xl'} py={12} h={"100vh"} mt={"20%"}>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
@@ -54,12 +58,11 @@ import {
               p={2}
               alignSelf={'flex-start'}
               rounded={'md'}>
-              Our Story
+              {t('about')}
             </Text>
-            <Heading>A digital Product design agency</Heading>
+            <Heading>{t('our-mission')}</Heading>
             <Text color={'gray.500'} fontSize={'lg'}>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore
+              {t('features-long')}
             </Text>
             <Stack
               spacing={4}
@@ -73,19 +76,19 @@ import {
                   <Icon as={IoAnalyticsSharp} color={'yellow.500'} w={5} h={5} />
                 }
                 iconBg={useColorModeValue('yellow.100', 'yellow.900')}
-                text={'Business Planning'}
+                text={t('rapidly-growing')}
               />
               <Feature
                 icon={<Icon as={IoLogoBitcoin} color={'green.500'} w={5} h={5} />}
                 iconBg={useColorModeValue('green.100', 'green.900')}
-                text={'Financial Planning'}
+                text={t('free-usage')}
               />
               <Feature
                 icon={
                   <Icon as={IoSearchSharp} color={'purple.500'} w={5} h={5} />
                 }
                 iconBg={useColorModeValue('purple.100', 'purple.900')}
-                text={'Market Analysis'}
+                text={t('fast-search')}
               />
             </Stack>
           </Stack>
@@ -94,7 +97,7 @@ import {
               rounded={'md'}
               alt={'feature image'}
               src={
-                'https://images.unsplash.com/photo-1554200876-56c2f25224fa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+                'https://pngimg.com/uploads/ice_cream/ice_cream_PNG5096.png'
               }
               objectFit={'cover'}
             />

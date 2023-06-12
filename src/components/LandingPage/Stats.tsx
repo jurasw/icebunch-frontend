@@ -7,6 +7,7 @@ import {
     StatNumber,
     useColorModeValue,
   } from '@chakra-ui/react';
+  import { useTranslation } from 'react-i18next';
   
   interface StatsCardProps {
     title: string;
@@ -33,6 +34,8 @@ import {
   }
   
   export default function Stats() {
+  const { t } = useTranslation();
+
     return (
       <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
         <chakra.h1
@@ -40,12 +43,12 @@ import {
           fontSize={'4xl'}
           py={10}
           fontWeight={'bold'}>
-          What is our company doing?
+            {t('website-offer')}
         </chakra.h1>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
-          <StatsCard title={'We serve'} stat={'50,000 people'} />
-          <StatsCard title={'In'} stat={'30 different countries'} />
-          <StatsCard title={'Who speak'} stat={'100 different languages'} />
+          <StatsCard title={t('we-created')} stat={t('the-biggest-online')} />
+          <StatsCard title={t('we-support')} stat={t('freedom')} />
+          <StatsCard title={t('we-enabled')} stat={t('stats-share')} />
         </SimpleGrid>
       </Box>
     );

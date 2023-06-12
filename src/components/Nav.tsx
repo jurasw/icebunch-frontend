@@ -13,6 +13,7 @@ import {
   Spacer,
   useColorMode,
   Text,
+  Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Flag from "./Nav/Flag";
@@ -37,10 +38,10 @@ export const MenuItems = () => {
           cursor: "pointer",
         }}
         onClick={() => {
-          navigate(Path.ABOUT);
+          navigate(Path.HOME);
         }}
       >
-        {t("about")}
+        {t("ice-cream")}
       </Button>
       <Flag locale={Language.PL} src="../flag-pl.png" />
       <Flag locale={Language.EN} src="../flag-en.png" />
@@ -83,8 +84,18 @@ export default function Nav() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"} w={"100%"}>
-            <Box as={"a"} href="/">
+            <Box as={"a"} href="/index">
+              <HStack>
+
               <Text as="b">iceBunch</Text>
+              <Image
+          boxSize={'1.8rem'}
+          // sizes='5%'
+          src='/logo.png'
+          >
+            </Image>
+            </HStack>
+
             </Box>
             <Spacer />
             <HStack

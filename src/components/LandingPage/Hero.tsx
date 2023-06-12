@@ -26,7 +26,7 @@ export default function Hero() {
           lineHeight={"110%"}
           bgGradient="linear(to-l,  #0043ff, #5bfaff)"
           bgClip="text"
-          fontSize="8xl"
+          fontSize={["6xl","8xl"]}
           fontWeight="extrabold"
           textTransform="uppercase"
         >

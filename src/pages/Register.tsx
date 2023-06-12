@@ -33,12 +33,11 @@ export default function SignupCard() {
   const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
 
-
-  useEffect(()=> {
-    if(user) {
-      navigate(Path.HOME)
+  useEffect(() => {
+    if (user) {
+      navigate(Path.HOME);
     }
-  })
+  });
 
   const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -61,10 +60,10 @@ export default function SignupCard() {
       <Stack spacing={8} width={"50%"} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"} textAlign={"center"}>
-            {t('sign-up-header')}
+            {t("sign-up-header")}
           </Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
-            {t('sign-up-header2')}
+            {t("sign-up-header2")}
           </Text>
         </Stack>
         <Box
@@ -75,11 +74,11 @@ export default function SignupCard() {
         >
           <Stack spacing={4}>
             <FormControl id="email" isRequired>
-              <FormLabel>{t('email-adress')}</FormLabel>
+              <FormLabel>{t("email-adress")}</FormLabel>
               <Input type="email" onChange={handleEmail} />
             </FormControl>
             <FormControl id="password" isRequired>
-              <FormLabel>{t('password')}</FormLabel>
+              <FormLabel>{t("password")}</FormLabel>
               <InputGroup>
                 <Input
                   type={showPassword ? "text" : "password"}
@@ -98,7 +97,7 @@ export default function SignupCard() {
               </InputGroup>
             </FormControl>
             <FormControl id="confir-password" isRequired>
-              <FormLabel>{t('confirm-password')}</FormLabel>
+              <FormLabel>{t("confirm-password")}</FormLabel>
               <InputGroup>
                 <Input
                   type={showPassword ? "text" : "password"}
@@ -119,22 +118,16 @@ export default function SignupCard() {
 
             <Stack spacing={10} pt={2}>
               <Button
-                loadingText="Submitting"
-                size="lg"
-                bg={"blue.400"}
-                color={"white"}
-                _hover={{
-                  bg: "blue.500",
-                }}
+               variant={"primaryButton"}
                 onClick={register}
               >
-                {t('sign-up')}
+                {t("sign-up")}
               </Button>
 
               <HStack>
                 <Divider />
                 <Text fontSize="sm" whiteSpace="nowrap" color="muted">
-                  {t('or')}
+                  {t("or")}
                 </Text>
                 <Divider />
               </HStack>
@@ -142,10 +135,10 @@ export default function SignupCard() {
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>
-                {t('already-a-user')}
-                <Link href={Path.LOGIN} color={"blue.400"}>
+                {t("already-a-user")}
+                <Link href={Path.LOGIN} color={"primary"}>
                   {" "}
-                  {t('sign-in')}
+                  {t("sign-in")}
                 </Link>
               </Text>
             </Stack>

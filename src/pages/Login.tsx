@@ -11,13 +11,13 @@ import {
   useColorModeValue,
   HStack,
   Text,
-  Divider
+  Divider,
 } from "@chakra-ui/react";
 import OAuthButtonGroup from "../components/Login/OAuthButtonGroup";
 import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import { useAuthStore } from "../zustand";
 import { Path } from "./Paths";
 
@@ -29,12 +29,11 @@ export default function SimpleCard() {
   const { t } = useTranslation();
   const user = useAuthStore((state) => state.user);
 
-
-  useEffect(()=> {
-    if(user) {
-      navigate(Path.HOME)
+  useEffect(() => {
+    if (user) {
+      navigate(Path.HOME);
     }
-  })
+  });
 
   const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -59,75 +58,70 @@ export default function SimpleCard() {
   };
 
   return (
-
+    <>
       <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading fontSize={"4xl"}>{t('login-header')}</Heading>
-          <HStack spacing="1" justify="center">
-            <Text color="muted">{t('dont-have-account')}</Text>
-            <Button
-            as={"a"}
-            href={"/register"}
-            variant="link"
-            colorScheme="blue"
-            >
-              {t('sign-up')}
-            </Button>
-          </HStack>
-        </Stack>
-        <Box
-          rounded={"lg"}
-          bg={useColorModeValue("white", "gray.700")}
-          boxShadow={"lg"}
-          p={8}
-        >
-          <Stack spacing={4}>
-            <FormControl id="email">
-              <FormLabel>{t('email-adress')}</FormLabel>
-              <Input type="email" onChange={handleEmail} />
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>{t('password')}</FormLabel>
-              <Input type="password" onChange={handlePassword} />
-            </FormControl>
-            <Stack spacing={8}>
-              <Stack
-                direction={{ base: "column", sm: "row" }}
-                align={"start"}
-                justify={"center"}
-              >
-                <Link href={"/forgot-password"} color={"blue.400"}>{t('forgot-password')}</Link>
-              </Stack>
+        minH={"100vh"}
+        align={"center"}
+        justify={"center"}
+        bg={useColorModeValue("gray.50", "gray.800")}
+      >
+        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+          <Stack align={"center"}>
+            <Heading fontSize={"4xl"}>{t("login-header")}</Heading>
+            <Text color="muted">
+              {t("dont-have-account")}{" "}
               <Button
-                bg={"blue.400"}
-                color={"white"}
-                _hover={{
-                  bg: "blue.500",
-                }}
-                onClick={login}
+                as={"a"}
+                href={"/register"}
+                variant="link"
+                colorScheme="blue"
               >
-                {t('sign-in')}
+                {t("sign-up")}
               </Button>
-
-              <HStack>
-              <Divider />
-              <Text fontSize="sm" whiteSpace="nowrap" color="muted">
-                {t('or')}
-              </Text>
-              <Divider />
-            </HStack>
-            <OAuthButtonGroup />
-
-            </Stack>
+            </Text>
           </Stack>
-        </Box>
-      </Stack>
-    </Flex>
-    )
-  }
+          <Box
+            rounded={"lg"}
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow={"lg"}
+            p={8}
+          >
+            <Stack spacing={4}>
+              <FormControl id="email">
+                <FormLabel>{t("email-adress")}</FormLabel>
+                <Input type="email" onChange={handleEmail} />
+              </FormControl>
+              <FormControl id="password">
+                <FormLabel>{t("password")}</FormLabel>
+                <Input type="password" onChange={handlePassword} />
+              </FormControl>
+              <Stack spacing={10}>
+                <Stack
+                  direction={{ base: "column", sm: "row" }}
+                  align={"start"}
+                  justify={"space-between"}
+                >
+                  <Link color={"primary"} href={"/forgot-password"}>
+                    {" "}
+                    {t("forgot-password")}
+                  </Link>
+                </Stack>
+                <Button variant={"primaryButton"} onClick={login}>
+                  {t("sign-in")}
+                </Button>
+              </Stack>
+              <HStack>
+                <Divider />
+                <Text fontSize="sm" whiteSpace="nowrap" color="muted">
+                  {t("or")}
+                </Text>
+                <Divider />
+              </HStack>
+              <OAuthButtonGroup />
+            </Stack>
+          </Box>
+        </Stack>
+      </Flex>
+    </>
+  );
+}

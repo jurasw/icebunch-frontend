@@ -46,14 +46,15 @@ export default function Features() {
   const { t } = useTranslation();
 
   return (
-    <Container maxW={"5xl"} py={12} h={"100vh"} mt={"20%"}>
-      <SimpleGrid
-        columns={{ base: 1, md: 2 }}
-        spacing={10}
-        display="flex"
-        alignItems={"center"}
-      >
-        <Stack spacing={4} pr={16}>
+    <Container
+      maxW={"5xl"}
+      py={12}
+      h={"100vh"}
+      display="flex"
+      alignItems={"center"}
+    >
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+        <Stack spacing={4} pr={16} m={"auto"}>
           <Text
             textTransform={"uppercase"}
             color={"blue.400"}
@@ -104,7 +105,7 @@ export default function Features() {
             rounded={"md"}
             alt={"feature image"}
             src={"https://pngimg.com/uploads/ice_cream/ice_cream_PNG5096.png"}
-            maxH={600}
+            maxH={500}
             objectFit={"contain"}
           />
         </Flex>

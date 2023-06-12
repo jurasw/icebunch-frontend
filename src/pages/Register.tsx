@@ -51,79 +51,75 @@ export default function SignupCard() {
   };
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack spacing={8} width={"50%"} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading fontSize={"4xl"} textAlign={"center"}>
-            {t("sign-up-header")}
-          </Heading>
-          <Text fontSize={"lg"} color={"gray.600"}>
-            {t("sign-up-header2")}
-          </Text>
-        </Stack>
-        <Box
-          rounded={"lg"}
-          bg={useColorModeValue("white", "gray.700")}
-          boxShadow={"lg"}
-          p={8}
-        >
-          <Stack spacing={4}>
-            <FormControl id="email" isRequired>
-              <FormLabel>{t("email-adress")}</FormLabel>
-              <Input type="email" onChange={handleEmail} />
-            </FormControl>
-            <FormControl id="password" isRequired>
-              <FormLabel>{t("password")}</FormLabel>
-              <InputGroup>
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  onChange={handlePassword}
-                />
-                <InputRightElement h={"full"}>
-                  <Button
-                    variant={"ghost"}
-                    onClick={() =>
-                      setShowPassword((showPassword) => !showPassword)
-                    }
-                  >
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
-            <FormControl id="confir-password" isRequired>
-              <FormLabel>{t("confirm-password")}</FormLabel>
-              <InputGroup>
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  onChange={handlePassword}
-                />
-                <InputRightElement h={"full"}>
-                  <Button
-                    variant={"ghost"}
-                    onClick={() =>
-                      setShowPassword((showPassword) => !showPassword)
-                    }
-                  >
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
+    <>
 
-            <Stack spacing={10} pt={2}>
-              <Button
-               variant={"primaryButton"}
-                onClick={register}
-              >
-                {t("sign-up")}
-              </Button>
-
+      <Flex
+        minH={"100vh"}
+        align={"center"}
+        justify={"center"}
+        bg={useColorModeValue("gray.50", "gray.800")}
+      >
+        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6} w={500}>
+          <Stack align={"center"}>
+            <Heading fontSize={"4xl"}> {t("sign-up-header")}</Heading>
+            <Text fontSize={"lg"} color={"gray.600"}>
+              {t("sign-up-header2")}
+            </Text>
+          </Stack>
+          <Box
+            rounded={"lg"}
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow={"lg"}
+            p={8}
+          >
+            <Stack spacing={4}>
+              <FormControl id="email" isRequired>
+                <FormLabel>{t("email-adress")}</FormLabel>
+                <Input type="email" onChange={handleEmail} />
+              </FormControl>
+              <FormControl id="password" isRequired>
+                <FormLabel>{t("password")}</FormLabel>
+                <InputGroup>
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    onChange={handlePassword}
+                  />
+                  <InputRightElement h={"full"}>
+                    <Button
+                      variant={"ghost"}
+                      onClick={() =>
+                        setShowPassword((showPassword) => !showPassword)
+                      }
+                    >
+                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+              <FormControl id="confir-password" isRequired>
+                <FormLabel>{t("confirm-password")}</FormLabel>
+                <InputGroup>
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    onChange={handlePassword}
+                  />
+                  <InputRightElement h={"full"}>
+                    <Button
+                      variant={"ghost"}
+                      onClick={() =>
+                        setShowPassword((showPassword) => !showPassword)
+                      }
+                    >
+                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+              <Stack spacing={10}>
+                <Button variant={"primaryButton"} onClick={register}>
+                  {t("sign-up")}
+                </Button>
+              </Stack>
               <HStack>
                 <Divider />
                 <Text fontSize="sm" whiteSpace="nowrap" color="muted">
@@ -142,9 +138,11 @@ export default function SignupCard() {
                 </Link>
               </Text>
             </Stack>
-          </Stack>
-        </Box>
-      </Stack>
-    </Flex>
+          </Box>
+        </Stack>
+      </Flex>
+
+
+    </>
   );
 }

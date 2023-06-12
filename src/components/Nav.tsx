@@ -91,7 +91,7 @@ export default function Nav() {
               <Image
           boxSize={'1.8rem'}
           // sizes='5%'
-          src='/logo.png'
+          src='/logo.webp'
           >
             </Image>
             </HStack>

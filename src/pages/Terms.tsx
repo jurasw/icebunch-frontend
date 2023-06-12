@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import Footer from "../components/Footer";
+import Footer from "../components/LandingPage/Footer";
 import Nav from "../components/Nav";
 
 const Terms = () => {

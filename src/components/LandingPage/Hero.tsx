@@ -19,10 +19,12 @@ export default function Hero() {
         as={Box}
         textAlign={"center"}
         justifyContent={"center"}
-        spacing={{ base: 8, md: 14 }}
+        spacing={{ base: 14, md: 18 }}
         py={{ base: 20, md: 36 }}
       >
         <Text
+        // marginTop={'0'}
+        // paddingTop={'0'}
           lineHeight={"110%"}
           bgGradient="linear(to-l,  #0043ff, #5bfaff)"
           bgClip="text"

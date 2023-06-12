@@ -43,8 +43,8 @@ export const MenuItems = () => {
       >
         {t("ice-cream")}
       </Button>
-      <Flag locale={Language.PL} src="../flag-pl.png" />
-      <Flag locale={Language.EN} src="../flag-en.png" />
+      <Flag locale={Language.PL} src="../flag-pl.webp" />
+      <Flag locale={Language.EN} src="../flag-en.webp" />
 
       <Button onClick={toggleColorMode}>
         {colorMode === "light" ? <MoonIcon /> : <SunIcon />}

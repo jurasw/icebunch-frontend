@@ -123,7 +123,7 @@ export default function IceCream() {
                   {language === Language.EN && iceCreamQuery?.data?.brand_en}
                 </Heading>
                 {iceCreamQuery?.data?.vegan && (
-                  <Image src="/vegan.png" h={[35, 35, 35, 50]} />
+                  <Image src="/vegan.webp" h={[35, 35, 35, 50]} />
                 )}
               </HStack>
 

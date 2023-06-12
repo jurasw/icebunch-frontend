@@ -34,7 +34,7 @@ function IceCreamTile(props: Props) {
       >
         {props.isVegan && (
           <Image
-            src={"/vegan.png"}
+            src={"/vegan.webp"}
             w={"20%"}
             position="absolute"
             top={2}

@@ -43,8 +43,8 @@ export const MenuItems = () => {
       >
         {t("ice-cream")}
       </Button>
-      <Flag locale={Language.PL} src="../flag-pl.webp" />
-      <Flag locale={Language.EN} src="../flag-en.webp" />
+      <Flag locale={Language.PL} src="/flag-pl.webp" />
+      <Flag locale={Language.EN} src="/flag-en.webp" />
 
       <Button onClick={toggleColorMode}>
         {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
@@ -90,7 +90,6 @@ export default function Nav() {
               <Text as="b">iceBunch</Text>
               <Image
           boxSize={'1.8rem'}
-          // sizes='5%'
           src='/logo.webp'
           >
             </Image>

@@ -18,6 +18,7 @@ import { useTranslation } from "react-i18next";
 import { Pagination, PaginationProps } from "antd";
 import IceCreamTileSkeleton from "../components/IceCreamTileSkeleton";
 import { Path } from "./Paths";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const [iceCream, setIceCream] = useState<IceCream[]>([]);
@@ -70,6 +71,10 @@ const Home = () => {
 
   return (
     <>
+    <Helmet>
+        <title>{t('ice-cream')}</title>
+        <meta name="description" content='Przegląd Lodów' />
+    </Helmet>
       <Nav />
       <Center>
         <Input

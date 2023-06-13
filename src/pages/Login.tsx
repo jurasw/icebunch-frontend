@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuthStore } from "../zustand";
 import { Path } from "./Paths";
-
+import { Helmet } from "react-helmet";
 export default function SimpleCard() {
   const navigate = useNavigate();
   const { formLoginMutation } = useAuth();
@@ -59,6 +59,10 @@ export default function SimpleCard() {
 
   return (
     <>
+    <Helmet>
+        <title>{t('sign-in')}</title>
+        <meta name="description" content='Login to the iceBunch' />
+    </Helmet>
       <Flex
         minH={"100vh"}
         align={"center"}

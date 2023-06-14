@@ -50,7 +50,7 @@ const ReviewsProfile = ({ userId }: Params) => {
     const thisIceCream = iceCream?.find(
       (element) => element._id == userIceCreamId
     );
-    return `..${Path.HOME}/${thisIceCream?.name_pl}=${thisIceCream?.brand_pl}/${thisIceCream?._id}`;
+    return `..${Path.ICE_CREAMS}/${thisIceCream?.name_pl}=${thisIceCream?.brand_pl}/${thisIceCream?._id}`;
   };
 
   return (

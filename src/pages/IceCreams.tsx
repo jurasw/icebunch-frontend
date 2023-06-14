@@ -9,18 +9,18 @@ import {
   HStack,
   GridItem,
 } from "@chakra-ui/react";
-import IceCreamTile from "../components/IceCreamTile";
+import IceCreamTile from "../components/IceCreams/IceCreamTile";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IceCream } from "../models/IceCream";
-import Nav from "../components/Nav";
+import Nav from "../components/Nav/Nav";
 import { useTranslation } from "react-i18next";
 import { Pagination, PaginationProps } from "antd";
-import IceCreamTileSkeleton from "../components/IceCreamTileSkeleton";
+import IceCreamTileSkeleton from "../components/IceCreams/IceCreamTileSkeleton";
 import { Path } from "./Paths";
 import { Helmet } from "react-helmet";
 
-const Home = () => {
+const IceCreams = () => {
   const [iceCream, setIceCream] = useState<IceCream[]>([]);
   const [searchField, setSearchField] = useState("");
   const [isVegan, setIsVegan] = useState(false);
@@ -140,7 +140,7 @@ const Home = () => {
                   imageURL={icecream.image}
                   rating={icecream.rating}
                   numberOfRatings={icecream.numberOfRatings}
-                  href={`${Path.HOME}/${icecream.name_pl}-${icecream.brand_pl}/${icecream._id}`}
+                  href={`${Path.ICE_CREAMS}/${icecream.name_pl}-${icecream.brand_pl}/${icecream._id}`}
                   isVegan={icecream.vegan!}
                 />
               </GridItem>
@@ -161,4 +161,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default IceCreams;

@@ -1,5 +1,5 @@
 export enum Path {
-  HOME = "/ice-cream",
+  ICE_CREAMS = "/ice-cream",
   INDEX = "/",
   LOGIN = "/login",
   REGISTER = "/register",

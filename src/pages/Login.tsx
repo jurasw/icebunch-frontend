@@ -31,7 +31,7 @@ export default function SimpleCard() {
 
   useEffect(() => {
     if (user) {
-      navigate(Path.HOME);
+      navigate(Path.ICE_CREAMS);
     }
   });
 

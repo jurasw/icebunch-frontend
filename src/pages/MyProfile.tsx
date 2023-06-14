@@ -14,7 +14,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { useAuthStore } from "../zustand";
-import Nav from "../components/Nav";
+import Nav from "../components/Nav/Nav";
 import { useUser } from "../hooks/queries/useUser";
 import { useEffect, useState } from "react";
 import { UserDB } from "../models/User";

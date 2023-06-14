@@ -1,5 +1,5 @@
 import { Flex, Box, useColorModeValue, Text, Skeleton } from "@chakra-ui/react";
-import ReviewStars from "./IceCream/ReviewStars";
+import ReviewStars from "../IceCream/ReviewStars";
 
 function IceCreamTileSkeleton() {
   return (

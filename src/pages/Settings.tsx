@@ -4,7 +4,7 @@ import { Center, Text, VStack } from "@chakra-ui/react";
 // import axios from "axios";
 // import { IceCream } from "../models/IceCream";
 // import { useAuthStore } from "../zustand";
-import Nav from "../components/Nav";
+import Nav from "../components/Nav/Nav";
 import DragDrop from "../components/Settings/DragDrop";
 
 const Settings = () => {

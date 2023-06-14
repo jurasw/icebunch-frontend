@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import Home from "./pages/Home";
+import IceCreams from "./pages/IceCreams";
 import { Path } from "./pages/Paths";
 import { AnimatePresence } from "framer-motion";
 import Login from "./pages/Login";
@@ -26,7 +26,7 @@ export const Router = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path={Path.INDEX} element={<LandingPage />} />
-        <Route path={Path.HOME} element={<Home />} />
+        <Route path={Path.ICE_CREAMS} element={<IceCreams />} />
         <Route path={Path.ICE_CREAM} element={<IceCream />} />
 
         <Route path={Path.MY_PROFILE} element={<MyProfile />} />

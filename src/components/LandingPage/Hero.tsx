@@ -45,7 +45,7 @@ export default function Hero() {
         >
           <Button 
              onClick={() => {
-              navigate(Path.HOME);
+              navigate(Path.ICE_CREAMS);
             }} variant="primaryButton">{t('show-me')}</Button>
           <Button onClick={()=> {window.scrollTo(600, 600);}} variant={"link"} colorScheme={"blue"} size={"sm"}>
             {t('read-more')}

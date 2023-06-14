@@ -60,7 +60,7 @@ export default function Confirm(): JSX.Element {
     
             </Center>
             <Stack spacing={6}>
-              <Button as={"a"} href={Path.HOME}>
+              <Button as={"a"} href={Path.ICE_CREAMS}>
                 {t('go-to-app')}
               </Button>
             </Stack>

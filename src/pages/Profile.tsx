@@ -2,7 +2,7 @@ import { Avatar, Center, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Nav from "../components/Nav";
+import Nav from "../components/Nav/Nav";
 import ReviewsProfile from "../components/Profile/ReviewsProfile";
 
 const Profile = () => {

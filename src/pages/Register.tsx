@@ -35,7 +35,7 @@ export default function SignupCard() {
 
   useEffect(() => {
     if (user) {
-      navigate(Path.HOME);
+      navigate(Path.ICE_CREAMS);
     }
   });
 

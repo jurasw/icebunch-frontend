@@ -1,6 +1,6 @@
 import { Flex, Box, useColorModeValue, Image, Text } from "@chakra-ui/react";
-import { Language, useLanguageStore } from "../zustand";
-import ReviewStars from "./IceCream/ReviewStars";
+import { Language, useLanguageStore } from "../../zustand";
+import ReviewStars from "../IceCream/ReviewStars";
 import { useTranslation } from "react-i18next";
 
 interface Props {

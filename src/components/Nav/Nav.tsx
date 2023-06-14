@@ -16,14 +16,14 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import Flag from "./Nav/Flag";
-import { Language, useAuthStore } from "../zustand";
-import { useAuth } from "../hooks/useAuth";
-import { Path } from "../pages/Paths";
+import Flag from "./Flag";
+import { useAuthStore, Language } from "../../zustand";
+import { useAuth } from "../../hooks/useAuth";
+import { Path } from "../../pages/Paths";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../hooks/queries/useUser";
-import { UserDB } from "../models/User";
+import { useUser } from "../../hooks/queries/useUser";
+import { UserDB } from "../../models/User";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -38,7 +38,7 @@ export const MenuItems = () => {
           cursor: "pointer",
         }}
         onClick={() => {
-          navigate(Path.HOME);
+          navigate(Path.ICE_CREAMS);
         }}
       >
         {t("ice-cream")}

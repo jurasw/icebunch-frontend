@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IceCream } from "../models/IceCream";
 import { Language, useLanguageStore } from "../zustand";
-import Nav from "../components/Nav";
+import Nav from "../components/Nav/Nav";
 import { useReviews } from "../hooks/queries/useReviews";
 import AddReview from "../components/IceCream/Review/AddReview";
 import Reviews, {

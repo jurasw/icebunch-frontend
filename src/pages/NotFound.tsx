@@ -1,4 +1,4 @@
-import { Center, Text, Button, VStack, Spacer } from "@chakra-ui/react";
+import { Center, Text, Button, VStack } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { Path } from "./Paths";
 import { useNavigate } from "react-router-dom";

@@ -1,4 +1,4 @@
-import { Button, Textarea, Text } from "@chakra-ui/react";
+import { Button, Text, useColorMode } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 // import ReactStars from "react-stars";
 import { useAuthStore } from "../../../zustand";
@@ -9,12 +9,16 @@ import { UserDB } from "../../../models/User";
 import { useUser } from "../../../hooks/queries/useUser";
 import EditReview from "./EditReview";
 import { useToast } from "@chakra-ui/react";
-import { Rate } from "antd";
+import { ConfigProvider, Rate, theme } from "antd";
 import { useTranslation } from "react-i18next";
+import TextArea from "antd/es/input/TextArea";
 
 function AddReview() {
-  const toast = useToast()
+  const toast = useToast();
   const { iceCreamId } = useParams();
+  const { colorMode } = useColorMode();
+  const isDarkMode = colorMode === "dark";
+  const { defaultAlgorithm, darkAlgorithm } = theme;
   const { t } = useTranslation();
 
   const user = useAuthStore((state) => state.user);
@@ -31,10 +35,9 @@ function AddReview() {
   const [reviewRating, setReviewRating] = useState<number>(0);
 
   const handleRatingStars = (value: number) => {
-    setReviewRating(value)
-    console.log(reviewRating)
-  }
-
+    setReviewRating(value);
+    console.log(reviewRating);
+  };
 
   const handleFieldContent = (event: any) => {
     setReviewContent(event.target.value);
@@ -53,9 +56,9 @@ function AddReview() {
   const createReview = () => {
     if (!user) {
       navigate(Path.LOGIN);
-      return
+      return;
     }
-    if (reviewRating!=0) {
+    if (reviewRating != 0) {
       createMutation.mutate({
         rating: reviewRating,
         content: reviewContent,
@@ -64,31 +67,28 @@ function AddReview() {
         username: userData!.username,
         lastUpdate: new Date(),
       });
-    }
-    else {
+    } else {
       toast({
-        title: t('toast-rating'),
+        title: t("toast-rating"),
         status: "info",
       });
     }
-  
   };
   const translatePlaceholder = () => {
-    return t('share-your-thoughts')
-  }
+    return t("share-your-thoughts");
+  };
 
   return (
     <>
-
-<Text
-              fontSize={{ base: "16px", lg: "18px" }}
-              color="primary"
-              fontWeight={"500"}
-              textTransform={"uppercase"}
-              mb={"4"}
-            >
-              {t("my-review")}
-            </Text>
+      <Text
+        fontSize={{ base: "16px", lg: "18px" }}
+        color="primary"
+        fontWeight={"500"}
+        textTransform={"uppercase"}
+        mb={"4"}
+      >
+        {t("my-review")}
+      </Text>
       {iceCreamReviewsQuery.data?.some((el) => el.userId == userData?._id) ? (
         <EditReview
           review={iceCreamReviewsQuery.data.find(
@@ -100,18 +100,27 @@ function AddReview() {
         <>
           {user && (
             <>
-
               <Rate
-              allowHalf
-              style={{ color: 'black', fontSize: '30px' }}
-              onChange={handleRatingStars}
+                allowHalf
+                style={{
+                  color: "black",
+                  fontSize: "30px",
+                  marginBottom: "20px",
+                }}
+                onChange={handleRatingStars}
               />
-              <Textarea
-              marginTop={'1rem'}
-                onChange={handleFieldContent}
-                resize={"none"}
-                placeholder={translatePlaceholder()}
-              />
+              <ConfigProvider
+                theme={{
+                  algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
+                }}
+              >
+                <TextArea
+                  showCount
+                  maxLength={900}
+                  onChange={handleFieldContent}
+                  placeholder={translatePlaceholder()}
+                />
+              </ConfigProvider>
             </>
           )}
           <Button
@@ -127,7 +136,7 @@ function AddReview() {
             variant="primaryButton"
             isLoading={createMutation.isLoading}
           >
-            {t('add-review')}
+            {t("add-review")}
           </Button>
         </>
       )}

@@ -55,19 +55,19 @@ export default function IceCream() {
 
 
 
-  const ldJson = {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    "name": `${iceCreamQuery?.data?.brand_pl}{" "}${iceCreamQuery?.data?.description_pl}`,
-    "image": `${iceCreamQuery?.data?.image}`,
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": `${iceCreamQuery?.data?.rating}`,
-      "bestRating": "",
-      "worstRating": "",
-      "ratingCount": `${iceCreamQuery?.data?.numberOfRatings}`
-    }
-  }
+  // const ldJson = {
+  //   "@context": "https://schema.org/",
+  //   "@type": "Product",
+  //   "name": `${iceCreamQuery?.data?.brand_pl}{" "}${iceCreamQuery?.data?.description_pl}`,
+  //   "image": `${iceCreamQuery?.data?.image}`,
+  //   "aggregateRating": {
+  //     "@type": "AggregateRating",
+  //     "ratingValue": `${iceCreamQuery?.data?.rating}`,
+  //     "bestRating": "",
+  //     "worstRating": "",
+  //     "ratingCount": `${iceCreamQuery?.data?.numberOfRatings}`
+  //   }
+  // }
 
 
 
@@ -77,12 +77,31 @@ export default function IceCream() {
     <>
     <Helmet>
         <title>{`${iceCreamQuery?.data?.brand_pl} ${iceCreamQuery?.data?.name_pl}`}</title>
-        <meta name="description" content={iceCreamQuery?.data?.brand_pl} />
+        <meta name="description" content={iceCreamQuery?.data?.description_pl} />
+        <meta name="keywords" content="lody, ice cream, icecream, ranking lodów"></meta>
         <meta property="og:image" content={iceCreamQuery?.data?.image} />
+        <meta name="og:description" content={iceCreamQuery?.data?.description_en} />
+        <meta name="og:title" content={`${iceCreamQuery?.data?.brand_pl} ${iceCreamQuery?.data?.name_pl}`}></meta>
         <meta property="og:image:secure_url" content={iceCreamQuery?.data?.image} />
+        <meta name='og:site_name' content='icebunch'></meta>
+        <meta name="robots" content="index,follow"></meta>
         <script type="application/ld+json">
-        {JSON.stringify(ldJson)}
+        {`
+          {
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "name": ${iceCreamQuery?.data?.brand_pl}{" "}${iceCreamQuery?.data?.description_pl},
+            "image": ${iceCreamQuery?.data?.image},
+            "description": ${iceCreamQuery?.data?.description_pl},
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": ${iceCreamQuery?.data?.rating},
+              "ratingCount": ${iceCreamQuery?.data?.numberOfRatings}
+            }
+          }
+        `}
       </script>
+
     </Helmet>
       <Nav />
       <Container maxW={"7xl"}>

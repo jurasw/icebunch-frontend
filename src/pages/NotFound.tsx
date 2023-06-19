@@ -15,8 +15,8 @@ export default function NotFound() {
         <Center padding={'2rem'}>
             <VStack spacing={'1.5rem'} >
 
-            <Text align={'center'} fontSize='3xl'>Strona została przeniesiona..</Text>
-            <Text align={'center'} fontSize='3xl' >Jeśli szukasz loda znajdziesz go w naszej wyszukiwarce!</Text>
+            <Text align={'center'} fontSize='3xl'>{t('page-moved')}</Text>
+            <Text align={'center'} fontSize='3xl' >{t('if-you-are-looking')}</Text>
             <Button
              onClick={() => {
               navigate(Path.ICE_CREAMS);

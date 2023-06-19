@@ -23,6 +23,7 @@ import { Path } from "./Paths";
 import { useTranslation } from "react-i18next";
 import { useAuthStore } from "../zustand";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 export default function SignupCard() {
   const [showPassword, setShowPassword] = useState(false);
@@ -52,7 +53,10 @@ export default function SignupCard() {
 
   return (
     <>
-
+      <Helmet>
+        <title>{t('sign-up-header')}</title>
+        <meta name="description" content='Register free to the iceBunch' />
+      </Helmet>
       <Flex
         minH={"100vh"}
         align={"center"}

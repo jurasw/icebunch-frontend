@@ -77,7 +77,7 @@ export default function IceCream() {
     <>
     <Helmet>
         <title>{`${iceCreamQuery?.data?.brand_pl} ${iceCreamQuery?.data?.name_pl}`}</title>
-        <meta name="description" content='' />
+        <meta name="description" content={iceCreamQuery?.data?.brand_pl} />
         <meta property="og:image" content={iceCreamQuery?.data?.image} />
         <meta property="og:image:secure_url" content={iceCreamQuery?.data?.image} />
         <script type="application/ld+json">

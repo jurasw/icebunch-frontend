@@ -61,7 +61,10 @@
     "confirmed-message":"Dziękujemy za rejestrację, zapraszamy do korzystania z platformy",
     "confirmation-failed": "Potwierdzenie email nie powiodło się",
     "confirmation-failed-message": "Proszę sprawdź swój email ponownie lub skontaktuj się z właścielem strony.",
-    "go-to-app": "Przejdź na stronę"
+    "go-to-app": "Przejdź na stronę",
+
+    "page-moved": "Strona została przeniesiona..",
+    "if-you-are-looking": "Jeśli szukasz loda znajdziesz go w naszej wyszukiwarce!!"
 
 
 

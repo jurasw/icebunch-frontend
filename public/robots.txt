@@ -6,6 +6,5 @@ Allow: /
 Host: https://icebunch.com
 
 # Sitemaps
-Sitemap: https://icebunch.com/sitemap.xml
-Sitemap: https://icebunch.com/sitemap-2.xml
+Sitemap: https://icebunch.com/sitemap-newest.xml
 

@@ -16,6 +16,7 @@ import About from "./pages/About";
 import LandingPage from "./pages/LandingPage";
 import Terms from "./pages/Terms";
 import ReactGA from 'react-ga4';
+import NotFound from "./pages/NotFound";
 
 ReactGA.initialize("G-TFDGCF5R9M");
 
@@ -28,7 +29,7 @@ export const Router = () => {
         <Route path={Path.INDEX} element={<LandingPage />} />
         <Route path={Path.ICE_CREAMS} element={<IceCreams />} />
         <Route path={Path.ICE_CREAM} element={<IceCream />} />
-
+        <Route path='*' element={<NotFound />}/>
         <Route path={Path.MY_PROFILE} element={<MyProfile />} />
         <Route path={Path.PROFILE} element={<Profile />} />
         <Route path={Path.CONFIRM_REQUEST} element={<ConfirmRequest />} />

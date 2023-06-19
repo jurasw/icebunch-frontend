@@ -64,7 +64,12 @@
     "confirmed-message":"Thank you for confirming your e-mail, and we wish you a pleasant use of the platform",
     "confirmation-failed":"Confirmation failed!",
     "confirmation-failed-message": "Please check your email again or contact support.",
-    "go-to-app": "Go to App"
+    "go-to-app": "Go to App",
+
+
+    "page-moved": "The page has been moved..",
+    "if-you-are-looking": "If you are looking for ice cream, you will find it in our search engine!"
+
 
     
 }

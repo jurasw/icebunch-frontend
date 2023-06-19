@@ -8,6 +8,7 @@ import {
   Select,
   HStack,
   GridItem,
+  useColorMode,
 } from "@chakra-ui/react";
 import IceCreamTile from "../components/IceCreams/IceCreamTile";
 import { useEffect, useState } from "react";
@@ -15,12 +16,17 @@ import axios from "axios";
 import { IceCream } from "../models/IceCream";
 import Nav from "../components/Nav/Nav";
 import { useTranslation } from "react-i18next";
-import { Pagination, PaginationProps } from "antd";
+import { ConfigProvider, Pagination, PaginationProps, theme } from "antd";
 import IceCreamTileSkeleton from "../components/IceCreams/IceCreamTileSkeleton";
 import { Path } from "./Paths";
 import { Helmet } from "react-helmet";
 
 const IceCreams = () => {
+  const { colorMode } = useColorMode();
+  const isDarkMode = colorMode === "dark";
+  const { defaultAlgorithm, darkAlgorithm } = theme;
+  const { t } = useTranslation();
+
   const [iceCream, setIceCream] = useState<IceCream[]>([]);
   const [searchField, setSearchField] = useState("");
   const [isVegan, setIsVegan] = useState(false);
@@ -28,8 +34,6 @@ const IceCreams = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalEntities, setTotalEntities] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,10 +75,10 @@ const IceCreams = () => {
 
   return (
     <>
-    <Helmet>
-        <title>{t('ice-cream')}</title>
-        <meta name="description" content='Przegląd Lodów' />
-    </Helmet>
+      <Helmet>
+        <title>{t("ice-cream")}</title>
+        <meta name="description" content="Przegląd Lodów" />
+      </Helmet>
       <Nav />
       <Center>
         <Input
@@ -149,13 +153,19 @@ const IceCreams = () => {
         )}
       </Grid>
       <Center my={4}>
-        <Pagination
-          current={currentPage}
-          onChange={onChange}
-          pageSize={20}
-          total={totalEntities}
-          showSizeChanger={false}
-        />
+        <ConfigProvider
+          theme={{
+            algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
+          }}
+        >
+          <Pagination
+            current={currentPage}
+            onChange={onChange}
+            pageSize={20}
+            total={totalEntities}
+            showSizeChanger={false}
+          />
+        </ConfigProvider>
       </Center>
     </>
   );

@@ -58,13 +58,16 @@ function EditReview({ review, userId }: Props) {
 
   const updateReview = () => {
     console.log(reviewRating);
-    updateMutation.mutate({reviewId: review!._id, body:{
-      rating: reviewRating,
-      content: reviewContent,
-      iceCreamId: iceCreamId!,
-      userId: userId!,
-      lastUpdate: new Date(),
-    }});
+    updateMutation.mutate({
+      reviewId: review!._id,
+      body: {
+        rating: reviewRating,
+        content: reviewContent,
+        iceCreamId: iceCreamId!,
+        userId: userId!,
+        lastUpdate: new Date(),
+      },
+    });
     setEditing(false);
   };
 
@@ -119,7 +122,7 @@ function EditReview({ review, userId }: Props) {
           padding={"1em"}
           _hover={{ cursor: "pointer" }}
         >
-          <Box fontWeight={"bold"}>
+          <Box fontWeight={"bold"} w={"100%"}>
             <HStack mb={2}>
               <Avatar
                 name={review?.username}
@@ -132,20 +135,22 @@ function EditReview({ review, userId }: Props) {
                 <ReviewStars rating={review?.rating} />
               </>
             </HStack>
-            <p>{review?.content}</p>
+            <HStack>
+              <p>{review?.content}</p>
+              <Spacer />
+              <IconButton
+                aria-label="Search database"
+                icon={<EditIcon />}
+                onClick={() => setEditing(true)}
+              />
+              <IconButton
+                ml={4}
+                aria-label="Search database"
+                icon={<DeleteIcon />}
+                onClick={onOpen}
+              />
+            </HStack>
           </Box>
-          <Spacer />
-          <IconButton
-            aria-label="Search database"
-            icon={<EditIcon />}
-            onClick={() => setEditing(true)}
-          />
-          <IconButton
-            ml={4}
-            aria-label="Search database"
-            icon={<DeleteIcon />}
-            onClick={onOpen}
-          />
         </HStack>
       )}
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>

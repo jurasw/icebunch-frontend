@@ -69,14 +69,14 @@ export default function Confirm(): JSX.Element {
             <>
               <Center>
                 <Heading lineHeight={1.1} fontSize={{ base: "2xl", md: "3xl" }}>
-                  {"confirmation-failed"}
+                  {t("confirmation-failed")}
                 </Heading>
               </Center>
               <Center
                 fontSize={{ base: "sm", sm: "md" }}
                 color={useColorModeValue("gray.800", "gray.400")}
               >
-                {"confirmation-failed-message"}
+                {t("confirmation-failed-message")}
               </Center>
             </>
           )}

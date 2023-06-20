@@ -33,6 +33,7 @@ function AddReview() {
 
   const [reviewContent, setReviewContent] = useState("");
   const [reviewRating, setReviewRating] = useState<number>(0);
+  const [disabled, setDisabled] = useState<boolean>(false);
 
   const handleRatingStars = (value: number) => {
     setReviewRating(value);
@@ -54,6 +55,7 @@ function AddReview() {
   }, [iceCreamReviewsQuery.data]);
 
   const createReview = () => {
+    setDisabled(true);
     if (!user) {
       navigate(Path.LOGIN);
       return;
@@ -135,6 +137,7 @@ function AddReview() {
             onClick={createReview}
             variant="primaryButton"
             isLoading={createMutation.isLoading}
+            disabled={disabled}
           >
             {t("add-review")}
           </Button>

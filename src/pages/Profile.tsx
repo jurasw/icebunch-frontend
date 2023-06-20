@@ -24,7 +24,7 @@ const Profile = () => {
       <Center margin={8}>
         <VStack spacing={8}>
           <Text fontSize={"4xl"} as="b">
-            {viewedUser?.email}
+            {viewedUser?.username}
           </Text>
           <Avatar size="2xl" src={viewedUser?.avatarUrl} />
           <Text fontSize='xl' as='b'>Reviews: </Text>

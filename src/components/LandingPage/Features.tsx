@@ -98,7 +98,7 @@ export default function Features() {
           <Image
             rounded={"md"}
             alt={"feature image"}
-            src={"https://pngimg.com/uploads/ice_cream/ice_cream_PNG5096.png"}
+            src={"https://res.cloudinary.com/dfqe0wizz/image/upload/v1687784690/image-1_mpwcur.webp"}
             objectFit={'cover'}
           />
         </Flex>

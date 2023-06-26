@@ -24,7 +24,7 @@ import {
 import { useAuthStore } from "../zustand";
 import Nav from "../components/Nav/Nav";
 import { useUser } from "../hooks/queries/useUser";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { UserDB } from "../models/User";
 import AvatarUpload from "../components/Profile/AvatarUpload";
 import ReviewsMyProfile from "../components/Profile/ReviewsMyProfile";
@@ -34,11 +34,11 @@ import { Path } from "./Paths";
 
 const MyProfile = () => {
   const user = useAuthStore((state) => state.user);
-  const { getUserFromEmail } = useUser();
+  const { getUserFromEmail, changeUserUsername } = useUser();
   const navigate = useNavigate();
   const [userData, setUserData] = useState<UserDB>();
+  const [username, setUsername] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   useEffect(() => {
     if (!user) {
       navigate(Path.LOGIN);
@@ -52,6 +52,10 @@ const MyProfile = () => {
     };
     fetchUserData();
   }, []);
+
+  const handleUsername = (newValue: SetStateAction<string>) => {
+    setUsername(newValue);
+  };
 
   function EditableControls() {
     const {
@@ -67,6 +71,12 @@ const MyProfile = () => {
           icon={<CheckIcon />}
           aria-label=""
           {...getSubmitButtonProps()}
+          onClick={() =>
+            changeUserUsername({
+              userId: userData!._id,
+              newUsername: username,
+            })
+          }
         />
         <IconButton
           icon={<CloseIcon />}
@@ -108,6 +118,8 @@ const MyProfile = () => {
           </Avatar>
           {userData?.username && (
             <Editable
+              value={username}
+              onChange={handleUsername}
               textAlign="center"
               defaultValue={userData.username}
               fontSize="2xl"
@@ -115,7 +127,6 @@ const MyProfile = () => {
             >
               <HStack>
                 <EditablePreview />
-                {/* Here is the custom input */}
                 <Input as={EditableInput} />
                 <EditableControls />
               </HStack>

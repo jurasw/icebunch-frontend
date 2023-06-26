@@ -12,6 +12,14 @@ import {
   ModalHeader,
   useDisclosure,
   IconButton,
+  Editable,
+  ButtonGroup,
+  Input,
+  Flex,
+  EditablePreview,
+  useEditableControls,
+  EditableInput,
+  HStack,
 } from "@chakra-ui/react";
 import { useAuthStore } from "../zustand";
 import Nav from "../components/Nav/Nav";
@@ -20,23 +28,20 @@ import { useEffect, useState } from "react";
 import { UserDB } from "../models/User";
 import AvatarUpload from "../components/Profile/AvatarUpload";
 import ReviewsMyProfile from "../components/Profile/ReviewsMyProfile";
-import { EditIcon } from "@chakra-ui/icons";
+import { CheckIcon, CloseIcon, EditIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { Path } from "./Paths";
 
 const MyProfile = () => {
   const user = useAuthStore((state) => state.user);
   const { getUserFromEmail } = useUser();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [userData, setUserData] = useState<UserDB>();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-
-
   useEffect(() => {
-
     if (!user) {
-      navigate(Path.LOGIN)
+      navigate(Path.LOGIN);
     }
 
     const fetchUserData = async () => {
@@ -48,7 +53,39 @@ const MyProfile = () => {
     fetchUserData();
   }, []);
 
-  
+  function EditableControls() {
+    const {
+      isEditing,
+      getSubmitButtonProps,
+      getCancelButtonProps,
+      getEditButtonProps,
+    } = useEditableControls();
+
+    return isEditing ? (
+      <ButtonGroup justifyContent="center" size="sm">
+        <IconButton
+          icon={<CheckIcon />}
+          aria-label=""
+          {...getSubmitButtonProps()}
+        />
+        <IconButton
+          icon={<CloseIcon />}
+          aria-label=""
+          {...getCancelButtonProps()}
+        />
+      </ButtonGroup>
+    ) : (
+      <Flex justifyContent="center">
+        <IconButton
+          size="sm"
+          icon={<EditIcon />}
+          aria-label=""
+          {...getEditButtonProps()}
+        />
+      </Flex>
+    );
+  }
+
   return (
     <>
       <Nav />
@@ -69,7 +106,24 @@ const MyProfile = () => {
               onClick={onOpen}
             />
           </Avatar>
-          <Text fontSize='xl' as='b'>My Reviews: </Text>
+          {userData?.username && (
+            <Editable
+              textAlign="center"
+              defaultValue={userData.username}
+              fontSize="2xl"
+              isPreviewFocusable={false}
+            >
+              <HStack>
+                <EditablePreview />
+                {/* Here is the custom input */}
+                <Input as={EditableInput} />
+                <EditableControls />
+              </HStack>
+            </Editable>
+          )}
+          <Text fontSize="xl" as="b">
+            My Reviews:{" "}
+          </Text>
           <ReviewsMyProfile />
         </VStack>
       </Center>

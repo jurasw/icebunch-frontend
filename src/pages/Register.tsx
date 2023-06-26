@@ -29,6 +29,7 @@ export default function SignupCard() {
   const [showPassword, setShowPassword] = useState(false);
   const { formSignupMutation } = useAuth();
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { t } = useTranslation();
   const user = useAuthStore((state) => state.user);
@@ -43,19 +44,22 @@ export default function SignupCard() {
   const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
+  const handleUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(event.target.value);
+  };
   const handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
 
   const register = () => {
-    formSignupMutation.mutate({ email, password });
+    formSignupMutation.mutate({ email, username, password });
   };
 
   return (
     <>
       <Helmet>
-        <title>{t('sign-up-header')}</title>
-        <meta name="description" content='Register free to the iceBunch' />
+        <title>{t("sign-up-header")}</title>
+        <meta name="description" content="Register free to the iceBunch" />
       </Helmet>
       <Flex
         minH={"100vh"}
@@ -80,6 +84,10 @@ export default function SignupCard() {
               <FormControl id="email" isRequired>
                 <FormLabel>{t("email-adress")}</FormLabel>
                 <Input type="email" onChange={handleEmail} />
+              </FormControl>
+              <FormControl id="username" isRequired>
+                <FormLabel>{t("username")}</FormLabel>
+                <Input type="username" onChange={handleUsername} />
               </FormControl>
               <FormControl id="password" isRequired>
                 <FormLabel>{t("password")}</FormLabel>
@@ -145,8 +153,6 @@ export default function SignupCard() {
           </Box>
         </Stack>
       </Flex>
-
-
     </>
   );
 }

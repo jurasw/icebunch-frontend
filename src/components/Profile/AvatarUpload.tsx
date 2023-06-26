@@ -21,8 +21,8 @@ const AvatarUpload = ({ userId }: Props) => {
     const formData = new FormData();
 
     formData.append("file", uploadedFile);
-    const response = await axios.post(
-      `/users/image/upload/${userId}`,
+    const response = await axios.put(
+      `/user-profile/image/upload/${userId}`,
       formData
     );
 

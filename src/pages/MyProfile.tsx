@@ -71,13 +71,13 @@ const MyProfile = () => {
         <IconButton
           icon={<CheckIcon />}
           aria-label=""
-          {...getSubmitButtonProps()}
-          onClick={() =>
+          onClick={() => {
+            getSubmitButtonProps();
             changeUserUsername({
               userId: userData!._id,
               newUsername: username,
-            })
-          }
+            });
+          }}
         />
         <IconButton
           icon={<CloseIcon />}

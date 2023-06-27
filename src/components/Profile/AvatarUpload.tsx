@@ -23,12 +23,11 @@ const AvatarUpload = ({ userId }: Props) => {
     const formData = new FormData();
 
     formData.append("file", uploadedFile);
-    const response = await axios.put(
+    await axios.put(
       `/user-profile/image/upload/${userId}`,
       formData
     );
 
-    console.log(response);
   };
 
   return (
@@ -46,7 +45,7 @@ const AvatarUpload = ({ userId }: Props) => {
           {t('click-or-drag')}
         </p>
         <p className="ant-upload-hint">
-          {t('image-nax')}
+          {t('image-max')}
         </p>
       </Dragger>
       {uploadedFile && (

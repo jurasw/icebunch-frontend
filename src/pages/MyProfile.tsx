@@ -12,14 +12,12 @@ import {
   ModalHeader,
   useDisclosure,
   IconButton,
-  Editable,
-  ButtonGroup,
   Input,
-  Flex,
-  EditablePreview,
-  useEditableControls,
-  EditableInput,
   HStack,
+  FormControl,
+  ModalFooter,
+  Button,
+  FormLabel,
 } from "@chakra-ui/react";
 import { useAuthStore } from "../zustand";
 import Nav from "../components/Nav/Nav";
@@ -28,7 +26,7 @@ import { SetStateAction, useEffect, useState } from "react";
 import { UserDB } from "../models/User";
 import AvatarUpload from "../components/Profile/AvatarUpload";
 import ReviewsMyProfile from "../components/Profile/ReviewsMyProfile";
-import { CheckIcon, CloseIcon, EditIcon } from "@chakra-ui/icons";
+import { EditIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { Path } from "./Paths";
 
@@ -38,6 +36,8 @@ const MyProfile = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState<UserDB>();
   const [username, setUsername] = useState("");
+  const [changedUsername, setChangedUsername] = useState("");
+  const [usernameModal, setUsernameModal] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     if (!user) {
@@ -49,53 +49,17 @@ const MyProfile = () => {
         const result = await getUserFromEmail(user.email);
         setUserData(result);
         setUsername(result.username);
+        setChangedUsername(result.username);
       }
     };
     fetchUserData();
   }, []);
 
-  const handleUsername = (newValue: SetStateAction<string>) => {
-    setUsername(newValue);
+  const handleUsername = (event: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    setUsername(event.target.value);
   };
-
-  function EditableControls() {
-    const {
-      isEditing,
-      getSubmitButtonProps,
-      getCancelButtonProps,
-      getEditButtonProps,
-    } = useEditableControls();
-
-    return isEditing ? (
-      <ButtonGroup justifyContent="center" size="sm">
-        <IconButton
-          icon={<CheckIcon />}
-          aria-label=""
-          onClick={() => {
-            getSubmitButtonProps();
-            changeUserUsername({
-              userId: userData!._id,
-              newUsername: username,
-            });
-          }}
-        />
-        <IconButton
-          icon={<CloseIcon />}
-          aria-label=""
-          {...getCancelButtonProps()}
-        />
-      </ButtonGroup>
-    ) : (
-      <Flex justifyContent="center">
-        <IconButton
-          size="sm"
-          icon={<EditIcon />}
-          aria-label=""
-          {...getEditButtonProps()}
-        />
-      </Flex>
-    );
-  }
 
   return (
     <>
@@ -118,20 +82,17 @@ const MyProfile = () => {
             />
           </Avatar>
           {userData?.username && (
-            <Editable
-              value={username}
-              onChange={handleUsername}
-              textAlign="center"
-              defaultValue={userData.username}
-              fontSize="2xl"
-              isPreviewFocusable={false}
-            >
-              <HStack>
-                <EditablePreview />
-                <Input as={EditableInput} />
-                <EditableControls />
-              </HStack>
-            </Editable>
+            <HStack>
+              <Text fontSize={"20px"} fontWeight={600}>
+                {changedUsername}
+              </Text>
+              <IconButton
+                size="sm"
+                icon={<EditIcon />}
+                aria-label=""
+                onClick={() => setUsernameModal(true)}
+              />
+            </HStack>
           )}
           <Text fontSize="xl" as="b">
             My Reviews:{" "}
@@ -147,6 +108,42 @@ const MyProfile = () => {
           <ModalBody pb={6}>
             <AvatarUpload userId={userData?._id} />
           </ModalBody>
+        </ModalContent>
+      </Modal>
+
+      <Modal isOpen={usernameModal} onClose={() => setUsernameModal(false)}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Edit username</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl>
+              <FormLabel>Username</FormLabel>
+              <Input
+                placeholder="Username"
+                value={username}
+                onChange={handleUsername}
+              />
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={() => {
+                changeUserUsername({
+                  userId: userData!._id,
+                  newUsername: username,
+                });
+                setChangedUsername(username);
+                setUsernameModal(false);
+              }}
+            >
+              Save
+            </Button>
+            <Button onClick={() => setUsernameModal(false)}>Cancel</Button>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

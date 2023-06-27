@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import { Button } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 
 const { Dragger } = Upload;
 
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const AvatarUpload = ({ userId }: Props) => {
+  const { t } = useTranslation();
   const [uploadedFile, setUploadedFile] = useState(null);
 
   const handleFileUpload = (file: any, setUploadedFile: any) => {
@@ -41,10 +43,10 @@ const AvatarUpload = ({ userId }: Props) => {
           <InboxOutlined />
         </p>
         <p className="ant-upload-text">
-          Click or drag file to this area to upload
+          {t('click-or-drag')}
         </p>
         <p className="ant-upload-hint">
-        Image can have maximum 2MB
+          {t('image-nax')}
         </p>
       </Dragger>
       {uploadedFile && (
@@ -54,7 +56,7 @@ const AvatarUpload = ({ userId }: Props) => {
           variant="primaryButton"
           onClick={() => sendRequest(uploadedFile)}
         >
-          Save
+          {t('save')}
         </Button>
       )}
     </div>

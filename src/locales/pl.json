@@ -66,7 +66,18 @@
     "go-to-app": "Przejdź na stronę",
 
     "page-moved": "Strona została przeniesiona lub nie istnieje..",
-    "if-you-are-looking": "Jeśli szukasz loda znajdziesz go w naszej wyszukiwarce!!"
+    "if-you-are-looking": "Jeśli szukasz loda znajdziesz go w naszej wyszukiwarce!!",
+
+    "edit-username": "Zmiana nazwy użytkownika",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "my-reviews": "Moje recenzje",
+    "upload-avatar": "Zmień zdjęcie profilowe",
+
+    "click-or-drag": "Wybierz lub przeciągnij zdjęcie na to pole",
+    "image-max":"Zdjęcie nie może przekroczyć 2MB"
+    
+
 
 
 

@@ -29,6 +29,7 @@ import ReviewsMyProfile from "../components/Profile/ReviewsMyProfile";
 import { EditIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { Path } from "./Paths";
+import { useTranslation } from "react-i18next";
 
 const MyProfile = () => {
   const user = useAuthStore((state) => state.user);
@@ -39,6 +40,7 @@ const MyProfile = () => {
   const [changedUsername, setChangedUsername] = useState("");
   const [usernameModal, setUsernameModal] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {t} = useTranslation();
   useEffect(() => {
     if (!user) {
       navigate(Path.LOGIN);
@@ -95,7 +97,7 @@ const MyProfile = () => {
             </HStack>
           )}
           <Text fontSize="xl" as="b">
-            My Reviews:{" "}
+            {t('my-reviews')}:{" "}
           </Text>
           <ReviewsMyProfile />
         </VStack>
@@ -103,7 +105,7 @@ const MyProfile = () => {
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Upload Avatar</ModalHeader>
+          <ModalHeader>{t('upload-avatar')}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <AvatarUpload userId={userData?._id} />
@@ -114,11 +116,11 @@ const MyProfile = () => {
       <Modal isOpen={usernameModal} onClose={() => setUsernameModal(false)}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Edit username</ModalHeader>
+          <ModalHeader>{t('edit-username')}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>{t('username')}</FormLabel>
               <Input
                 placeholder="Username"
                 value={username}
@@ -140,9 +142,9 @@ const MyProfile = () => {
                 setUsernameModal(false);
               }}
             >
-              Save
+              {t('save')}
             </Button>
-            <Button onClick={() => setUsernameModal(false)}>Cancel</Button>
+            <Button onClick={() => setUsernameModal(false)}>{t('cancel')}</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

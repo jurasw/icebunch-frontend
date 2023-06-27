@@ -70,7 +70,20 @@
 
 
     "page-moved": "The page has been moved or does not exist..",
-    "if-you-are-looking": "If you are looking for ice cream, you will find it in our search engine!"
+    "if-you-are-looking": "If you are looking for ice cream, you will find it in our search engine!",
+
+    "edit-username": "Edit username",
+    "save": "Save",
+    "cancel": "Cancel",
+    "my-reviews": "My Reviews",
+    "upload-avatar": "Change your profile picture",
+
+
+    "click-or-drag": "Click or drag image to this area to upload",
+    "image-max":"Image can have maximum 2MB"
+
+
+
 
 
     

@@ -48,6 +48,7 @@ const MyProfile = () => {
       if (user) {
         const result = await getUserFromEmail(user.email);
         setUserData(result);
+        setUsername(result.username);
       }
     };
     fetchUserData();

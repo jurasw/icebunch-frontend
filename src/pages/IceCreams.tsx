@@ -30,7 +30,7 @@ const IceCreams = () => {
   const [iceCream, setIceCream] = useState<IceCream[]>([]);
   const [searchField, setSearchField] = useState("");
   const [isVegan, setIsVegan] = useState(false);
-  const [sorting, setSorting] = useState<number>(-1);
+  const [sorting, setSorting] = useState<number>(-2);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalEntities, setTotalEntities] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -105,8 +105,10 @@ const IceCreams = () => {
             />
           </FormControl>
           <Select minW={"190px"} onChange={handleSortingChange}>
+            <option value={-2}>{t("most-popular")}</option>
             <option value={-1}>{t("rating-decreasing")}</option>
             <option value={1}>{t("rating-increasing")}</option>
+
           </Select>
         </HStack>
       </Center>

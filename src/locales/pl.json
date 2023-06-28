@@ -6,6 +6,7 @@
     "only-vegan" : "Tylko Wegańskie",
     "rating-decreasing": "Oceny Malejąco",
     "rating-increasing": "Oceny Rosnąco",
+    "most-popular": "Najpopularniejsze",
     "date-decreasing": "Najnowsze",
     "date-increasing": "Najstarsze",
     "reviewers": "opinie",
@@ -73,6 +74,9 @@
     "cancel": "Anuluj",
     "my-reviews": "Moje recenzje",
     "upload-avatar": "Zmień zdjęcie profilowe",
+
+    "user-reviews": "Oceny użytkownika",
+
 
     "click-or-drag": "Wybierz lub przeciągnij zdjęcie na to pole",
     "image-max":"Zdjęcie nie może przekroczyć 2MB"

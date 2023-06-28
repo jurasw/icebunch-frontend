@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Nav from "../components/Nav/Nav";
 import ReviewsProfile from "../components/Profile/ReviewsProfile";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
+  const { t } = useTranslation();
   const { userId } = useParams();
   const [viewedUser, setViewedUser] = useState<any>();
 
@@ -27,7 +29,7 @@ const Profile = () => {
             {viewedUser?.username}
           </Text>
           <Avatar size="2xl" src={viewedUser?.avatarUrl} />
-          <Text fontSize='xl' as='b'>Reviews: </Text>
+          <Text fontSize='xl' as='b'>{t('user-reviews')}{':'} </Text>
           <ReviewsProfile userId={userId!} />
         </VStack>
       </Center>

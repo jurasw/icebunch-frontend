@@ -160,6 +160,7 @@ export default function IceCream() {
               <Skeleton h={30} mb={2} isLoaded={!iceCreamQuery.isLoading}>
                 <Box marginTop={"0.25em"} display="flex" alignItems="center">
                   <ReviewStars rating={iceCreamQuery?.data?.rating} />
+                  <Text marginLeft={'0.25rem'}>{'('}{iceCreamQuery?.data?.rating.toFixed(2)}{')'}</Text>
                   <Box as="span" ml="2" color="gray.600" fontSize="md">
                     {iceCreamQuery?.data?.numberOfRatings} {t("reviewers")}
                   </Box>

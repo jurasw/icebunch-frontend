@@ -6,6 +6,7 @@
     "only-vegan" : "Only Vegan",
     "rating-decreasing": "Rating Decreasing",
     "rating-increasing": "Rating Increasing",
+    "most-popular": "Most Popular",
     "date-decreasing": "Newest",
     "date-increasing": "Oldest",
     "reviewers": "reviews",
@@ -78,6 +79,7 @@
     "my-reviews": "My Reviews",
     "upload-avatar": "Change your profile picture",
 
+    "user-reviews": "User's reviews",
 
     "click-or-drag": "Click or drag image to this area to upload",
     "image-max":"Image can have maximum 2MB"

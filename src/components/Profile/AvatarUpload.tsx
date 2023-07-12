@@ -2,8 +2,9 @@ import { Upload } from "antd";
 import axios from "axios";
 import { useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
-import { Button } from "@chakra-ui/react";
+import { Button, Spinner } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { useToast } from "@chakra-ui/react";
 
 const { Dragger } = Upload;
 
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const AvatarUpload = ({ userId }: Props) => {
+  const [loading, setLoading] = useState(false);
+  const toast = useToast();
   const { t } = useTranslation();
   const [uploadedFile, setUploadedFile] = useState(null);
 
@@ -20,13 +23,25 @@ const AvatarUpload = ({ userId }: Props) => {
   };
 
   const sendRequest = async (uploadedFile: any) => {
+    setLoading(true)
     const formData = new FormData();
-
     formData.append("file", uploadedFile);
     await axios.post(
       `/user-profile/image/upload/${userId}`,
       formData
-    );
+    )
+    .catch((e)=> {
+      toast.closeAll()
+      toast({
+        title: e.message,
+        status: "error",
+      });
+      })
+      setLoading(false)
+    toast({
+      title: t('avatar-saved'),
+      status: "success"
+    })
 
   };
 
@@ -55,9 +70,10 @@ const AvatarUpload = ({ userId }: Props) => {
           variant="primaryButton"
           onClick={() => sendRequest(uploadedFile)}
         >
-          {t('save')}
+          { loading ? (<Spinner />) : t('save')}
         </Button>
-      )}
+      )
+    }
     </div>
   );
 };
